@@ -323,9 +323,16 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="reg-mobile">মোবাইল নম্বর</label>
-                    <input type="tel" id="reg-mobile" pattern="[+]{1}880[0-9]{9,10}" placeholder="+8801XXXXXXXXX" required>
-                </div>
+    <label for="reg-mobile">মোবাইল নম্বর</label>
+    <input 
+        type="tel" 
+        id="reg-mobile" 
+        pattern="(\+880|0)[0-9]{10}" 
+        placeholder="01601735574 বা +8801601735574" 
+        required
+        title="বাংলাদেশী মোবাইল নম্বর দিন (01601735574 বা +8801601735574)"
+    >
+</div>
                 
                 <div class="form-group">
                     <label for="reg-username">ইউজারনেম</label>

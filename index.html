@@ -16,10 +16,11 @@
         body {
             background-color: #f5f5f5;
             color: #333;
+            transition: all 0.3s;
         }
         
         .hidden {
-            display: none;
+            display: none !important;
         }
         
         /* লগইন/রেজিস্ট্রেশন স্টাইল */
@@ -92,9 +93,10 @@
             font-weight: bold;
         }
 
-        /* ড্যাশবোর্ড স্টাইল (আপনার দেওয়া কোড) */
+        /* ড্যাশবোর্ড স্টাইল */
         #dashboard-page {
             padding-bottom: 80px;
+            transition: margin-left 0.3s;
         }
         
         header {
@@ -155,7 +157,7 @@
         }
         
         .notice-line {
-            width: 90%
+            width: 90%;
             margin: 20px auto;
             padding: 15px;
             background-color: #fff;
@@ -199,6 +201,8 @@
             justify-content: center;
             gap: 10px;
             text-align: center;
+            color: #333;
+            text-decoration: none;
         }
         
         .big-button:hover {
@@ -271,13 +275,243 @@
             margin: 0 10px;
         }
         
-        .success-message {
+        /* সাইডবার স্টাইল */
+        .sidebar {
+            width: 280px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: -300px;
+            z-index: 1000;
+            transition: left 0.3s;
+        }
+        
+        .sidebar.open {
+            left: 0;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        .profile {
+            background-color: #0b74ff;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+        
+        .profile img {
+            width: 60px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        
+        .balance {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background-color: #0b74ff;
+        }
+        
+        .actions div {
+            color: white;
+            text-align: center;
+            font-size: 12px;
+            padding: 5px;
+            cursor: pointer;
+        }
+        
+        .menu {
+            padding: 15px;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: #333;
+            transition: all 0.2s;
+        }
+        
+        .menu-item:hover {
+            background-color: #f1f1f1;
+            transform: translateX(5px);
+        }
+        
+        .menu-item i {
+            width: 25px;
+            margin-right: 15px;
+            font-size: 18px;
+            text-align: center;
+            color: #0b74ff;
+        }
+        
+        .logout {
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        
+        /* রেফারেল পেজ স্টাইল */
+        #referral-page {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding-bottom: 80px;
+        }
+        
+        .page-title {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .back-button {
             background-color: #4CAF50;
             color: white;
-            padding: 15px;
-            text-align: center;
+            border: none;
+            padding: 10px 15px;
             border-radius: 5px;
             margin-bottom: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* রেফারেল বক্স স্টাইল */
+        .referral-box {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .referral-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #4CAF50;
+            text-align: center;
+        }
+        
+        .referral-link-container {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .referral-link {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            font-size: 14px;
+        }
+        
+        .copy-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .share-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        /* কমিশন চার্ট স্টাইল */
+        .commission-chart {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .chart-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #4CAF50;
+            text-align: center;
+        }
+        
+        .commission-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .commission-level {
+            font-weight: bold;
+        }
+        
+        .commission-amount {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .highlight {
+            background-color: #f8f8f8;
+            border-radius: 5px;
+        }
+        
+        .note {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+        
+        .earn-more {
+            margin-top: 30px;
+            text-align: center;
+            font-weight: bold;
+            color: #4CAF50;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -323,16 +557,16 @@
                 </div>
                 
                 <div class="form-group">
-    <label for="reg-mobile">মোবাইল নম্বর</label>
-    <input 
-        type="tel" 
-        id="reg-mobile" 
-        pattern="(\+880|0)[0-9]{10}" 
-        placeholder="01XXXXXXXXX বা +8801XXXXXXXXX" 
-        required
-        title="বাংলাদেশী মোবাইল নম্বর দিন (01XXXXXXXXX বা +8801XXXXXXXXX)"
-    >
-</div>
+                    <label for="reg-mobile">মোবাইল নম্বর</label>
+                    <input 
+                        type="tel" 
+                        id="reg-mobile" 
+                        pattern="(\+880|0)[0-9]{10}" 
+                        placeholder="01601735574 বা +8801601735574" 
+                        required
+                        title="বাংলাদেশী মোবাইল নম্বর দিন (01601735574 বা +8801601735574)"
+                    >
+                </div>
                 
                 <div class="form-group">
                     <label for="reg-username">ইউজারনেম</label>
@@ -358,11 +592,66 @@
         </div>
     </div>
 
-    <!-- ড্যাশবোর্ড পেজ (আপনার দেওয়া হোমপেজ) -->
+    <!-- ড্যাশবোর্ড পেজ -->
     <div id="dashboard-page" class="hidden">
+        <!-- ওভারলে (সাইডবার খোলা থাকলে দেখাবে) -->
+        <div id="overlay" class="overlay"></div>
+        
+        <!-- সাইডবার -->
+        <div id="sidebar" class="sidebar">
+            <div class="profile">
+                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User" id="sidebar-profile-img">
+                <div id="sidebar-fullname">নাম</div>
+                <div id="sidebar-username" style="font-size: 12px;">ইউজারনেম</div>
+                <div class="balance" id="sidebar-balance">0.00 টাকা</div>
+            </div>
+
+            <div class="actions">
+                <div><i class="fas fa-wallet"></i> ডিপোজিট</div>
+                <div><i class="fas fa-money-bill-wave"></i> উত্তোলন</div>
+                <div class="referral-action"><i class="fas fa-user-plus"></i> রেফারেল</div>
+                <div><i class="fas fa-user-cog"></i> প্রোফাইল</div>
+            </div>
+
+            <div class="menu">
+                <div class="menu-item">
+                    <i class="fas fa-home"></i>
+                    <span>হোম</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-file-invoice"></i>
+                    <span>ডিপোজিট ইতিহাস</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>মোট উত্তোলন ইতিহাস</span>
+                </div>
+                <div class="menu-item referral-menu-item">
+                    <i class="fas fa-users"></i>
+                    <span>রেফারেল</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>অ্যাকাউন্ট সেটিংস</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-key"></i>
+                    <span>পাসওয়ার্ড পরিবর্তন</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>সাহায্য</span>
+                </div>
+                <div class="menu-item logout" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>লগ আউট করুন</span>
+                </div>
+            </div>
+        </div>
+        
         <!-- হেডার সেকশন -->
         <header>
-            <div class="menu-icon">
+            <div class="menu-icon" id="menu-toggle">
                 <i class="fas fa-bars"></i>
             </div>
             
@@ -388,33 +677,33 @@
         <!-- নোটিশ লাইন -->
         <div class="notice-line">
             <div class="notice-text">
-                🙋‍♂️আসসালামু আলাইকুম।  সবাই নিয়ম মেনে কাজ করুন ১০০% পেমেন্ট পাবেন ইনশাআল্লাহ। 💸✅
+                🙋‍♂️আসসালামু আলাইকুম। সবাই নিয়ম মেনে কাজ করুন ১০০% পেমেন্ট পাবেন ইনশাআল্লাহ। 💸✅
             </div>
         </div>
         
         <!-- বাটন সেকশন -->
         <div class="button-section">
-            <button class="big-button">
+            <button class="big-button" onclick="window.open('https://t.me/earningbyhabib', '_blank')">
                 <i class="fas fa-question-circle"></i>
                 সহায়তা কেন্দ্র
             </button>
             
-            <button class="big-button">
+            <button class="big-button" id="invite-friends-btn">
                 <i class="fas fa-user-friends"></i>
                 বন্ধুদের আমন্ত্রণ জানান
             </button>
             
-            <button class="big-button">
+            <button class="big-button" onclick="window.open('https://t.me/earningbyhabib', '_blank')">
                 <i class="fas fa-download"></i>
                 ডাউনলোড করুন অ্যাপ
             </button>
             
-            <button class="big-button">
+            <button class="big-button" onclick="window.open('https://t.me/earningbyhabib', '_blank')">
                 <i class="fas fa-video"></i>
                 ভিডিও টিউটোরিয়াল
             </button>
             
-            <button class="big-button" style="grid-column: 1 / span 2;">
+            <button class="big-button" style="grid-column: 1 / span 2;" onclick="window.open('https://t.me/earningbyhabib', '_blank')">
                 <i class="fas fa-info-circle"></i>
                 আমাদের সম্পর্কে জানুন
             </button>
@@ -447,6 +736,80 @@
                 <i class="fas fa-user"></i>
                 প্রোফাইল
             </a>
+        </div>
+    </div>
+
+    <!-- রেফারেল পেজ (শুরুতে লুকানো) -->
+    <div id="referral-page" class="hidden">
+        <button class="back-button" id="back-button">
+            <i class="fas fa-arrow-left"></i> পিছনে যান
+        </button>
+        
+        <h1 class="page-title">রেফারেল সিস্টেম</h1>
+        
+        <!-- রেফারেল বক্স -->
+        <div class="referral-box">
+            <h2 class="referral-title">আপনার রেফারেল লিংক</h2>
+            <div class="referral-link-container">
+                <input type="text" id="referral-link" class="referral-link" readonly>
+                <button class="copy-btn" id="copy-btn">
+                    <i class="fas fa-copy"></i> কপি
+                </button>
+            </div>
+            
+            <div class="share-buttons">
+                <button class="share-btn">
+                    <i class="fab fa-facebook"></i> Facebook
+                </button>
+                <button class="share-btn">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </button>
+                <button class="share-btn">
+                    <i class="fas fa-envelope"></i> Email
+                </button>
+            </div>
+        </div>
+        
+        <!-- কমিশন চার্ট -->
+        <div class="commission-chart">
+            <h2 class="chart-title">🎯 রেফার কমিশন চার্ট 💸</h2>
+            
+            <div class="commission-item highlight">
+                <span class="commission-level">👤 সরাসরি রেফার</span>
+                <span class="commission-amount">💰 ৩০ টাকা</span>
+            </div>
+            
+            <div class="commission-item">
+                <span class="commission-level">1️⃣ ১ম জেনারেশন</span>
+                <span class="commission-amount">💰 ১২ টাকা</span>
+            </div>
+            
+            <div class="commission-item">
+                <span class="commission-level">2️⃣ ২য় জেনারেশন</span>
+                <span class="commission-amount">💰 ৮ টাকা</span>
+            </div>
+            
+            <div class="commission-item">
+                <span class="commission-level">3️⃣ ৩য় জেনারেশন</span>
+                <span class="commission-amount">💰 ৫ টাকা</span>
+            </div>
+            
+            <div class="commission-item">
+                <span class="commission-level">4️⃣ ৪র্থ জেনারেশন</span>
+                <span class="commission-amount">💰 ৩ টাকা</span>
+            </div>
+            
+            <div class="commission-item">
+                <span class="commission-level">5️⃣ ৫ম জেনারেশন</span>
+                <span class="commission-amount">💰 ২ টাকা</span>
+            </div>
+            
+            <p class="note">📢 আপনি যত রেফার করবেন, ইনকাম হবে তত বেশি!</p>
+            
+            <p class="earn-more">
+                🧑‍🤝‍🧑 টিম যত বড় হবে, আপনার ইনকামও তত বাড়বে!<br>
+                🚀 আজই শুরু করুন – অন্যদের ইনভাইট করুন, আর ঘরে বসেই আয় করুন!
+            </p>
         </div>
     </div>
 
@@ -496,7 +859,8 @@
                 email: document.getElementById('reg-email').value,
                 mobile: document.getElementById('reg-mobile').value,
                 username: username,
-                password: document.getElementById('reg-password').value
+                password: document.getElementById('reg-password').value,
+                balance: 0.00
             };
             
             // ব্রাউজারের লোকাল স্টোরেজে সেভ করুন
@@ -521,8 +885,105 @@
             if(user && user.password === password) {
                 document.getElementById('login-page').classList.add('hidden');
                 document.getElementById('dashboard-page').classList.remove('hidden');
+                
+                // সাইডবারে ইউজার ইনফো সেট করুন
+                document.getElementById('sidebar-fullname').textContent = user.fullname;
+                document.getElementById('sidebar-username').textContent = user.username;
+                document.getElementById('sidebar-balance').textContent = user.balance.toFixed(2) + ' টাকা';
+                
+                // কারেন্ট ইউজার স্টোর করুন
+                localStorage.setItem('currentUser', JSON.stringify(user));
             } else {
                 alert("❌ ভুল ইউজারনেম বা পাসওয়ার্ড! আবার চেষ্টা করুন");
+            }
+        });
+
+        // ৫. মেনু টগল ফাংশনালিটি
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('active');
+        });
+
+        document.getElementById('overlay').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('active');
+        });
+
+        // ৬. লগআউট ফাংশনালিটি
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            localStorage.removeItem('currentUser');
+            document.getElementById('dashboard-page').classList.add('hidden');
+            document.getElementById('login-page').classList.remove('hidden');
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('active');
+        });
+
+        // ৭. রেফারেল পেজ দেখান/লুকান
+        document.getElementById('invite-friends-btn').addEventListener('click', function() {
+            document.getElementById('dashboard-page').classList.add('hidden');
+            document.getElementById('referral-page').classList.remove('hidden');
+            
+            // কারেন্ট ইউজার এর রেফারেল লিংক জেনারেট করুন
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if(currentUser) {
+                document.getElementById('referral-link').value = `https://t.me/earningbyhabib?ref=${currentUser.username}`;
+            }
+        });
+        
+        // সাইডবার রেফারেল বাটন
+        document.querySelector('.referral-action').addEventListener('click', function() {
+            document.getElementById('dashboard-page').classList.add('hidden');
+            document.getElementById('referral-page').classList.remove('hidden');
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('active');
+            
+            // কারেন্ট ইউজার এর রেফারেল লিংক জেনারেট করুন
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if(currentUser) {
+                document.getElementById('referral-link').value = `https://t.me/earningbyhabib?ref=${currentUser.username}`;
+            }
+        });
+        
+        // সাইডবার মেনু রেফারেল আইটেম
+        document.querySelector('.referral-menu-item').addEventListener('click', function() {
+            document.getElementById('dashboard-page').classList.add('hidden');
+            document.getElementById('referral-page').classList.remove('hidden');
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('active');
+            
+            // কারেন্ট ইউজার এর রেফারেল লিংক জেনারেট করুন
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if(currentUser) {
+                document.getElementById('referral-link').value = `https://t.me/earningbyhabib?ref=${currentUser.username}`;
+            }
+        });
+
+        // ৮. পিছনে বাটন ফাংশনালিটি
+        document.getElementById('back-button').addEventListener('click', function() {
+            document.getElementById('referral-page').classList.add('hidden');
+            document.getElementById('dashboard-page').classList.remove('hidden');
+        });
+
+        // ৯. কপি বাটন ফাংশনালিটি
+        document.getElementById('copy-btn').addEventListener('click', function() {
+            const referralInput = document.getElementById('referral-link');
+            referralInput.select();
+            document.execCommand('copy');
+            alert('রেফারেল লিংক কপি করা হয়েছে!');
+        });
+
+        // ১০. পেজ লোড হলে কারেন্ট ইউজার চেক করুন
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if(currentUser) {
+                document.getElementById('login-page').classList.add('hidden');
+                document.getElementById('dashboard-page').classList.remove('hidden');
+                
+                // সাইডবারে ইউজার ইনফো সেট করুন
+                document.getElementById('sidebar-fullname').textContent = currentUser.fullname;
+                document.getElementById('sidebar-username').textContent = currentUser.username;
+                document.getElementById('sidebar-balance').textContent = currentUser.balance.toFixed(2) + ' টাকা';
             }
         });
     </script>

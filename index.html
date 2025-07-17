@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
+     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>লগইন ও ড্যাশবোর্ড</title>
     <style>
-        /* কমন স্টাইল */
+         /* কমন স্টাইল */
         * {
             margin: 0;
             padding: 0;
@@ -513,6 +513,70 @@
             font-weight: bold;
             color: #4CAF50;
         }
+
+        /* শেয়ার বাটনের নতুন স্টাইল */
+        .share-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        .share-main-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+        
+        .share-options {
+            display: none;
+            margin-top: 15px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .share-options.active {
+            display: grid;
+        }
+        
+        .share-option {
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .share-option i {
+            font-size: 20px;
+        }
+        
+        .whatsapp { color: #25D366; }
+        .facebook { color: #1877F2; }
+        .messenger { color: #006AFF; }
+        .telegram { color: #0088cc; }
+        .twitter { color: #1DA1F2; }
+        .more { color: #666; }
+    </style>
+</head>
+<body>
+    <!-- পূর্বের সমস্ত HTML কন্টেন্ট একই থাকবে, শুধু রেফারেল বক্স অংশটি পরিবর্তন করুন -->
+
+        
+      
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -757,19 +821,126 @@
                 </button>
             </div>
             
-            <div class="share-buttons">
-                <button class="share-btn">
-                    <i class="fab fa-facebook"></i> Facebook
-                </button>
-                <button class="share-btn">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </button>
-                <button class="share-btn">
-                    <i class="fas fa-envelope"></i> Email
-                </button>
+              <div class="share-container">
+            <button class="share-main-btn" id="share-main-btn">
+                <i class="fas fa-share-alt"></i> শেয়ার করুন
+            </button>
+            
+            <div class="share-options" id="share-options">
+                <div class="share-option" data-app="whatsapp">
+                    <i class="fab fa-whatsapp whatsapp"></i>
+                    WhatsApp
+                </div>
+                <div class="share-option" data-app="facebook">
+                    <i class="fab fa-facebook facebook"></i>
+                    Facebook
+                </div>
+                <div class="share-option" data-app="messenger">
+                    <i class="fab fa-facebook-messenger messenger"></i>
+                    Messenger
+                </div>
+                <div class="share-option" data-app="telegram">
+                    <i class="fab fa-telegram telegram"></i>
+                    Telegram
+                </div>
+                <div class="share-option" data-app="twitter">
+                    <i class="fab fa-twitter twitter"></i>
+                    Twitter
+                </div>
+                <div class="share-option" data-app="more">
+                    <i class="fas fa-ellipsis-h more"></i>
+                    আরো অপশন
+                </div>
             </div>
         </div>
-        
+    </div>
+
+    <!-- পূর্বের সমস্ত স্ক্রিপ্ট একই থাকবে, শুধু নিচের অংশটি যোগ করুন -->
+
+    <script>
+        // ১১. শেয়ার ফাংশনালিটি
+        document.getElementById('share-main-btn').addEventListener('click', function() {
+            document.getElementById('share-options').classList.toggle('active');
+        });
+
+        // শেয়ার অপশনগুলোর জন্য ইভেন্ট লিসেনার
+        document.querySelectorAll('.share-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const app = this.getAttribute('data-app');
+                shareLink(app);
+            });
+        });
+
+        // শেয়ার ফাংশন
+        function shareLink(app) {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if(!currentUser) return;
+            
+            const referralLink = `https://t.me/earningbyhabib?ref=${currentUser.username}`;
+            const shareText = `💰 টাকা উপার্জনের সুযোগ! এই লিংক থেকে রেজিস্টার করুন: ${referralLink}`;
+            
+            let shareUrl = '';
+            
+            switch(app) {
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+                    break;
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}`;
+                    break;
+                case 'messenger':
+                    shareUrl = `fb-messenger://share/?link=${encodeURIComponent(referralLink)}`;
+                    break;
+                case 'telegram':
+                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent('টাকা উপার্জনের সুযোগ!')}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+                    break;
+                case 'more':
+                    if(navigator.share) {
+                        navigator.share({
+                            title: 'টাকা উপার্জনের সুযোগ!',
+                            text: 'এই লিংক থেকে রেজিস্টার করুন',
+                            url: referralLink
+                        }).catch(console.error);
+                    } else {
+                        alert('শেয়ার অপশনগুলো দেখতে উপরের বাটনগুলো ব্যবহার করুন');
+                    }
+                    return;
+            }
+            
+            window.open(shareUrl, '_blank');
+        }
+
+        // ১২. পেজ লোড হলে রেফারেল লিংক সেট করুন
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if(currentUser) {
+                document.getElementById('referral-link').value = `https://t.me/earningbyhabib?ref=${currentUser.username}`;
+            } else {
+                document.getElementById('referral-link').value = 'লগইন করুন রেফারেল লিংক পেতে';
+            }
+        });
+
+        // ১৩. রেফারেল পেজে যাওয়ার সময় লিংক আপডেট করুন
+        function updateReferralLink() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if(currentUser) {
+                document.getElementById('referral-link').value = `https://t.me/earningbyhabib?ref=${currentUser.username}`;
+            }
+        }
+
+        // পূর্বের সমস্ত ইভেন্ট লিসেনারে এই ফাংশন কল যোগ করুন
+        document.getElementById('invite-friends-btn').addEventListener('click', updateReferralLink);
+        document.querySelector('.referral-action').addEventListener('click', updateReferralLink);
+        document.querySelector('.referral-menu-item').addEventListener('click', updateReferralLink);
+    </script>
+</body>
+</html>
+
+     
         <!-- কমিশন চার্ট -->
         <div class="commission-chart">
             <h2 class="chart-title">🎯 রেফার কমিশন চার্ট 💸</h2>
@@ -989,3 +1160,7 @@
     </script>
 </body>
 </html>
+
+
+আমি তোমাকে এই html কোডের ভিতরে রেফার সিস্টেম টা দেখতে বলছি 
+রেফার বক্সে রেফার লিংক শো করবে কিনা.?  

@@ -5,573 +5,670 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>লগইন ও ড্যাশবোর্ড</title>
     <style>
-         /* কমন স্টাইল */
-       
-{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f5f5;
-            color: #333;
-            transition: all 0.3s;
-        }
-        
-        .hidden {
-            display: none !important;
-        }
-        
-        /* লগইন/রেজিস্ট্রেশন স্টাইল */
-        .auth-container {
-            max-width: 500px;
-            margin: 50px auto;
-            padding: 20px;
-        }
-        
-        .form-container {
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-        
-        .auth-title {
-            text-align: center;
-            color: #4CAF50;
-            margin-bottom: 30px;
-            font-size: 28px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #555;
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-        }
-        
-        .submit-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 10px;
-            transition: background 0.3s;
-        }
-        
-        .submit-btn:hover {
-            background-color: #45a049;
-        }
-        
-        .toggle-link {
-            text-align: center;
-            margin-top: 20px;
-            color: #666;
-        }
-        
-        .toggle-link a {
-            color: #1a73e8;
-            text-decoration: none;
-            font-weight: bold;
-        }
+    /* কমন স্টাইল */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+        background-color: #f8f9fa;
+        color: #333;
+        transition: all 0.3s;
+    }
+    
+    .hidden {
+        display: none !important;
+    }
+    
+    /* লগইন/রেজিস্ট্রেশন স্টাইল */
+    .auth-container {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+    }
+    
+    .form-container {
+        background: linear-gradient(135deg, #ffffff 0%, #f1f8ff 100%);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: 1px solid #e0e6ed;
+    }
+    
+    .auth-title {
+        text-align: center;
+        color: #2c7be5;
+        margin-bottom: 30px;
+        font-size: 28px;
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #4a5568;
+    }
+    
+    .form-group input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: all 0.3s;
+        background-color: #f8fafc;
+    }
+    
+    .form-group input:focus {
+        border-color: #2c7be5;
+        box-shadow: 0 0 0 3px rgba(44, 123, 229, 0.1);
+        outline: none;
+    }
+    
+    .submit-btn {
+        background: linear-gradient(to right, #2c7be5, #00c9a7);
+        color: white;
+        padding: 14px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 10px;
+        transition: all 0.3s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .toggle-link {
+        text-align: center;
+        margin-top: 20px;
+        color: #718096;
+        font-size: 15px;
+    }
+    
+    .toggle-link a {
+        color: #2c7be5;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+    
+    .toggle-link a:hover {
+        color: #1a56a8;
+        text-decoration: underline;
+    }
 
-        /* ড্যাশবোর্ড স্টাইল */
-        #dashboard-page {
-            padding-bottom: 80px;
-            transition: margin-left 0.3s;
-        }
-        
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #4CAF50;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .profile-notification {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .profile-icon, .notification-icon, .menu-icon {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-        
-        .slider-container {
+    /* ড্যাশবোর্ড স্টাইল */
+    #dashboard-page {
+        padding-bottom: 80px;
+        transition: margin-left 0.3s;
+        background-color: #f8fafc;
+    }
+    
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 5%;
+        background: linear-gradient(to right, #2c7be5, #00c9a7);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .profile-notification {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .profile-icon, .notification-icon, .menu-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: white;
+    }
+    
+    .profile-icon:hover, .notification-icon:hover, .menu-icon:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+        transform: scale(1.1);
+    }
+    
+    .slider-container {
+        width: 90%;
+        margin: 20px auto;
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .slider {
+        width: 100%;
+        height: 150px;
+        background: linear-gradient(135deg, #2c7be5 0%, #00c9a7 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        font-weight: 600;
+        border-radius: 15px;
+    }
+    
+    .notice-line {
+        width: 90%;
+        margin: 20px auto;
+        padding: 15px;
+        background: linear-gradient(to right, #ff7e5f, #feb47b);
+        border-radius: 8px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        white-space: nowrap;
+        color: white;
+        font-weight: 500;
+    }
+    
+    .notice-text {
+        display: inline-block;
+        animation: scrollText 20s linear infinite;
+    }
+    
+    @keyframes scrollText {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+    
+    .button-section {
+        width: 90%;
+        margin: 20px auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .big-button {
+        padding: 25px 15px;
+        border-radius: 12px;
+        background: white;
+        border: none;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-align: center;
+        color: #2d3748;
+        text-decoration: none;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .big-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        border-color: #2c7be5;
+    }
+    
+    .big-button i {
+        font-size: 28px;
+        background: linear-gradient(to right, #2c7be5, #00c9a7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .video-section {
             width: 90%;
             margin: 20px auto;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        .slider {
-            width: 100%;
-            height: 150px;
-            background-color: #4CAF50;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-        }
-        
-        .notice-line {
-            width: 90%;
-            margin: 20px auto;
-            padding: 15px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        
-        .notice-text {
-            display: inline-block;
-            animation: scrollText 20s linear infinite;
-        }
-        
-        @keyframes scrollText {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-        
-        .button-section {
-            width: 90%;
-            margin: 20px auto;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-        
-        .big-button {
-            padding: 30px 15px;
-            border-radius: 10px;
-            background-color: white;
-            border: none;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-align: center;
-            color: #333;
-            text-decoration: none;
-        }
-        
-        .big-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-        
-        .big-button i {
-            font-size: 24px;
-            color: #4CAF50;
-        }
-        
-        .video-section {
-            width: 90%;
-            margin: 20px auto;
-            background-color: #e0e0e0;
+            background-color: #e2e8f0;
             border-radius: 10px;
             height: 200px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #666;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            color: #666666;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
         }
-        
-        .nav-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 0;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-            z-index: 100;
-            gap: 15px;
-        }
-        
-        .nav-button {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 12px;
-            color: #666;
-            text-decoration: none;
-            flex: 1;
-            max-width: 60px;
-        }
-        
-        .nav-button i {
-            font-size: 20px;
-            margin-bottom: 5px;
-        }
-        
-        .premium-button {
-            background-color: #4CAF50;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: -20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            flex-shrink: 0;
-            margin: 0 10px;
-        }
-        
-        /* সাইডবার স্টাইল */
-        .sidebar {
-            width: 280px;
-            background: white;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: -300px;
-            z-index: 1000;
-            transition: left 0.3s;
-        }
-        
-        .sidebar.open {
-            left: 0;
-        }
-        
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 999;
-            display: none;
-        }
-        
-        .overlay.active {
-            display: block;
-        }
-        
-        .profile {
-            background-color: #0b74ff;
-            padding: 20px;
-            color: white;
-            text-align: center;
-        }
-        
-        .profile img {
-            width: 60px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-        }
-        
-        .balance {
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        
-        .actions {
-            display: flex;
-            justify-content: space-around;
-            padding: 10px;
-            background-color: #0b74ff;
-        }
-        
-        .actions div {
-            color: white;
-            text-align: center;
-            font-size: 12px;
-            padding: 5px;
-            cursor: pointer;
-        }
-        
-        .menu {
-            padding: 15px;
-        }
-        
-        .menu-item {
-            display: flex;
-            align-items: center;
-            padding: 15px 10px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            color: #333;
-            transition: all 0.2s;
-        }
-        
-        .menu-item:hover {
-            background-color: #f1f1f1;
-            transform: translateX(5px);
-        }
-        
-        .menu-item i {
-            width: 25px;
-            margin-right: 15px;
-            font-size: 18px;
-            text-align: center;
-            color: #0b74ff;
-        }
-        
-        .logout {
-            color: red;
-            font-weight: bold;
-            margin-top: 20px;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-        }
-        
-        /* রেফারেল পেজ স্টাইল */
-        #referral-page {
-            padding: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-            padding-bottom: 80px;
-        }
-        
-        .page-title {
-            text-align: center;
-            color: #4CAF50;
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-        
-        .back-button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        /* রেফারেল বক্স স্টাইল */
-        .referral-box {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        
-        .referral-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #4CAF50;
-            text-align: center;
-        }
-        
-        .referral-link-container {
-            display: flex;
-            margin-bottom: 15px;
-        }
-        
-        .referral-link {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px 0 0 5px;
-            font-size: 14px;
-        }
-        
-        .copy-btn {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 0 15px;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-        }
-        
-        .share-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
-        .share-btn {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            cursor: pointer;
-        }
-        
-        /* কমিশন চার্ট স্টাইল */
-        .commission-chart {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .chart-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #4CAF50;
-            text-align: center;
-        }
-        
-        .commission-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .commission-level {
-            font-weight: bold;
-        }
-        
-        .commission-amount {
-            color: #4CAF50;
-            font-weight: bold;
-        }
-        
-        .highlight {
-            background-color: #f8f8f8;
-            border-radius: 5px;
-        }
-        
-        .note {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #666;
-            text-align: center;
-        }
-        
-        .earn-more {
-            margin-top: 30px;
-            text-align: center;
-            font-weight: bold;
-            color: #4CAF50;
-        }
-
-        /* শেয়ার বাটনের নতুন স্টাইল */
-        .share-container {
-            margin-top: 15px;
-            text-align: center;
-        }
-        
-        .share-main-btn {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-        }
-        
-        .share-options {
-            display: none;
-            margin-top: 15px;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-        
-        .share-options.active {
-            display: grid;
-        }
-        
-        .share-option {
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #f0f0f0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-        
-        .share-option i {
-            font-size: 20px;
-        }
-        
-        .whatsapp { color: #25D366; }
-        .facebook { color: #1877F2; }
-        .messenger { color: #006AFF; }
-        .telegram { color: #0088cc; }
-        .twitter { color: #1DA1F2; }
-        .more { color: #666; }
-    </style>
+    
+    /* নেভিগেশন বার */
+    .nav-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 12px 0;
+        box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.08);
+        z-index: 100;
+        gap: 15px;
+        border-top: 1px solid #e2e8f0;
+    }
+    
+    .nav-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 12px;
+        color: #718096;
+        text-decoration: none;
+        flex: 1;
+        max-width: 60px;
+        transition: all 0.2s;
+    }
+    
+    .nav-button i {
+        font-size: 22px;
+        margin-bottom: 5px;
+        color: #4a5568;
+    }
+    
+    .nav-button:hover, .nav-button.active {
+        color: #2c7be5;
+    }
+    
+    .nav-button:hover i, .nav-button.active i {
+        color: #2c7be5;
+    }
+    
+    .premium-button {
+        background: linear-gradient(to right, #ff7e5f, #feb47b);
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: -20px;
+        box-shadow: 0 5px 15px rgba(254, 180, 123, 0.4);
+        flex-shrink: 0;
+        margin: 0 10px;
+        transition: all 0.3s;
+    }
+    
+    .premium-button:hover {
+        transform: scale(1.1) translateY(-5px);
+        box-shadow: 0 8px 20px rgba(254, 180, 123, 0.5);
+    }
+    
+    /* সাইডবার স্টাইল */
+    .sidebar {
+        width: 280px;
+        background: white;
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: -300px;
+        z-index: 1000;
+        transition: left 0.3s;
+    }
+    
+    .sidebar.open {
+        left: 0;
+    }
+    
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        display: none;
+    }
+    
+    .overlay.active {
+        display: block;
+    }
+    
+    .profile {
+        background: linear-gradient(to right, #2c7be5, #00c9a7);
+        padding: 25px 20px;
+        color: white;
+        text-align: center;
+    }
+    
+    .profile img {
+        width: 70px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .balance {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 10px;
+        color: white;
+    }
+    
+    .actions {
+        display: flex;
+        justify-content: space-around;
+        padding: 15px 10px;
+        background: linear-gradient(to right, #2c7be5, #00c9a7);
+    }
+    
+    .actions div {
+        color: white;
+        text-align: center;
+        font-size: 12px;
+        padding: 5px;
+        cursor: pointer;
+        transition: all 0.2s;
+        border-radius: 5px;
+    }
+    
+    .actions div:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .actions i {
+        display: block;
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+    
+    .menu {
+        padding: 15px;
+    }
+    
+    .menu-item {
+        display: flex;
+        align-items: center;
+        padding: 15px 15px;
+        margin-bottom: 5px;
+        border-radius: 10px;
+        cursor: pointer;
+        color: #4a5568;
+        transition: all 0.2s;
+    }
+    
+    .menu-item:hover {
+        background-color: #f0f7ff;
+        transform: translateX(5px);
+        color: #2c7be5;
+    }
+    
+    .menu-item i {
+        width: 25px;
+        margin-right: 15px;
+        font-size: 18px;
+        text-align: center;
+        color: #2c7be5;
+    }
+    
+    .logout {
+        color: #e53e3e;
+        font-weight: bold;
+        margin-top: 20px;
+        border-top: 1px solid #e2e8f0;
+        padding-top: 15px;
+    }
+    
+    /* রেফারেল পেজ স্টাইল */
+    #referral-page {
+        padding: 20px;
+        max-width: 600px;
+        margin: 0 auto;
+        padding-bottom: 80px;
+    }
+    
+    .page-title {
+        text-align: center;
+        color: #2c7be5;
+        margin-bottom: 20px;
+        font-size: 26px;
+        font-weight: 700;
+    }
+    
+    .back-button {
+        background: linear-gradient(to right, #2c7be5, #00c9a7);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-weight: 600;
+        box-shadow: 0 3px 10px rgba(44, 123, 229, 0.2);
+        transition: all 0.2s;
+    }
+    
+    .back-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(44, 123, 229, 0.3);
+    }
+    
+    /* রেফারেল বক্স স্টাইল */
+    .referral-box {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .referral-title {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #2c7be5;
+        text-align: center;
+    }
+    
+    .referral-link-container {
+        display: flex;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    
+    .referral-link {
+        flex: 1;
+        padding: 12px 15px;
+        border: 1px solid #e2e8f0;
+        border-right: none;
+        border-radius: 8px 0 0 8px;
+        font-size: 14px;
+        background-color: #f8fafc;
+    }
+    
+    .copy-btn {
+        background: linear-gradient(to right, #2c7be5, #00c9a7);
+        color: white;
+        border: none;
+        padding: 0 20px;
+        border-radius: 0 8px 8px 0;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+    
+    .copy-btn:hover {
+        opacity: 0.9;
+    }
+    
+    /* কমিশন চার্ট স্টাইল */
+    .commission-chart {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e2e8f0;
+    }
+    
+    .chart-title {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #2c7be5;
+        text-align: center;
+    }
+    
+    .commission-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 15px;
+        border-bottom: 1px solid #edf2f7;
+        transition: all 0.2s;
+    }
+    
+    .commission-item:hover {
+        background-color: #f8fafc;
+    }
+    
+    .commission-level {
+        font-weight: 600;
+        color: #4a5568;
+    }
+    
+    .commission-amount {
+        color: #00c9a7;
+        font-weight: 700;
+    }
+    
+    .highlight {
+        background-color: #f0f7ff;
+        border-radius: 8px;
+        border-left: 4px solid #2c7be5;
+    }
+    
+    .note {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #718096;
+        text-align: center;
+        line-height: 1.5;
+    }
+    
+    .earn-more {
+        margin-top: 30px;
+        text-align: center;
+        font-weight: 700;
+        color: #2c7be5;
+        line-height: 1.6;
+    }
+    
+    /* শেয়ার বাটন স্টাইল */
+    .share-container {
+        margin-top: 20px;
+        text-align: center;
+    }
+    
+    .share-main-btn {
+        background: linear-gradient(to right, #2c7be5, #00c9a7);
+        color: white;
+        border: none;
+        padding: 14px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        transition: all 0.2s;
+        box-shadow: 0 4px 10px rgba(44, 123, 229, 0.2);
+    }
+    
+    .share-main-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(44, 123, 229, 0.3);
+    }
+    
+    .share-options {
+        display: none;
+        margin-top: 15px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    
+    .share-options.active {
+        display: grid;
+    }
+    
+    .share-option {
+        padding: 12px 10px;
+        border-radius: 8px;
+        background-color: #f8fafc;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 500;
+        transition: all 0.2s;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .share-option:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    .share-option i {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+    
+    .whatsapp { color: #25D366; }
+    .facebook { color: #1877F2; }
+    .messenger { color: #006AFF; }
+    .telegram { color: #0088cc; }
+    .twitter { color: #1DA1F2; }
+    .more { color: #4a5568; }
+</style>
 </head>
 <body>
     <!-- পূর্বের সমস্ত HTML কন্টেন্ট একই থাকবে, শুধু রেফারেল বক্স অংশটি পরিবর্তন করুন -->
@@ -775,7 +872,7 @@
             </button>
         </div>
         
-        <!-- ভিডিও সেকশন -->
+           <!-- ভিডিও সেকশন -->
         <div class="video-section">
             <i class="fas fa-play-circle" style="font-size: 50px;"></i>
             <p>শর্ট ভিডিও কন্টেন্ট</p>

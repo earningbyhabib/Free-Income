@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>প্যাকেজ পরিকল্পনা</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .vip-icon {
+      color: gold;
+      text-shadow: 0 0 5px rgba(255,215,0,0.7);
+    }
+    .package:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    .ribbon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+    }
+    .ribbon span {
+      position: absolute;
+      top: 15px;
+      right: -25px;
+      width: 120px;
+      padding: 5px 0;
+      background: #ff6b6b;
+      color: white;
+      text-align: center;
+      transform: rotate(45deg);
+      font-size: 12px;
+      font-weight: bold;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+  <!-- Header Section -->
+  <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-8 px-4">
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+      <div class="text-center md:text-left mb-6 md:mb-0">
+        <h1 class="text-3xl md:text-4xl font-bold mb-3 flex items-center justify-center md:justify-start">
+          <i class="fas fa-crown vip-icon mr-3"></i>
+          প্যাকেজ পরিকল্পনা
+        </h1>
+        <p class="text-lg mb-2">বর্তমান পরিকল্পনা: <span class="font-bold text-yellow-300">কোন ভিআইপি নেই</span></p>
+        <p class="text-sm opacity-90">আপনার উপযুক্ত প্যাকেজ নির্বাচন করুন</p>
+      </div>
+      <div class="vip-badge mt-4 md:mt-0">
+        <i class="fas fa-medal fa-5x vip-icon"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Packages Section -->
+  <div class="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    
+    <!-- Silver Package -->
+    <div class="package bg-white rounded-xl shadow-lg p-6 relative overflow-hidden transition-all duration-300 border-t-4 border-gray-400">
+      <div class="ribbon"><span>বেস্ট সেলার</span></div>
+      <div class="flex justify-between items-start mb-4">
+        <h3 class="text-2xl font-bold text-gray-800 flex items-center">
+          <i class="fas fa-star vip-icon mr-2"></i>
+          VIP সিলভার
+        </h3>
+        <span class="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm font-semibold">সর্বাধিক জনপ্রিয়</span>
+      </div>
+      <div class="mb-6">
+        <p class="text-4xl font-bold text-gray-800 mb-2">৳120<span class="text-lg">.00</span></p>
+        <p class="text-gray-600">৯০ দিনের জন্য</p>
+      </div>
+      <ul class="space-y-3 mb-8">
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>দৈনিক সীমা: ১০ টাকা</span>
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>বোনাস: ৫% কমিশন</span>
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>২৪/৭ সাপোর্ট</span>
+        </li>
+      </ul>
+      <button class="w-full bg-gray-600 hover:bg-gray-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center">
+        <i class="fas fa-shopping-cart mr-2"></i> এখনি কিনুন
+      </button>
+    </div>
+
+    <!-- Gold Package -->
+    <div class="package bg-white rounded-xl shadow-lg p-6 relative overflow-hidden transition-all duration-300 border-t-4 border-yellow-400">
+      <h3 class="text-2xl font-bold text-gray-800 flex items-center mb-4">
+        <i class="fas fa-gem vip-icon mr-2" style="color: gold;"></i>
+        VIP গোল্ড
+      </h3>
+      <div class="mb-6">
+        <p class="text-4xl font-bold text-gray-800 mb-2">৳240<span class="text-lg">.00</span></p>
+        <p class="text-gray-600">৯০ দিনের জন্য</p>
+      </div>
+      <ul class="space-y-3 mb-8">
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>দৈনিক সীমা: ১৫ টাকা</span>
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>বোনাস: ১০% কমিশন</span>
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>প্রায়োরিটি সাপোর্ট</span>
+        </li>
+      </ul>
+      <button class="w-full bg-yellow-600 hover:bg-yellow-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center">
+        <i class="fas fa-shopping-cart mr-2"></i> এখনি কিনুন
+      </button>
+    </div>
+
+    <!-- Diamond Package -->
+    <div class="package bg-white rounded-xl shadow-lg p-6 relative overflow-hidden transition-all duration-300 border-t-4 border-blue-400">
+      <h3 class="text-2xl font-bold text-gray-800 flex items-center mb-4">
+        <i class="fas fa-gem vip-icon mr-2" style="color: #00b4d8;"></i>
+        VIP ডায়মন্ড
+      </h3>
+      <div class="mb-6">
+        <p class="text-4xl font-bold text-gray-800 mb-2">৳360<span class="text-lg">.00</span></p>
+        <p class="text-gray-600">৯০ দিনের জন্য</p>
+      </div>
+      <ul class="space-y-3 mb-8">
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>দৈনিক সীমা: ২০ টাকা</span>
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>বোনাস: ১৫% কমিশন</span>
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>এক্সক্লুসিভ অফার</span>
+        </li>
+      </ul>
+      <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center">
+        <i class="fas fa-shopping-cart mr-2"></i> এখনি কিনুন
+      </button>
+    </div>
+
+    <!-- Platinum Package -->
+    <div class="package bg-white rounded-xl shadow-lg p-6 relative overflow-hidden transition-all duration-300 border-t-4 border-gray-300">
+      <h3 class="text-2xl font-bold text-gray-800 flex items-center mb-4">
+        <i class="fas fa-award vip-icon mr-2" style="color: #e5e5e5;"></i>
+        VIP প্লাটিনাম
+      </h3>
+      <div class="mb-6">
+        <p class="text-4xl font-bold text-gray-800 mb-2">৳480<span class="text-lg">.00</span></p>
+        <p class="text-gray-600">১২০ দিনের জন্য</p>
+      </div>
+      <ul class="space-y-3 mb-8">
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>দৈনিক সীমা: ২৫ টাকা</span>
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>বোনাস: ২০% কমিশন</span>
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>ভিআইপি ম্যানেজার</span>
+        </li>
+      </ul>
+      <button class="w-full bg-gray-500 hover:bg-gray-600 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center">
+        <i class="fas fa-shopping-cart mr-2"></i> এখনি কিনুন
+      </button>
+    </div>
+
+    <!-- Ruby Package -->
+    <div class="package bg-white rounded-xl shadow-lg p-6 relative overflow-hidden transition-all duration-300 border-t-4 border-red-400">
+      <h3 class="text-2xl font-bold text-gray-800 flex items-center mb-4">
+        <i class="fas fa-gem vip-icon mr-2" style="color: #e63946;"></i>
+        VIP রুবি
+      </h3>
+      <div class="mb-6">
+        <p class="text-4xl font-bold text-gray-800 mb-2">৳600<span class="text-lg">.00</span></p>
+        <p class="text-gray-600">১৫০ দিনের জন্য</p>
+      </div>
+      <ul class="space-y-3 mb-8">
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>দৈনিক সীমা: ৩০ টাকা</span>
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>বোনাস: ২৫% কমিশন</span>
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>প্রাইভেট কনসালটেন্ট</span>
+        </li>
+      </ul>
+      <button class="w-full bg-red-600 hover:bg-red-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center">
+        <i class="fas fa-shopping-cart mr-2"></i> এখনি কিনুন
+      </button>
+    </div>
+
+    <!-- Crown Package -->
+    <div class="package bg-white rounded-xl shadow-lg p-6 relative overflow-hidden transition-all duration-300 border-t-4 border-purple-400">
+      <div class="ribbon"><span>বেস্ট ভ্যালু</span></div>
+      <h3 class="text-2xl font-bold text-gray-800 flex items-center mb-4">
+        <i class="fas fa-crown vip-icon mr-2" style="color: #9d4edd;"></i>
+        VIP ক্রাউন
+      </h3>
+      <div class="mb-6">
+        <p class="text-4xl font-bold text-gray-800 mb-2">৳900<span class="text-lg">.00</span></p>
+        <p class="text-gray-600">১৮০ দিনের জন্য</p>
+      </div>
+      <ul class="space-y-3 mb-8">
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>দৈনিক সীমা: ৫০ টাকা</span>
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>বোনাস: ৩০% কমিশন</span>
+        </li>
+        <li class="flex items-center">
+          <i class="fas fa-check-circle text-green-500 mr-2"></i>
+          <span>সমস্ত প্রিমিয়াম সুবিধা</span>
+        </li>
+      </ul>
+      <button class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center">
+        <i class="fas fa-shopping-cart mr-2"></i> এখনি কিনুন
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>

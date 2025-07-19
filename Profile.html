@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>প্রোফাইল ড্যাশবোর্ড</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans pb-10">
+
+  <!-- Header -->
+  <div class="bg-gradient-to-r from-green-600 to-green-500 text-white px-4 py-3 flex justify-between items-center rounded-b-xl shadow-md">
+    <h1 class="text-lg font-bold">Free Lancer 24</h1>
+    <div class="flex items-center space-x-3">
+      <img src="https://img.icons8.com/ios-filled/24/ffffff/appointment-reminders.png" alt="bell" />
+      <img src="https://img.icons8.com/color/48/user-male-circle--v1.png" alt="profile" class="w-8 h-8 rounded-full border-2 border-white" />
+    </div>
+  </div>
+
+  <!-- Profile Card -->
+  <div class="bg-white rounded-xl shadow-md p-6 mt-4 mx-4 text-center border border-gray-100">
+    <img src="https://img.icons8.com/color/96/user-male-circle--v1.png" alt="profile" class="mx-auto w-20 h-20 border-4 border-green-100 rounded-full" />
+    <h2 class="text-xl font-semibold mt-2">Habib Sikdar</h2>
+    <p class="text-sm text-gray-500">User Name : Habib526</p>
+    <p class="text-3xl font-bold text-green-600 mt-2">৳ 20.00</p>
+    <p class="text-xs bg-gray-100 text-gray-600 inline-block px-3 py-1 rounded-full mt-1 border border-gray-200">কোনো প্যাকেজ নেই</p>
+  </div>
+
+  <!-- Actions -->
+  <div class="grid grid-cols-3 gap-4 mt-6 mx-4">
+    <div class="bg-white rounded-lg shadow-md text-center p-4 border border-gray-100 hover:bg-blue-50 transition-colors">
+      <img src="https://img.icons8.com/color/48/upload.png" class="mx-auto mb-2 w-10 h-10" />
+      <p class="font-semibold text-blue-600 text-sm">ডিপোজিট</p>
+    </div>
+    <div class="bg-white rounded-lg shadow-md text-center p-4 border border-gray-100 hover:bg-gray-50 transition-colors">
+      <img src="https://img.icons8.com/ios-filled/50/add-user-group-man-man.png" class="mx-auto mb-2 w-10 h-10" />
+      <p class="font-semibold text-gray-700 text-sm">আমন্ত্রণ</p>
+    </div>
+    <div class="bg-white rounded-lg shadow-md text-center p-4 border border-gray-100 hover:bg-green-50 transition-colors">
+      <img src="https://img.icons8.com/color/48/download--v1.png" class="mx-auto mb-2 w-10 h-10" />
+      <p class="font-semibold text-green-600 text-sm">উত্তোলন</p>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="grid grid-cols-2 gap-4 mt-6 mx-4">
+    <div class="bg-white rounded-lg shadow-md text-center p-4 border border-yellow-100">
+      <p class="text-xs text-gray-500">মোট ডিপোজিট</p>
+      <p class="text-xl font-bold text-yellow-600">৳ 0.00</p>
+    </div>
+    <div class="bg-white rounded-lg shadow-md text-center p-4 border border-green-100">
+      <p class="text-xs text-gray-500">মোট উইদ্র </p>
+      <p class="text-xl font-bold text-green-600">৳ 0.00</p>
+    </div>
+    <div class="bg-white rounded-lg shadow-md text-center p-4 border border-gray-100">
+      <p class="text-xs text-gray-500">সম্পূর্ণ</p>
+      <p class="text-xl font-bold text-black">৳ 0.00</p>
+    </div>
+    <div class="bg-white rounded-lg shadow-md text-center p-4 border border-gray-100">
+      <p class="text-xs text-gray-500">টাকা রয়েছে</p>
+      <p class="text-xl font-bold text-black">৳ 0.00</p>
+    </div>
+  </div>
+
+  <!-- Account Section -->
+  <div class="bg-white mt-6 mx-4 rounded-xl shadow-md p-4 border border-blue-50">
+    <div class="flex items-center space-x-3 mb-4 p-2 hover:bg-blue-50 rounded-lg">
+      <div class="bg-blue-100 p-2 rounded-full">
+        <img src="https://img.icons8.com/ios-filled/24/0077b5/tools.png" class="w-5 h-5" />
+      </div>
+      <p class="text-sm font-medium text-gray-700">অ্যাকাউন্ট তথ্য</p>
+    </div>
+    <div class="flex items-center space-x-3 p-2 hover:bg-blue-50 rounded-lg">
+      <div class="bg-blue-100 p-2 rounded-full">
+        <img src="https://img.icons8.com/ios-filled/24/0077b5/key.png" class="w-5 h-5" />
+      </div>
+      <p class="text-sm font-medium text-gray-700">পাসওয়ার্ড পরিবর্তন করুন</p>
+    </div>
+  </div>
+
+  <!-- Commission Section -->
+  <div class="bg-white mt-4 mx-4 rounded-xl shadow-md p-4 border border-purple-50">
+    <div class="flex items-center space-x-3 mb-4 p-2 hover:bg-purple-50 rounded-lg">
+      <div class="bg-purple-100 p-2 rounded-full">
+        <img src="https://img.icons8.com/ios-filled/24/800080/money-bag.png" class="w-5 h-5" />
+      </div>
+      <p class="text-sm font-medium text-gray-700">কমিশন</p>
+    </div>
+    <div class="flex items-center space-x-3 mb-4 p-2 hover:bg-purple-50 rounded-lg">
+      <div class="bg-purple-100 p-2 rounded-full">
+        <img src="https://img.icons8.com/ios-filled/24/800080/money-box.png" class="w-5 h-5" />
+      </div>
+      <p class="text-sm font-medium text-gray-700">ডিপোজিট হিস্ট্রি</p>
+    </div>
+    <div class="flex items-center space-x-3 p-2 hover:bg-purple-50 rounded-lg">
+      <div class="bg-purple-100 p-2 rounded-full">
+        <img src="https://img.icons8.com/ios-filled/24/800080/withdrawal.png" class="w-5 h-5" />
+      </div>
+      <p class="text-sm font-medium text-gray-700">উইথড্রল হিস্ট্রি</p>
+    </div>
+  </div>
+
+  <!-- Referral Section -->
+  <div class="bg-white mt-4 mx-4 rounded-xl shadow-md p-4 border border-orange-50">
+    <div class="flex items-center space-x-3 mb-4 p-2 hover:bg-orange-50 rounded-lg">
+      <div class="bg-orange-100 p-2 rounded-full">
+        <img src="https://img.icons8.com/ios-filled/24/FFA500/conference-call.png" class="w-5 h-5" />
+      </div>
+      <p class="text-sm font-medium text-gray-700">মোট রেফার</p>
+    </div>
+    <div class="flex items-center space-x-3 p-2 hover:bg-orange-50 rounded-lg">
+      <div class="bg-orange-100 p-2 rounded-full">
+        <img src="https://img.icons8.com/ios-filled/24/FFA500/download-from-cloud.png" class="w-5 h-5" />
+      </div>
+      <p class="text-sm font-medium text-gray-700">এপ্স ডাউনলোড</p>
+    </div>
+  </div>
+
+  <!-- Logout Section -->
+  <div class="bg-white mt-4 mx-4 rounded-xl shadow-md p-4 border border-red-50">
+    <div class="flex items-center space-x-3 p-2 hover:bg-red-50 rounded-lg">
+      <div class="bg-red-100 p-2 rounded-full">
+        <img src="https://img.icons8.com/ios-filled/24/FF0000/exit.png" class="w-5 h-5" />
+      </div>
+      <p class="text-sm font-medium text-gray-700">লগ আউট</p>
+    </div>
+  </div>
+
+</body>
+</html>

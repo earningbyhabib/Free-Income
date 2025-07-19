@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>টাস্ক পোর্টাল - VIP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .vip-icon {
+      color: gold;
+      text-shadow: 0 0 5px rgba(255,215,0,0.7);
+    }
+    .task-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    .ribbon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+    }
+    .ribbon span {
+      position: absolute;
+      top: 15px;
+      right: -25px;
+      width: 120px;
+      padding: 5px 0;
+      background: #ff6b6b;
+      color: white;
+      text-align: center;
+      transform: rotate(45deg);
+      font-size: 12px;
+      font-weight: bold;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    }
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Header Section -->
+  <div class="gradient-bg text-white py-8 px-4 shadow-lg">
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+      <div class="text-center md:text-left mb-6 md:mb-0">
+        <h1 class="text-3xl md:text-4xl font-bold mb-3 flex items-center justify-center md:justify-start">
+          <i class="fas fa-tasks vip-icon mr-3"></i>
+          VIP টাস্ক পোর্টাল
+        </h1>
+        <p class="text-lg mb-2">বর্তমান ব্যালেন্স: <span class="font-bold text-yellow-300">৳0.00</span></p>
+        <p class="text-sm opacity-90">প্রতিদিনের টাস্ক সম্পন্ন করে আয় করুন</p>
+      </div>
+      <div class="mt-4 md:mt-0">
+        <div class="bg-white/20 rounded-full p-4 inline-block">
+          <i class="fas fa-coins fa-3x text-yellow-400"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Balance Info -->
+  <div class="container mx-auto px-4 py-6">
+    <div class="bg-gradient-to-r from-green-600 to-green-800 text-white rounded-xl p-6 shadow-lg flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-4 md:mb-0">
+        <h3 class="text-xl font-bold flex items-center">
+          <i class="fas fa-wallet mr-2"></i>
+          আপনার ওয়ালেট
+        </h3>
+        <p class="text-sm opacity-90 mt-1">আজকের আয়: ৳0.00</p>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-white/20 rounded-lg p-3 text-center">
+          <p class="text-sm">মোট আয়</p>
+          <p class="font-bold">৳0.00</p>
+        </div>
+        <div class="bg-white/20 rounded-lg p-3 text-center">
+          <p class="text-sm">উত্তোলনযোগ্য</p>
+          <p class="font-bold">৳0.00</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tasks Section -->
+  <div class="container mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    
+    <!-- Task 1 -->
+    <div class="task-card bg-white rounded-xl shadow-md p-6 relative transition-all duration-300 border-t-4 border-blue-500">
+      <div class="flex justify-between items-start mb-4">
+        <h3 class="text-xl font-bold text-gray-800 flex items-center">
+          <i class="fas fa-video text-blue-500 mr-2"></i>
+          ভিডিও দেখুন
+        </h3>
+        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-semibold">+৳0.40</span>
+      </div>
+      <div class="mb-6">
+        <p class="text-gray-600 mb-3">ভিডিওটি দেখে কাজ শুরু করুন, আপনি পাবেন ০.৪০ টাকা</p>
+        <div class="flex items-center text-sm text-gray-500">
+          <i class="fas fa-clock mr-1"></i>
+          <span>সময়: ৩০ সেকেন্ড</span>
+        </div>
+      </div>
+      <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center">
+        <i class="fas fa-play mr-2"></i> শুরু করুন
+      </button>
+    </div>
+
+    <!-- Task 2 -->
+    <div class="task-card bg-white rounded-xl shadow-md p-6 relative transition-all duration-300 border-t-4 border-green-500">
+      <div class="flex justify-between items-start mb-4">
+        <h3 class="text-xl font-bold text-gray-800 flex items-center">
+          <i class="fas fa-list-check text-green-500 mr-2"></i>
+          নির্দেশনা অনুসরণ
+        </h3>
+        <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">+৳0.75</span>
+      </div>
+      <div class="mb-6">
+        <p class="text-gray-600 mb-3">নিচের নির্দেশনা দেখে কাজ করুন, ইনকাম নিশ্চিত</p>
+        <div class="flex items-center text-sm text-gray-500">
+          <i class="fas fa-clock mr-1"></i>
+          <span>সময়: ২ মিনিট</span>
+        </div>
+      </div>
+      <button class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center">
+        <i class="fas fa-play mr-2"></i> কাজ করুন
+      </button>
+    </div>
+
+    <!-- Task 3 -->
+    <div class="task-card bg-white rounded-xl shadow-md p-6 relative transition-all duration-300 border-t-4 border-purple-500 pulse-animation">
+      <div class="ribbon"><span>বেস্ট অফার</span></div>
+      <div class="flex justify-between items-start mb-4">
+        <h3 class="text-xl font-bold text-gray-800 flex items-center">
+          <i class="fas fa-image text-purple-500 mr-2"></i>
+          ছবি সিলেক্ট
+        </h3>
+        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-xs font-semibold">+৳1.20</span>
+      </div>
+      <div class="mb-6">
+        <p class="text-gray-600 mb-3">ছবিটি দেখে নির্দিষ্ট অপশন সিলেক্ট করুন, আয় করুন সহজেই</p>
+        <div class="flex items-center text-sm text-gray-500">
+          <i class="fas fa-clock mr-1"></i>
+          <span>সময়: ১ মিনিট</span>
+        </div>
+      </div>
+      <button class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center">
+        <i class="fas fa-play mr-2"></i> শুরু করুন
+      </button>
+    </div>
+
+    <!-- Task 4 -->
+    <div class="task-card bg-white rounded-xl shadow-md p-6 relative transition-all duration-300 border-t-4 border-yellow-500">
+      <div class="flex justify-between items-start mb-4">
+        <h3 class="text-xl font-bold text-gray-800 flex items-center">
+          <i class="fas fa-ad text-yellow-500 mr-2"></i>
+          বিজ্ঞাপন দেখুন
+        </h3>
+        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-semibold">+৳0.50</span>
+      </div>
+      <div class="mb-6">
+        <p class="text-gray-600 mb-3">১৫ সেকেন্ড বিজ্ঞাপন দেখলেই আপনি পাবেন টাকা</p>
+        <div class="flex items-center text-sm text-gray-500">
+          <i class="fas fa-clock mr-1"></i>
+          <span>সময়: ১৫ সেকেন্ড</span>
+        </div>
+      </div>
+      <button class="w-full bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center">
+        <i class="fas fa-play mr-2"></i> বিজ্ঞাপন দেখুন
+      </button>
+    </div>
+
+    <!-- Task 5 -->
+    <div class="task-card bg-white rounded-xl shadow-md p-6 relative transition-all duration-300 border-t-4 border-red-500">
+      <div class="flex justify-between items-start mb-4">
+        <h3 class="text-xl font-bold text-gray-800 flex items-center">
+          <i class="fas fa-bolt text-red-500 mr-2"></i>
+          দ্রুত কাজ
+        </h3>
+        <span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-semibold">+৳0.30</span>
+      </div>
+      <div class="mb-6">
+        <p class="text-gray-600 mb-3">ছোট কাজ শেষ করে পেমেন্ট পান, কোন ইনভেস্ট লাগবে না</p>
+        <div class="flex items-center text-sm text-gray-500">
+          <i class="fas fa-clock mr-1"></i>
+          <span>সময়: ২০ সেকেন্ড</span>
+        </div>
+      </div>
+      <button class="w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center">
+        <i class="fas fa-play mr-2"></i> শুরু করুন
+      </button>
+    </div>
+
+    <!-- Task 6 -->
+    <div class="task-card bg-white rounded-xl shadow-md p-6 relative transition-all duration-300 border-t-4 border-indigo-500">
+      <div class="flex justify-between items-start mb-4">
+        <h3 class="text-xl font-bold text-gray-800 flex items-center">
+          <i class="fas fa-link text-indigo-500 mr-2"></i>
+          লিঙ্ক ভিজিট
+        </h3>
+        <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full text-xs font-semibold">+৳0.60</span>
+      </div>
+      <div class="mb-6">
+        <p class="text-gray-600 mb-3">নিচের লিঙ্কে ক্লিক করে সহজ টাস্ক করুন, ইনকাম নিন</p>
+        <div class="flex items-center text-sm text-gray-500">
+          <i class="fas fa-clock mr-1"></i>
+          <span>সময়: ৪৫ সেকেন্ড</span>
+        </div>
+      </div>
+      <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center">
+        <i class="fas fa-play mr-2"></i> টাস্ক করুন
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="bg-gray-800 text-white py-6 px-4 mt-12">
+    <div class="container mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <h3 class="text-xl font-bold flex items-center">
+            <i class="fas fa-crown text-yellow-400 mr-2"></i>
+            VIP টাস্ক পোর্টাল
+          </h3>
+          <p class="text-sm text-gray-400 mt-1">সহজ টাস্ক, নিশ্চিত আয়</p>
+        </div>
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-300 hover:text-white transition-colors">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="text-gray-300 hover:text-white transition-colors">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="text-gray-300 hover:text-white transition-colors">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-6 pt-6 text-center text-sm text-gray-400">
+        © ২০২৫ VIP টাস্ক পোর্টাল | সকল অধিকার সংরক্ষিত
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

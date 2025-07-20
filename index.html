@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-     <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>লগইন ও ড্যাশবোর্ড</title>
     <style>
@@ -669,13 +669,6 @@
     .twitter { color: #1DA1F2; }
     .more { color: #4a5568; }
 </style>
-</head>
-<body>
-    <!-- পূর্বের সমস্ত HTML কন্টেন্ট একই থাকবে, শুধু রেফারেল বক্স অংশটি পরিবর্তন করুন -->
-
-        
-      
-    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -772,7 +765,7 @@
                 <div><i class="fas fa-wallet"></i> ডিপোজিট</div>
                 <div><i class="fas fa-money-bill-wave"></i> উইদ্র</div>
                 <div class="referral-action"><i class="fas fa-user-plus"></i> রেফারেল</div>
-                <div><i class="fas fa-user-cog"></i> প্রোফাইল</div>
+                <div><a href="https://earningbyhabib.github.io/Free-Income/Profile.html" style="color: white; text-decoration: none;"><i class="fas fa-user-cog"></i> প্রোফাইল</a></div>
             </div>
 
             <div class="menu">
@@ -824,7 +817,7 @@
                     <i class="fas fa-bell"></i>
                 </div>
                 <div class="profile-icon">
-                    <i class="fas fa-user"></i>
+                    <a href="https://earningbyhabib.github.io/Free-Income/Profile.html" style="color: white;"><i class="fas fa-user"></i></a>
                 </div>
             </div>
         </header>
@@ -845,34 +838,33 @@
         
         <!-- বাটন সেকশন -->
         <div class="button-section">
-            <button class="big-button" onclick="window.open('https://t.me/earningbyhabib', '_blank')">
+            <a href="https://t.me/earningbyhabib" target="_blank" class="big-button">
                 <i class="fas fa-question-circle"></i>
                 সহায়তা কেন্দ্র
-            </button>
+            </a>
             
             <button class="big-button" id="invite-friends-btn">
                 <i class="fas fa-user-friends"></i>
-                বন্ধুকে রেফার করুন🙋‍♂️
-
+                বন্ধুকে রেফার করুন 🙋‍♂️
             </button>
             
-            <button class="big-button" onclick="window.open('https://t.me/earningbyhabib', '_blank')">
+            <a href="https://t.me/earningbyhabib" target="_blank" class="big-button">
                 <i class="fas fa-download"></i>
                 ডাউনলোড করুন অ্যাপ
-            </button>
+            </a>
             
-            <button class="big-button" onclick="window.open('https://t.me/earningbyhabib', '_blank')">
-                <i class="fas fa-video"></i>
-                ভিডিও টিউটোরিয়াল
-            </button>
+            <a href="https://earningbyhabib.github.io/Free-Income/Task.html" class="big-button">
+                <i class="fas fa-tasks"></i>
+                টাস্ক সেকশন
+            </a>
             
-            <button class="big-button" style="grid-column: 1 / span 2;" onclick="window.open('https://t.me/earningbyhabib', '_blank')">
-                <i class="fas fa-info-circle"></i>
-                আমাদের সম্পর্কে জানুন
-            </button>
+            <a href="https://earningbyhabib.github.io/Free-Income/Vip.html" class="big-button" style="grid-column: 1 / span 2;">
+                <i class="fas fa-crown"></i>
+                ভিআইপি মেম্বারশিপ
+            </a>
         </div>
         
-           <!-- ভিডিও সেকশন -->
+        <!-- ভিডিও সেকশন -->
         <div class="video-section">
             <i class="fas fa-play-circle" style="font-size: 50px;"></i>
             <p>শর্ট ভিডিও কন্টেন্ট</p>
@@ -884,18 +876,18 @@
                 <i class="fas fa-home"></i>
                 হোম
             </a>
-            <a href="#" class="nav-button">
+            <a href="https://earningbyhabib.github.io/Free-Income/Task.html" class="nav-button">
                 <i class="fas fa-tasks"></i>
                 টাস্ক
             </a>
-            <div class="premium-button">
+            <a href="https://earningbyhabib.github.io/Free-Income/Vip.html" class="premium-button">
                 <i class="fas fa-crown"></i>
-            </div>
-            <a href="#" class="nav-button">
+            </a>
+            <a href="https://earningbyhabib.github.io/Free-Income/Join.html" class="nav-button">
                 <i class="fas fa-users"></i>
                 জয়েন করুন
             </a>
-            <a href="#" class="nav-button">
+            <a href="https://earningbyhabib.github.io/Free-Income/Profile.html" class="nav-button">
                 <i class="fas fa-user"></i>
                 প্রোফাইল
             </a>
@@ -920,126 +912,40 @@
                 </button>
             </div>
             
-              <div class="share-container">
-            <button class="share-main-btn" id="share-main-btn">
-                <i class="fas fa-share-alt"></i> শেয়ার করুন
-            </button>
-            
-            <div class="share-options" id="share-options">
-                <div class="share-option" data-app="whatsapp">
-                    <i class="fab fa-whatsapp whatsapp"></i>
-                    WhatsApp
-                </div>
-                <div class="share-option" data-app="facebook">
-                    <i class="fab fa-facebook facebook"></i>
-                    Facebook
-                </div>
-                <div class="share-option" data-app="messenger">
-                    <i class="fab fa-facebook-messenger messenger"></i>
-                    Messenger
-                </div>
-                <div class="share-option" data-app="telegram">
-                    <i class="fab fa-telegram telegram"></i>
-                    Telegram
-                </div>
-                <div class="share-option" data-app="twitter">
-                    <i class="fab fa-twitter twitter"></i>
-                    Twitter
-                </div>
-                <div class="share-option" data-app="more">
-                    <i class="fas fa-ellipsis-h more"></i>
-                    আরো অপশন
+            <div class="share-container">
+                <button class="share-main-btn" id="share-main-btn">
+                    <i class="fas fa-share-alt"></i> শেয়ার করুন
+                </button>
+                
+                <div class="share-options" id="share-options">
+                    <div class="share-option" data-app="whatsapp">
+                        <i class="fab fa-whatsapp whatsapp"></i>
+                        WhatsApp
+                    </div>
+                    <div class="share-option" data-app="facebook">
+                        <i class="fab fa-facebook facebook"></i>
+                        Facebook
+                    </div>
+                    <div class="share-option" data-app="messenger">
+                        <i class="fab fa-facebook-messenger messenger"></i>
+                        Messenger
+                    </div>
+                    <div class="share-option" data-app="telegram">
+                        <i class="fab fa-telegram telegram"></i>
+                        Telegram
+                    </div>
+                    <div class="share-option" data-app="twitter">
+                        <i class="fab fa-twitter twitter"></i>
+                        Twitter
+                    </div>
+                    <div class="share-option" data-app="more">
+                        <i class="fas fa-ellipsis-h more"></i>
+                        আরো অপশন
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- পূর্বের সমস্ত স্ক্রিপ্ট একই থাকবে, শুধু নিচের অংশটি যোগ করুন -->
-
-    <script>
-        // ১১. শেয়ার ফাংশনালিটি
-        document.getElementById('share-main-btn').addEventListener('click', function() {
-            document.getElementById('share-options').classList.toggle('active');
-        });
-
-        // শেয়ার অপশনগুলোর জন্য ইভেন্ট লিসেনার
-        document.querySelectorAll('.share-option').forEach(option => {
-            option.addEventListener('click', function() {
-                const app = this.getAttribute('data-app');
-                shareLink(app);
-            });
-        });
-
-        // শেয়ার ফাংশন
-        function shareLink(app) {
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            if(!currentUser) return;
-            
-            const referralLink = `https://t.me/earningbyhabib?ref=${currentUser.username}`;
-            const shareText = `💰 টাকা উপার্জনের সুযোগ! এই লিংক থেকে রেজিস্টার করুন: ${referralLink}`;
-            
-            let shareUrl = '';
-            
-            switch(app) {
-                case 'whatsapp':
-                    shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
-                    break;
-                case 'facebook':
-                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}`;
-                    break;
-                case 'messenger':
-                    shareUrl = `fb-messenger://share/?link=${encodeURIComponent(referralLink)}`;
-                    break;
-                case 'telegram':
-                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent('টাকা উপার্জনের সুযোগ!')}`;
-                    break;
-                case 'twitter':
-                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
-                    break;
-                case 'more':
-                    if(navigator.share) {
-                        navigator.share({
-                            title: 'টাকা উপার্জনের সুযোগ!',
-                            text: 'এই লিংক থেকে রেজিস্টার করুন',
-                            url: referralLink
-                        }).catch(console.error);
-                    } else {
-                        alert('শেয়ার অপশনগুলো দেখতে উপরের বাটনগুলো ব্যবহার করুন');
-                    }
-                    return;
-            }
-            
-            window.open(shareUrl, '_blank');
-        }
-
-        // ১২. পেজ লোড হলে রেফারেল লিংক সেট করুন
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            
-            if(currentUser) {
-                document.getElementById('referral-link').value = `https://t.me/earningbyhabib?ref=${currentUser.username}`;
-            } else {
-                document.getElementById('referral-link').value = 'লগইন করুন রেফারেল লিংক পেতে';
-            }
-        });
-
-        // ১৩. রেফারেল পেজে যাওয়ার সময় লিংক আপডেট করুন
-        function updateReferralLink() {
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            if(currentUser) {
-                document.getElementById('referral-link').value = `https://t.me/earningbyhabib?ref=${currentUser.username}`;
-            }
-        }
-
-        // পূর্বের সমস্ত ইভেন্ট লিসেনারে এই ফাংশন কল যোগ করুন
-        document.getElementById('invite-friends-btn').addEventListener('click', updateReferralLink);
-        document.querySelector('.referral-action').addEventListener('click', updateReferralLink);
-        document.querySelector('.referral-menu-item').addEventListener('click', updateReferralLink);
-    </script>
-</body>
-</html>
-
-     
         <!-- কমিশন চার্ট -->
         <div class="commission-chart">
             <h2 class="chart-title">🎯 রেফার কমিশন চার্ট 💸</h2>
@@ -1242,20 +1148,80 @@
             alert('রেফারেল লিংক কপি করা হয়েছে!');
         });
 
-        // ১০. পেজ লোড হলে কারেন্ট ইউজার চেক করুন
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            
-            if(currentUser) {
-                document.getElementById('login-page').classList.add('hidden');
-                document.getElementById('dashboard-page').classList.remove('hidden');
-                
-                // সাইডবারে ইউজার ইনফো সেট করুন
-                document.getElementById('sidebar-fullname').textContent = currentUser.fullname;
-                document.getElementById('sidebar-username').textContent = currentUser.username;
-                document.getElementById('sidebar-balance').textContent = currentUser.balance.toFixed(2) + ' টাকা';
-            }
+        // ১০. শেয়ার ফাংশনালিটি
+        document.getElementById('share-main-btn').addEventListener('click', function() {
+            document.getElementById('share-options').classList.toggle('active');
         });
+
+        // শেয়ার অপশনগুলোর জন্য ইভেন্ট লিসেনার
+        document.querySelectorAll('.share-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const app = this.getAttribute('data-app');
+                shareLink(app);
+            });
+        });
+
+        // শেয়ার ফাংশন
+        function shareLink(app) {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if(!currentUser) return;
+            
+            const referralLink = `https://t.me/earningbyhabib?ref=${currentUser.username}`;
+            const shareText = `💰 টাকা উপার্জনের সুযোগ! এই লিংক থেকে রেজিস্টার করুন: ${referralLink}`;
+            
+            let shareUrl = '';
+            
+            switch(app) {
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+                    break;
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}`;
+                    break;
+                case 'messenger':
+                    shareUrl = `fb-messenger://share/?link=${encodeURIComponent(referralLink)}`;
+                    break;
+                case 'telegram':
+                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent('টাকা উপার্জনের সুযোগ!')}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+                    break;
+                case 'more':
+                    if(navigator.share) {
+                        navigator.share({
+                            title: 'টাকা উপার্জনের সুযোগ!',
+                            text: 'এই লিংক থেকে রেজিস্টার করুন',
+                            url: referralLink
+                        }).catch(console.error);
+                    } else {
+                        alert('শেয়ার অপশনগুলো দেখতে উপরের বাটনগুলো ব্যবহার করুন');
+                    }
+                    return;
+            }
+            
+            window.open(shareUrl, '_blank');
+        }
+
+        // ১১. পেজ লোড হলে কারেন্ট ইউজার চেক করুন
+        document.addEventListener('DOMContentLoaded', function() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        
+        if(currentUser) {
+            // যদি ইউজার লগইন করা থাকে
+            document.getElementById('login-page').classList.add('hidden');
+            document.getElementById('dashboard-page').classList.remove('hidden');
+            
+            // সাইডবারে ইউজার ইনফো সেট করুন
+            document.getElementById('sidebar-fullname').textContent = currentUser.fullname;
+            document.getElementById('sidebar-username').textContent = currentUser.username;
+            document.getElementById('sidebar-balance').textContent = currentUser.balance.toFixed(2) + ' টাকা';
+        } else {
+            // যদি ইউজার লগইন না করা থাকে
+            document.getElementById('login-page').classList.remove('hidden');
+            document.getElementById('dashboard-page').classList.add('hidden');
+        }
+    });
     </script>
 </body>
 </html>

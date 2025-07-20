@@ -3,437 +3,1119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>তহবিল জমা দিন - আধুনিক সংস্করণ</title>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>তহবিল জমা ফর্ম - আধুনিক ডিজাইন</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary-blue: #007bff; /* Vibrant Blue */
-            --primary-blue-dark: #0056b3;
-            --accent-green: #28a745; /* Success Green */
-            --background-gradient-start: #e9f0f9; /* Light Blue-Grey */
-            --background-gradient-end: #e2effd; /* Lighter Blue */
-            --card-background: #ffffff;
-            --text-dark: #343a40; /* Dark Grey */
-            --text-medium: #6c757d; /* Muted Grey */
-            --border-light: #ced4da; /* Light Grey Border */
-            --input-bg: #f8f9fa; /* Very Light Grey */
-            --shadow-subtle: rgba(0, 0, 0, 0.06);
-            --shadow-medium: rgba(0, 0, 0, 0.12);
+            --primary: #4361ee; /* Vibrant Royal Blue */
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9; /* Deep Blue */
+            --accent: #4cc9f0; /* Light Blue */
+            --success: #38b000; /* Green */
+            --warning: #ff9e00; /* Orange */
+            --danger: #f72585; /* Pink */
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'IBM Plex Sans Bengali', sans-serif;
-            background: linear-gradient(135deg, var(--background-gradient-start), var(--background-gradient-end));
-            color: var(--text-dark);
+            font-family: 'Hind Siliguri', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
             line-height: 1.6;
-            padding: 20px;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            padding: 20px;
         }
 
         .container {
-            background: var(--card-background);
-            border-radius: 25px;
-            box-shadow: 0 15px 40px var(--shadow-medium);
-            padding: 45px;
-            max-width: 550px; /* Slightly wider for better spacing */
             width: 100%;
-            animation: fadeInScale 0.8s ease-out forwards;
-            opacity: 0;
-            transform: scale(0.95);
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        @keyframes fadeInScale {
-            to { opacity: 1; transform: scale(1); }
+        .deposit-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            margin-bottom: 30px;
         }
 
-        h1 {
+        .deposit-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 25px 30px;
             text-align: center;
-            color: var(--primary-blue);
-            margin-bottom: 40px;
-            font-size: 2.6em; /* Slightly larger title */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(30deg) translate(-30%, -30%); }
+            100% { transform: rotate(30deg) translate(30%, 30%); }
+        }
+
+        .card-header h1 {
+            font-size: 28px;
             font-weight: 700;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.08);
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
         }
 
-        .section-title {
-            font-size: 1.4em;
-            color: var(--text-medium);
-            margin-bottom: 25px;
-            text-align: center;
-            font-weight: 500;
+        .card-header p {
+            font-size: 16px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Unique Payment Method Section */
-        .methods-wrapper {
+        .card-body {
+            padding: 30px;
+        }
+
+        .progress-steps {
             display: flex;
-            justify-content: center; /* Ensures icons are centered */
-            gap: 30px; /* Increased space between icons for a cleaner look */
+            justify-content: space-between;
             margin-bottom: 40px;
-            flex-wrap: wrap; /* Allows wrapping on smaller screens */
+            position: relative;
         }
 
-        .method-item {
+        .progress-steps::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--light-gray);
+            z-index: 0;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            height: 4px;
+            background: var(--primary);
+            z-index: 1;
+            transition: width 0.4s ease;
+        }
+
+        .step {
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-weight: 600;
+            margin-bottom: 10px;
+            border: 3px solid var(--light-gray);
+            transition: var(--transition);
+        }
+
+        .step.active .step-icon {
+            background: var(--primary);
+            color: white;
+            border-color: white;
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.3);
+        }
+
+        .step.completed .step-icon {
+            background: var(--success);
+            color: white;
+            border-color: white;
+        }
+
+        .step.completed .step-icon::after {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+        }
+
+        .step-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray);
+            text-align: center;
+        }
+
+        .step.active .step-label {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .step.completed .step-label {
+            color: var(--success);
+        }
+
+        .form-section {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            margin: 10px auto 0;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .payment-method {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: var(--transition);
+            border: 2px solid var(--light-gray);
             position: relative;
-            padding: 15px; /* Padding around item for hover effect */
-            border-radius: 20px; /* More rounded corners */
-            background-color: transparent; /* Start with transparent background */
+            overflow: hidden;
         }
 
-        .method-item:hover {
-            transform: translateY(-8px) scale(1.05);
-            background-color: rgba(0, 123, 255, 0.05); /* Light hover background */
-            box-shadow: 0 10px 25px var(--shadow-medium);
+        .payment-method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
         }
 
-        .method-item.selected {
-            transform: translateY(-4px);
-            background-color: rgba(0, 123, 255, 0.1); /* Slightly darker selected background */
-            box-shadow: 0 0 0 4px var(--primary-blue), 0 10px 25px var(--shadow-medium);
-        }
-        
-        .method-item.selected .icon-circle {
-            border-color: var(--primary-blue); /* Blue border on selection */
-            background-color: var(--primary-blue); /* Filled with blue on selection */
+        .payment-method.selected {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
         }
 
-        .method-item.selected .icon-circle::after {
-            content: '✓';
+        .payment-method.selected::after {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
             position: absolute;
-            top: -10px;
-            right: -10px;
-            background-color: var(--accent-green);
+            top: 10px;
+            right: 10px;
+            width: 22px;
+            height: 22px;
+            background: var(--success);
             color: white;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1em;
-            font-weight: bold;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-            z-index: 10;
+            font-size: 12px;
         }
 
-        .icon-circle {
-            width: 80px; /* Size of the circle */
-            height: 80px;
-            background-color: var(--input-bg);
-            border: 3px solid var(--border-light); /* Thicker border */
-            border-radius: 50%; /* Perfect circle */
+        .method-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 8px var(--shadow-subtle);
+            background: var(--light);
+            border-radius: 12px;
+            padding: 10px;
         }
 
-        .method-item img {
-            width: 55px; /* Icon size inside circle */
-            height: 55px;
+        .method-icon img {
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
         }
 
-        .method-item .name {
+        .method-name {
             font-weight: 600;
-            color: var(--text-dark);
-            font-size: 1.1em;
+            color: var(--dark);
+            margin-bottom: 5px;
         }
 
-        /* Deposit Form Section */
-        .deposit-form {
-            margin-top: 35px;
+        .method-info {
+            font-size: 13px;
+            color: var(--gray);
         }
 
         .form-group {
             margin-bottom: 25px;
         }
 
-        .form-group label {
+        .form-label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 500;
-            color: var(--text-medium);
-            font-size: 1em;
+            color: var(--dark);
+            font-size: 15px;
         }
 
-        .form-group input[type="number"],
-        .form-group input[type="text"] {
+        .form-control {
             width: 100%;
-            padding: 16px 20px;
-            border: 1px solid var(--border-light);
-            border-radius: 15px;
-            font-size: 1.1em;
-            color: var(--text-dark);
-            background-color: var(--input-bg);
-            transition: border-color 0.2s, box-shadow 0.2s;
-            box-shadow: inset 0 1px 4px rgba(0,0,0,0.05);
-        }
-        
-        .form-group input::placeholder {
-            color: #b0b0b0;
-        }
-
-        .form-group input:focus {
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2);
-            outline: none;
-            background-color: white;
-        }
-
-        button[type="submit"] {
-            background-color: var(--primary-blue);
-            color: white;
-            padding: 18px 35px;
-            border: none;
-            border-radius: 15px;
-            font-size: 1.25em;
-            font-weight: 600;
-            width: 100%;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
-            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.35);
-            letter-spacing: 0.8px;
-        }
-
-        button[type="submit"]:hover {
-            background-color: var(--primary-blue-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 123, 255, 0.45);
-        }
-
-        button[type="submit"]:active {
-            transform: translateY(0);
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.25);
-        }
-
-        .note {
-            font-size: 0.9em;
-            color: var(--text-medium);
-            margin-top: 30px;
-            text-align: center;
-            padding: 18px 25px;
-            background-color: rgba(0, 123, 255, 0.05);
-            border-left: 5px solid var(--primary-blue);
+            padding: 15px 20px;
+            border: 2px solid var(--light-gray);
             border-radius: 12px;
-            line-height: 1.5;
-            box-shadow: 0 2px 10px var(--shadow-subtle);
+            font-size: 16px;
+            transition: var(--transition);
+            background: var(--light);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.2);
+            outline: none;
+            background: white;
+        }
+
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-group .form-control {
+            padding-left: 45px;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            color: var(--gray);
+            font-size: 18px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-block {
+            display: flex;
+            width: 100%;
+        }
+
+        .btn-icon {
+            margin-right: 8px;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--light-gray);
+            color: var(--dark);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .info-card {
+            background: rgba(67, 97, 238, 0.05);
+            border-left: 4px solid var(--primary);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .info-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-title i {
+            margin-right: 8px;
+        }
+
+        .info-text {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .account-details {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--light-gray);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: var(--gray);
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-left: 10px;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--success);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 36px;
+            animation: bounceIn 0.8s;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .success-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 15px;
+        }
+
+        .success-text {
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .receipt {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .receipt-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .receipt-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .receipt-label {
+            color: var(--gray);
+        }
+
+        .receipt-value {
+            font-weight: 600;
+        }
+
+        .receipt-divider {
+            height: 1px;
+            background: var(--light-gray);
+            margin: 20px 0;
         }
 
         /* Responsive adjustments */
-        @media (max-width: 600px) {
-            .container {
-                padding: 30px;
-                border-radius: 20px;
+        @media (max-width: 768px) {
+            .payment-methods {
+                grid-template-columns: repeat(2, 1fr);
             }
-
-            h1 {
-                font-size: 2.2em;
-                margin-bottom: 30px;
+            
+            .card-header h1 {
+                font-size: 24px;
             }
-
+            
             .section-title {
-                font-size: 1.2em;
-                margin-bottom: 20px;
-            }
-
-            .methods-wrapper {
-                gap: 20px;
-                margin-bottom: 30px;
-            }
-
-            .icon-circle {
-                width: 70px;
-                height: 70px;
-                border-width: 2px;
-            }
-
-            .method-item img {
-                width: 50px;
-                height: 50px;
-            }
-
-            .method-item .name {
-                font-size: 1em;
-            }
-
-            .form-group {
-                margin-bottom: 20px;
-            }
-
-            .form-group input {
-                padding: 14px 18px;
-                font-size: 1em;
-                border-radius: 12px;
-            }
-
-            button[type="submit"] {
-                padding: 16px 30px;
-                font-size: 1.1em;
-                border-radius: 12px;
-            }
-
-            .note {
-                font-size: 0.8em;
-                padding: 15px 20px;
-                border-radius: 10px;
+                font-size: 18px;
             }
         }
 
-        @media (max-width: 450px) {
-            .container {
-                padding: 25px;
+        @media (max-width: 576px) {
+            .card-body {
+                padding: 25px 20px;
             }
-            h1 {
-                font-size: 2em;
+            
+            .payment-methods {
+                grid-template-columns: 1fr;
             }
-            .methods-wrapper {
-                flex-direction: row; /* Keep in a row */
-                justify-content: space-around; /* Distribute space */
-                gap: 10px; /* Smaller gap */
+            
+            .progress-steps {
+                margin-bottom: 30px;
             }
-            .method-item {
-                padding: 10px; /* Less padding */
+            
+            .step-label {
+                font-size: 12px;
             }
-            .icon-circle {
-                width: 60px;
-                height: 60px;
-            }
-            .method-item img {
-                width: 40px;
-                height: 40px;
-            }
-            .method-item .name {
-                font-size: 0.9em;
+            
+            .btn {
+                padding: 12px 20px;
+                font-size: 15px;
             }
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <h1>তহবিল জমা দিন</h1>
-
-        <div class="method-selection">
-            <h2 class="section-title">পেমেন্ট মাধ্যম নির্বাচন করুন</h2>
-            <div class="methods-wrapper">
-                <div class="method-item" data-method="Bkash">
-                    <div class="icon-circle">
-                        <img src="https://i.imgur.com/NbfkZqD.png" alt="Bkash">
-                    </div>
-                    <div class="name">বিকাশ</div>
-                </div>
-                <div class="method-item" data-method="Nagad">
-                    <div class="icon-circle">
-                        <img src="https://i.imgur.com/UB3K0HX.png" alt="Nagad">
-                    </div>
-                    <div class="name">নগদ</div>
-                </div>
-                <div class="method-item" data-method="Rocket">
-                    <div class="icon-circle">
-                        <img src="https://i.imgur.com/HKqgD6r.png" alt="Rocket">
-                    </div>
-                    <div class="name">রকেট</div>
-                </div>
+        <div class="deposit-card">
+            <div class="card-header">
+                <h1>তহবিল জমা করুন</h1>
+                <p>আপনার অ্যাকাউন্টে টাকা জমা করতে নিচের ধাপগুলো অনুসরণ করুন</p>
             </div>
-        </div>
-
-        <div class="deposit-form">
-            <h2 class="section-title">আপনার ডিপোজিট বিবরণ</h2>
-            <form id="depositForm">
-                <div class="form-group">
-                    <label for="amount">জমা করার পরিমাণ (সর্বনিম্ন ১০০ টাকা)</label>
-                    <input type="number" id="amount" placeholder="উদাহরণ: ৫০০" min="100" required>
+            
+            <div class="card-body">
+                <!-- Progress Steps -->
+                <div class="progress-steps">
+                    <div class="progress-bar" style="width: 0%;"></div>
+                    <div class="step active" data-step="1">
+                        <div class="step-icon">1</div>
+                        <div class="step-label">পদ্ধতি নির্বাচন</div>
+                    </div>
+                    <div class="step" data-step="2">
+                        <div class="step-icon">2</div>
+                        <div class="step-label">বিবরণ দিন</div>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-icon">3</div>
+                        <div class="step-label">নিশ্চিত করুন</div>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="transactionId">ট্রানজেকশন আইডি (TxID)</label>
-                    <input type="text" id="transactionId" placeholder="আপনার TxID এখানে লিখুন" required>
+                <!-- Step 1: Select Payment Method -->
+                <div class="form-section active" id="step1">
+                    <h2 class="section-title">পেমেন্ট পদ্ধতি নির্বাচন করুন</h2>
+                    
+                    <div class="payment-methods">
+                        <div class="payment-method" data-method="bkash">
+                            <div class="method-icon">
+                                <img src="https://i.postimg.cc/k5NH8C37/bkash-logo.png" alt="Bkash">
+                            </div>
+                            <div class="method-name">বিকাশ</div>
+                            <div class="method-info">মোবাইল ব্যাংকিং</div>
+                        </div>
+                        
+                        <div class="payment-method" data-method="nagad">
+                            <div class="method-icon">
+                                <img src="https://i.postimg.cc/gjjtf6w0/ide-IW55y-Qr-1752975797249.jpg" alt="Nagad">
+                            </div>
+                            <div class="method-name">নগদ</div>
+                            <div class="method-info">মোবাইল ব্যাংকিং</div>
+                        </div>
+                        
+                        <div class="payment-method" data-method="rocket">
+                            <div class="method-icon">
+                                <img src="https://i.postimg.cc/GtfgrhYx/Rocket-logo-505x500.png" alt="Rocket">
+                            </div>
+                            <div class="method-name">রকেট</div>
+                            <div class="method-info">মোবাইল ব্যাংকিং</div>
+                        </div>
+                        
+                        <div class="payment-method" data-method="bank">
+                            <div class="method-icon">
+                                <i class="fas fa-university" style="color: #4361ee; font-size: 30px;"></i>
+                            </div>
+                            <div class="method-name">ব্যাংক ট্রান্সফার</div>
+                            <div class="method-info">সরাসরি ব্যাংকিং</div>
+                        </div>
+                    </div>
+                    
+                    <div class="navigation-buttons">
+                        <button class="btn btn-outline" disabled>
+                            <i class="fas fa-arrow-left btn-icon"></i> পিছনে
+                        </button>
+                        <button class="btn btn-primary" id="nextToStep2">
+                            পরবর্তী <i class="fas fa-arrow-right btn-icon"></i>
+                        </button>
+                    </div>
                 </div>
-
-                <button type="submit">ডিপোজিট জমা দিন</button>
-            </form>
-
-            <div class="note">
-                **গুরুত্বপূর্ণ:** অনুগ্রহ করে সঠিক ট্রানজেকশন আইডি দিন। ভুল আইডি দিলে আপনার ডিপোজিট প্রক্রিয়া সম্পন্ন হবে না।
+                
+                <!-- Step 2: Enter Details -->
+                <div class="form-section" id="step2">
+                    <h2 class="section-title">ডিপোজিট বিবরণ লিখুন</h2>
+                    
+                    <div class="account-details" id="accountDetails">
+                        <!-- Dynamically filled based on selected method -->
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="amount" class="form-label">জমা করার পরিমাণ (টাকায়)</label>
+                        <div class="input-group">
+                            <i class="fas fa-money-bill-wave input-icon"></i>
+                            <input type="number" id="amount" class="form-control" placeholder="সর্বনিম্ন ১০০ টাকা" min="100" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="transactionId" class="form-label">ট্রানজেকশন আইডি (TxID)</label>
+                        <div class="input-group">
+                            <i class="fas fa-receipt input-icon"></i>
+                            <input type="text" id="transactionId" class="form-control" placeholder="আপনার TxID এখানে লিখুন" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="senderNumber" class="form-label">আপনার মোবাইল নম্বর</label>
+                        <div class="input-group">
+                            <i class="fas fa-mobile-alt input-icon"></i>
+                            <input type="text" id="senderNumber" class="form-control" placeholder="01XXXXXXXXX" required>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-title">
+                            <i class="fas fa-info-circle"></i> গুরুত্বপূর্ণ তথ্য
+                        </div>
+                        <div class="info-text">
+                            অনুগ্রহ করে সঠিক ট্রানজেকশন আইডি দিন। ভুল আইডি দিলে আপনার ডিপোজিট প্রক্রিয়া সম্পন্ন হবে না। ডিপোজিট সম্পন্ন হতে ৫-৩০ মিনিট সময় লাগতে পারে।
+                        </div>
+                    </div>
+                    
+                    <div class="navigation-buttons">
+                        <button class="btn btn-outline" id="backToStep1">
+                            <i class="fas fa-arrow-left btn-icon"></i> পিছনে
+                        </button>
+                        <button class="btn btn-primary" id="nextToStep3">
+                            পরবর্তী <i class="fas fa-arrow-right btn-icon"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Confirmation -->
+                <div class="form-section" id="step3">
+                    <h2 class="section-title">ডিপোজিট নিশ্চিত করুন</h2>
+                    
+                    <div class="receipt">
+                        <div class="receipt-title">ডিপোজিট সুমারি</div>
+                        
+                        <div class="receipt-item">
+                            <span class="receipt-label">পেমেন্ট পদ্ধতি:</span>
+                            <span class="receipt-value" id="confirmMethod">বিকাশ</span>
+                        </div>
+                        
+                        <div class="receipt-item">
+                            <span class="receipt-label">পরিমাণ:</span>
+                            <span class="receipt-value" id="confirmAmount">৫০০ টাকা</span>
+                        </div>
+                        
+                        <div class="receipt-item">
+                            <span class="receipt-label">ট্রানজেকশন আইডি:</span>
+                            <span class="receipt-value" id="confirmTxId">TRX123456789</span>
+                        </div>
+                        
+                        <div class="receipt-item">
+                            <span class="receipt-label">মোবাইল নম্বর:</span>
+                            <span class="receipt-value" id="confirmMobile">017XXXXXXXX</span>
+                        </div>
+                        
+                        <div class="receipt-divider"></div>
+                        
+                        <div class="receipt-item">
+                            <span class="receipt-label">তারিখ:</span>
+                            <span class="receipt-value" id="confirmDate">২০ জুলাই, ২০২৩</span>
+                        </div>
+                        
+                        <div class="receipt-item">
+                            <span class="receipt-label">স্ট্যাটাস:</span>
+                            <span class="receipt-value" style="color: var(--warning);">পেন্ডিং</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card" style="margin-top: 20px;">
+                        <div class="info-title">
+                            <i class="fas fa-check-circle"></i> নিশ্চিতকরণ
+                        </div>
+                        <div class="info-text">
+                            আপনি কি নিশ্চিত যে উপরের তথ্যগুলো সঠিক? একবার সাবমিট করলে তথ্য পরিবর্তন করা সম্ভব হবে না।
+                        </div>
+                    </div>
+                    
+                    <div class="navigation-buttons">
+                        <button class="btn btn-outline" id="backToStep2">
+                            <i class="fas fa-arrow-left btn-icon"></i> পিছনে
+                        </button>
+                        <button class="btn btn-primary" id="submitDeposit">
+                            জমা দিন <i class="fas fa-paper-plane btn-icon"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Success Message (Hidden initially) -->
+                <div class="form-section" id="successMessage">
+                    <div class="success-message">
+                        <div class="success-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h3 class="success-title">ডিপোজিট সফলভাবে জমা হয়েছে!</h3>
+                        <p class="success-text">আপনার ডিপোজিট রিকুয়েস্ট সফলভাবে গ্রহণ করা হয়েছে। সাধারণত ৫-৩০ মিনিটের মধ্যে আপনার অ্যাকাউন্টে টাকা যোগ হবে।</p>
+                        
+                        <div class="receipt">
+                            <div class="receipt-title">ডিপোজিট রসিদ</div>
+                            
+                            <div class="receipt-item">
+                                <span class="receipt-label">রেফারেন্স নম্বর:</span>
+                                <span class="receipt-value">DEP-2023-78945</span>
+                            </div>
+                            
+                            <div class="receipt-item">
+                                <span class="receipt-label">পেমেন্ট পদ্ধতি:</span>
+                                <span class="receipt-value" id="successMethod">বিকাশ</span>
+                            </div>
+                            
+                            <div class="receipt-item">
+                                <span class="receipt-label">পরিমাণ:</span>
+                                <span class="receipt-value" id="successAmount">৫০০ টাকা</span>
+                            </div>
+                            
+                            <div class="receipt-item">
+                                <span class="receipt-label">তারিখ ও সময়:</span>
+                                <span class="receipt-value" id="successDate">২০ জুলাই, ২০২৩ - ০৩:৪৫ PM</span>
+                            </div>
+                            
+                            <div class="receipt-divider"></div>
+                            
+                            <div class="receipt-item">
+                                <span class="receipt-label">স্ট্যাটাস:</span>
+                                <span class="receipt-value" style="color: var(--success);">প্রক্রিয়াধীন</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary btn-block" id="doneButton" style="margin-top: 30px;">
+                            <i class="fas fa-check-circle btn-icon"></i> সম্পন্ন
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const methodItems = document.querySelectorAll('.method-item');
-            const depositForm = document.getElementById('depositForm');
-            let selectedMethod = null; // To store the selected method
-
-            methodItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    // Remove 'selected' class from all items
-                    methodItems.forEach(mi => mi.classList.remove('selected'));
+            // DOM Elements
+            const steps = document.querySelectorAll('.step');
+            const progressBar = document.querySelector('.progress-bar');
+            const formSections = document.querySelectorAll('.form-section');
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            const accountDetails = document.getElementById('accountDetails');
+            
+            // Navigation Buttons
+            const nextToStep2 = document.getElementById('nextToStep2');
+            const nextToStep3 = document.getElementById('nextToStep3');
+            const backToStep1 = document.getElementById('backToStep1');
+            const backToStep2 = document.getElementById('backToStep2');
+            const submitDeposit = document.getElementById('submitDeposit');
+            const doneButton = document.getElementById('doneButton');
+            
+            // Form Inputs
+            const amountInput = document.getElementById('amount');
+            const transactionIdInput = document.getElementById('transactionId');
+            const senderNumberInput = document.getElementById('senderNumber');
+            
+            // Confirmation Elements
+            const confirmMethod = document.getElementById('confirmMethod');
+            const confirmAmount = document.getElementById('confirmAmount');
+            const confirmTxId = document.getElementById('confirmTxId');
+            const confirmMobile = document.getElementById('confirmMobile');
+            const confirmDate = document.getElementById('confirmDate');
+            
+            // Success Elements
+            const successMethod = document.getElementById('successMethod');
+            const successAmount = document.getElementById('successAmount');
+            const successDate = document.getElementById('successDate');
+            
+            // Variables
+            let selectedMethod = null;
+            let currentStep = 1;
+            
+            // Payment method data
+            const methodData = {
+                bkash: {
+                    name: "বিকাশ",
+                    account: "01601735574",
+                    type: "পার্সোনাল",
+                    instructions: "বিকাশ অ্যাপে গিয়ে 'Send Money' অপশন সিলেক্ট করুন, তারপর উপরের নম্বরে টাকা সেন্ড করুন।"
+                },
+                nagad: {
+                    name: "নগদ",
+                    account: "01601735574",
+                    type: "পার্সোনাল",
+                    instructions: "নগদ অ্যাপে গিয়ে 'Send Money' অপশন সিলেক্ট করুন, তারপর উপরের নম্বরে টাকা সেন্ড করুন।"
+                },
+                rocket: {
+                    name: "রকেট",
+                    account: "01601735574",
+                    type: "পার্সোনাল",
+                    instructions: "রকেট অ্যাপে গিয়ে 'Send Money' অপশন সিলেক্ট করুন, তারপর উপরের নম্বরে টাকা সেন্ড করুন।"
+                },
+                bank: {
+                    name: "ব্যাংক ট্রান্সফার",
+                    account: "BRAC BANK - 151XXXXXX",
+                    type: "কারেন্ট অ্যাকাউন্ট",
+                    instructions: "আপনার ব্যাংক অ্যাপ/ইন্টারনেট ব্যাংকিং থেকে উপরের অ্যাকাউন্টে টাকা ট্রান্সফার করুন।"
+                }
+            };
+            
+            // Select Payment Method
+            paymentMethods.forEach(method => {
+                method.addEventListener('click', function() {
+                    // Remove selected class from all methods
+                    paymentMethods.forEach(m => m.classList.remove('selected'));
                     
-                    // Add 'selected' class to the clicked item
+                    // Add selected class to clicked method
                     this.classList.add('selected');
                     
-                    // Store the selected method from data-method attribute
+                    // Store selected method
                     selectedMethod = this.dataset.method;
-                    console.log('Selected Method:', selectedMethod); // For debugging
+                    
+                    // Enable next button
+                    nextToStep2.disabled = false;
                 });
             });
-
-            depositForm.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent default form submission
-
-                const amount = document.getElementById('amount').value;
-                const transactionId = document.getElementById('transactionId').value;
-
+            
+            // Next to Step 2
+            nextToStep2.addEventListener('click', function() {
                 if (!selectedMethod) {
-                    alert('দয়া করে পেমেন্ট মাধ্যম নির্বাচন করুন (বিকাশ, নগদ বা রকেট আইকনে ক্লিক করুন)।');
-                    return;
-                }
-
-                if (amount < 100) {
-                    alert('জমা করার পরিমাণ সর্বনিম্ন ১০০ টাকা হতে হবে।');
+                    alert('দয়া করে একটি পেমেন্ট পদ্ধতি নির্বাচন করুন।');
                     return;
                 }
                 
-                if (transactionId.trim() === '') {
-                    alert('ট্রানজেকশন আইডি (TxID) প্রবেশ করানো আবশ্যক।');
-                    return;
-                }
-
-                // Here you would typically send this data to your server
-                console.log({
-                    amount: amount,
-                    method: selectedMethod,
-                    transactionId: transactionId
-                });
-
-                alert(`ডিপোজিট রিকুয়েস্ট সফলভাবে পাঠানো হয়েছে!\nপরিমাণ: ${amount}৳\nমাধ্যম: ${selectedMethod}\nট্রানজেকশন আইডি: ${transactionId}`);
+                // Update account details based on selected method
+                updateAccountDetails();
                 
-                // Reset the form and selected state after submission
-                depositForm.reset();
-                methodItems.forEach(mi => mi.classList.remove('selected'));
-                selectedMethod = null; // Reset selected method
+                // Update UI
+                goToStep(2);
             });
+            
+            // Back to Step 1
+            backToStep1.addEventListener('click', function() {
+                goToStep(1);
+            });
+            
+            // Next to Step 3
+            nextToStep3.addEventListener('click', function() {
+                // Validate inputs
+                if (!validateStep2()) return;
+                
+                // Update confirmation details
+                updateConfirmationDetails();
+                
+                // Update UI
+                goToStep(3);
+            });
+            
+            // Back to Step 2
+            backToStep2.addEventListener('click', function() {
+                goToStep(2);
+            });
+            
+            // Submit Deposit
+            submitDeposit.addEventListener('click', function() {
+                // Here you would typically send data to server
+                // For demo, we'll just show success message
+                
+                // Update success details
+                updateSuccessDetails();
+                
+                // Update UI
+                goToStep(4);
+            });
+            
+            // Done Button
+            doneButton.addEventListener('click', function() {
+                // Reset form for new deposit
+                resetForm();
+                
+                // Go back to step 1
+                goToStep(1);
+            });
+            
+            // Helper Functions
+            function goToStep(step) {
+                currentStep = step;
+                
+                // Update progress bar
+                updateProgressBar();
+                
+                // Update step indicators
+                updateStepIndicators();
+                
+                // Show/hide form sections
+                formSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                if (step === 4) {
+                    document.getElementById('successMessage').classList.add('active');
+                } else {
+                    document.getElementById(`step${step}`).classList.add('active');
+                }
+            }
+            
+            function updateProgressBar() {
+                let width = 0;
+                if (currentStep === 2) width = 50;
+                else if (currentStep === 3) width = 100;
+                else if (currentStep === 4) width = 100;
+                
+                progressBar.style.width = `${width}%`;
+            }
+            
+            function updateStepIndicators() {
+                steps.forEach(step => {
+                    const stepNum = parseInt(step.dataset.step);
+                    
+                    step.classList.remove('active', 'completed');
+                    
+                    if (stepNum < currentStep) {
+                        step.classList.add('completed');
+                    } else if (stepNum === currentStep) {
+                        step.classList.add('active');
+                    }
+                });
+            }
+            
+            function updateAccountDetails() {
+                const method = methodData[selectedMethod];
+                
+                accountDetails.innerHTML = `
+                    <div class="detail-item">
+                        <span class="detail-label">পেমেন্ট পদ্ধতি:</span>
+                        <span class="detail-value">${method.name}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">অ্যাকাউন্ট নম্বর/আইডি:</span>
+                        <span class="detail-value">${method.account}
+                            <button class="copy-btn" onclick="copyToClipboard('${method.account}')">
+                                <i class="fas fa-copy"></i> কপি
+                            </button>
+                        </span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">অ্যাকাউন্ট টাইপ:</span>
+                        <span class="detail-value">${method.type}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">নির্দেশনা:</span>
+                        <span class="detail-value">${method.instructions}</span>
+                    </div>
+                `;
+            }
+            
+            function validateStep2() {
+                if (!amountInput.value || parseInt(amountInput.value) < 100) {
+                    alert('দয়া করে সঠিক পরিমাণ লিখুন (সর্বনিম্ন ১০০ টাকা)।');
+                    amountInput.focus();
+                    return false;
+                }
+                
+                if (!transactionIdInput.value.trim()) {
+                    alert('দয়া করে ট্রানজেকশন আইডি লিখুন।');
+                    transactionIdInput.focus();
+                    return false;
+                }
+                
+                if (!senderNumberInput.value.trim() || senderNumberInput.value.length < 11) {
+                    alert('দয়া করে সঠিক মোবাইল নম্বর লিখুন।');
+                    senderNumberInput.focus();
+                    return false;
+                }
+                
+                return true;
+            }
+            
+            function updateConfirmationDetails() {
+                const method = methodData[selectedMethod];
+                const now = new Date();
+                const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                const formattedDate = now.toLocaleDateString('bn-BD', options);
+                
+                confirmMethod.textContent = method.name;
+                confirmAmount.textContent = `${amountInput.value} টাকা`;
+                confirmTxId.textContent = transactionIdInput.value;
+                confirmMobile.textContent = senderNumberInput.value;
+                confirmDate.textContent = formattedDate;
+            }
+            
+            function updateSuccessDetails() {
+                const method = methodData[selectedMethod];
+                const now = new Date();
+                const options = { 
+                    day: 'numeric', 
+                    month: 'long', 
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true
+                };
+                const formattedDate = now.toLocaleDateString('bn-BD', options);
+                
+                successMethod.textContent = method.name;
+                successAmount.textContent = `${amountInput.value} টাকা`;
+                successDate.textContent = formattedDate;
+            }
+            
+            function resetForm() {
+                // Reset form inputs
+                amountInput.value = '';
+                transactionIdInput.value = '';
+                senderNumberInput.value = '';
+                
+                // Reset selected method
+                paymentMethods.forEach(m => m.classList.remove('selected'));
+                selectedMethod = null;
+                
+                // Reset next button
+                nextToStep2.disabled = true;
+            }
+            
+            // Global function for copy to clipboard
+            window.copyToClipboard = function(text) {
+                navigator.clipboard.writeText(text)
+                    .then(() => {
+                        alert('কপি করা হয়েছে: ' + text);
+                    })
+                    .catch(err => {
+                        console.error('Could not copy text: ', err);
+                    });
+            };
+            
+            // Initialize form
+            resetForm();
         });
     </script>
-
 </body>
 </html>

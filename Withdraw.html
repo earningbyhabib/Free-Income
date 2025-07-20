@@ -3,396 +3,1210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>উইথড্র করুন - আধুনিক</title>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>টাকা উত্তোলন - আধুনিক ডিজাইন</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary-green: #28a745; /* Modern Green */
-            --primary-green-dark: #218838;
-            --background-gradient-start: #e0f2f7; /* Light blueish start */
-            --background-gradient-end: #e8f5e9; /* Light greenish end */
-            --card-background: #ffffff;
-            --text-color-dark: #333;
-            --text-color-medium: #555;
-            --border-color: #dcdcdc;
-            --input-bg: #fdfdfd;
-            --shadow-light: rgba(0, 0, 0, 0.08);
-            --shadow-medium: rgba(0, 0, 0, 0.12);
+            --primary: #4361ee; /* Vibrant Royal Blue */
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9; /* Deep Blue */
+            --accent: #4cc9f0; /* Light Blue */
+            --success: #38b000; /* Green */
+            --warning: #ff9e00; /* Orange */
+            --danger: #f72585; /* Pink */
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'IBM Plex Sans Bengali', sans-serif;
-            background: linear-gradient(135deg, var(--background-gradient-start), var(--background-gradient-end));
-            color: var(--text-color-dark);
+            font-family: 'Hind Siliguri', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
             line-height: 1.6;
-            padding: 20px;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center; /* Center vertically */
-            min-height: 100vh;
+            align-items: center;
+            padding: 20px;
         }
 
         .container {
-            background: var(--card-background);
-            border-radius: 20px;
-            box-shadow: 0 12px 30px var(--shadow-medium);
-            padding: 40px;
-            max-width: 480px;
             width: 100%;
-            margin: 20px auto; /* Centered with vertical margin */
-            animation: fadeIn 0.8s ease-out;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .withdraw-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            margin-bottom: 30px;
         }
 
-        h1 {
+        .withdraw-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 25px 30px;
             text-align: center;
-            color: var(--primary-green);
-            margin-bottom: 35px;
-            font-size: 2.3em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(30deg) translate(-30%, -30%); }
+            100% { transform: rotate(30deg) translate(30%, 30%); }
+        }
+
+        .card-header h1 {
+            font-size: 28px;
             font-weight: 700;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
         }
 
-        .method-selection {
-            margin-bottom: 35px;
+        .card-header p {
+            font-size: 16px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
 
-        .method-selection h2 {
-            font-size: 1.3em;
-            color: var(--text-color-medium);
-            margin-bottom: 25px;
-            text-align: center;
-            font-weight: 500;
+        .card-body {
+            padding: 30px;
         }
 
-        .methods-row {
+        .progress-steps {
             display: flex;
-            justify-content: center;
-            gap: 20px; /* Increased gap for better spacing */
-            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
         }
 
-        .method-icon-wrapper {
-            background: var(--input-bg);
-            border: 2px solid var(--border-color);
-            border-radius: 15px;
-            width: 90px; /* Slightly larger for better touch target */
-            height: 90px;
+        .progress-steps::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--light-gray);
+            z-index: 0;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            height: 4px;
+            background: var(--primary);
+            z-index: 1;
+            transition: width 0.4s ease;
+        }
+
+        .step {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative;
-            box-shadow: 0 4px 10px var(--shadow-light);
-            text-decoration: none; /* Remove underline for anchor if used */
-            color: inherit; /* Inherit color for text */
+            z-index: 2;
         }
 
-        .method-icon-wrapper:hover {
-            border-color: var(--primary-green);
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 8px 20px var(--shadow-medium);
-        }
-
-        .method-icon-wrapper.selected {
-            border-color: var(--primary-green);
-            background-color: rgba(40, 167, 69, 0.08); /* Light green background */
-            box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.2), 0 8px 20px var(--shadow-medium);
-            transform: translateY(-2px);
-        }
-        
-        .method-icon-wrapper.selected::after {
-            content: '✓';
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background-color: var(--primary-green);
-            color: white;
+        .step-icon {
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
-            width: 28px;
-            height: 28px;
+            background: var(--light-gray);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1em;
-            font-weight: bold;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-            z-index: 10;
-        }
-
-        .method-icon-wrapper img {
-            width: 50px; /* Adjusted icon size */
-            height: 50px; /* Adjusted icon size */
-            object-fit: contain;
-            margin-bottom: 8px;
-        }
-
-        .method-icon-wrapper div {
+            color: var(--gray);
             font-weight: 600;
-            color: var(--text-color-dark);
-            font-size: 1em;
+            margin-bottom: 10px;
+            border: 3px solid var(--light-gray);
+            transition: var(--transition);
         }
 
-        .withdraw-form-section {
-            margin-top: 35px;
+        .step.active .step-icon {
+            background: var(--primary);
+            color: white;
+            border-color: white;
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.3);
         }
 
-        .withdraw-form-section h2 {
-            font-size: 1.3em;
-            color: var(--text-color-medium);
+        .step.completed .step-icon {
+            background: var(--success);
+            color: white;
+            border-color: white;
+        }
+
+        .step.completed .step-icon::after {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+        }
+
+        .step-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray);
+            text-align: center;
+        }
+
+        .step.active .step-label {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .step.completed .step-label {
+            color: var(--success);
+        }
+
+        .form-section {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--dark);
             margin-bottom: 25px;
             text-align: center;
-            font-weight: 500;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            margin: 10px auto 0;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .payment-method {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid var(--light-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payment-method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .payment-method.selected {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .payment-method.selected::after {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 22px;
+            height: 22px;
+            background: var(--success);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .method-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        .method-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .method-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .method-info {
+            font-size: 13px;
+            color: var(--gray);
         }
 
         .form-group {
-            margin-bottom: 22px;
+            margin-bottom: 25px;
         }
 
-        .form-group label {
+        .form-label {
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
-            color: var(--text-color-medium);
-            font-size: 0.95em;
+            color: var(--dark);
+            font-size: 15px;
         }
 
-        .form-group input[type="number"] {
+        .form-control {
             width: 100%;
-            padding: 15px 18px;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            font-size: 1.1em;
-            color: var(--text-color-dark);
-            background-color: var(--input-bg);
-            transition: border-color 0.2s, box-shadow 0.2s;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.06); /* subtle inner shadow */
-        }
-        
-        .form-group input[type="number"]::placeholder {
-            color: #b0b0b0;
-        }
-
-        .form-group input[type="number"]:focus {
-            border-color: var(--primary-green);
-            box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.25);
-            outline: none;
-            background-color: white;
-        }
-
-        button[type="submit"] {
-            background-color: var(--primary-green);
-            color: white;
-            padding: 16px 30px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.15em;
-            font-weight: 600;
-            width: 100%;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
-            box-shadow: 0 6px 15px rgba(40, 167, 69, 0.35);
-            letter-spacing: 0.5px;
-        }
-
-        button[type="submit"]:hover {
-            background-color: var(--primary-green-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.45);
-        }
-
-        button[type="submit"]:active {
-            transform: translateY(0);
-            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.25);
-        }
-
-        .note {
-            font-size: 0.88em;
-            color: var(--text-color-medium);
-            margin-top: 30px;
-            text-align: center;
             padding: 15px 20px;
-            background-color: rgba(40, 167, 69, 0.05);
-            border-left: 4px solid var(--primary-green);
-            border-radius: 10px;
-            line-height: 1.5;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            font-size: 16px;
+            transition: var(--transition);
+            background: var(--light);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.2);
+            outline: none;
+            background: white;
+        }
+
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-group .form-control {
+            padding-left: 45px;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            color: var(--gray);
+            font-size: 18px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-block {
+            display: flex;
+            width: 100%;
+        }
+
+        .btn-icon {
+            margin-right: 8px;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--light-gray);
+            color: var(--dark);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .info-card {
+            background: rgba(67, 97, 238, 0.05);
+            border-left: 4px solid var(--primary);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .info-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-title i {
+            margin-right: 8px;
+        }
+
+        .info-text {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .account-details {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--light-gray);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: var(--gray);
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-left: 10px;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--success);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 36px;
+            animation: bounceIn 0.8s;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .success-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 15px;
+        }
+
+        .success-text {
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .receipt {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .receipt-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .receipt-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .receipt-label {
+            color: var(--gray);
+        }
+
+        .receipt-value {
+            font-weight: 600;
+        }
+
+        .receipt-divider {
+            height: 1px;
+            background: var(--light-gray);
+            margin: 20px 0;
+        }
+
+        .balance-info {
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.1) 0%, rgba(76, 201, 240, 0.1) 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .balance-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+
+        .balance-label {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .withdraw-limits {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .limit-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            flex: 1;
+            margin: 0 5px;
+            box-shadow: var(--shadow);
+        }
+
+        .limit-value {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .limit-label {
+            font-size: 12px;
+            color: var(--gray);
         }
 
         /* Responsive adjustments */
-        @media (max-width: 550px) {
-            .container {
-                padding: 30px;
+        @media (max-width: 768px) {
+            .payment-methods {
+                grid-template-columns: repeat(2, 1fr);
             }
-
-            h1 {
-                font-size: 2em;
-                margin-bottom: 30px;
+            
+            .card-header h1 {
+                font-size: 24px;
             }
-
-            .method-icon-wrapper {
-                width: 80px;
-                height: 80px;
+            
+            .section-title {
+                font-size: 18px;
             }
-
-            .method-icon-wrapper img {
-                width: 45px;
-                height: 45px;
+            
+            .withdraw-limits {
+                flex-direction: column;
             }
-
-            .method-icon-wrapper div {
-                font-size: 0.9em;
-            }
-
-            .form-group input[type="number"] {
-                padding: 12px 15px;
-                font-size: 1em;
-            }
-
-            button[type="submit"] {
-                padding: 14px 25px;
-                font-size: 1.05em;
-            }
-
-            .note {
-                font-size: 0.8em;
-                padding: 12px 15px;
+            
+            .limit-card {
+                margin: 5px 0;
             }
         }
 
-        @media (max-width: 400px) {
-            .container {
-                padding: 20px;
+        @media (max-width: 576px) {
+            .card-body {
+                padding: 25px 20px;
             }
-            .methods-row {
-                gap: 15px;
+            
+            .payment-methods {
+                grid-template-columns: 1fr;
             }
-            .method-icon-wrapper {
-                width: 75px;
-                height: 75px;
-                border-radius: 12px;
+            
+            .progress-steps {
+                margin-bottom: 30px;
             }
-            .method-icon-wrapper img {
-                width: 40px;
-                height: 40px;
+            
+            .step-label {
+                font-size: 12px;
+            }
+            
+            .btn {
+                padding: 12px 20px;
+                font-size: 15px;
+            }
+            
+            .balance-amount {
+                font-size: 28px;
             }
         }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <h1>তহবিল উত্তোলন</h1>
-
-        <div class="method-selection">
-            <h2>আপনার পছন্দের মাধ্যম নির্বাচন করুন</h2>
-            <div class="methods-row">
-                <div class="method-icon-wrapper" data-method="Bkash">
-                    <img src="https://i.imgur.com/NbfkZqD.png" alt="Bkash">
-                    <div>বিকাশ</div>
-                </div>
-                <div class="method-icon-wrapper" data-method="Nagad">
-                    <img src="https://i.imgur.com/UB3K0HX.png" alt="Nagad">
-                    <div>নগদ</div>
-                </div>
-                <div class="method-icon-wrapper" data-method="Rocket">
-                    <img src="https://i.imgur.com/HKqgD6r.png" alt="Rocket">
-                    <div>রকেট</div>
-                </div>
+        <div class="withdraw-card">
+            <div class="card-header">
+                <h1>টাকা উত্তোলন করুন</h1>
+                <p>আপনার অ্যাকাউন্ট থেকে টাকা উত্তোলন করতে নিচের ধাপগুলো অনুসরণ করুন</p>
             </div>
-        </div>
-
-        <div class="withdraw-form-section">
-            <h2>উত্তোলনের বিবরণ দিন</h2>
-            <form id="withdrawForm">
-                <div class="form-group">
-                    <label for="amount">উত্তোলন পরিমাণ (সর্বনিম্ন ১০০ টাকা)</label>
-                    <input type="number" id="amount" placeholder="উদাহরণ: ৫০০" min="100" required>
+            
+            <div class="card-body">
+                <!-- Progress Steps -->
+                <div class="progress-steps">
+                    <div class="progress-bar" style="width: 0%;"></div>
+                    <div class="step active" data-step="1">
+                        <div class="step-icon">1</div>
+                        <div class="step-label">পদ্ধতি নির্বাচন</div>
+                    </div>
+                    <div class="step" data-step="2">
+                        <div class="step-icon">2</div>
+                        <div class="step-label">বিবরণ দিন</div>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-icon">3</div>
+                        <div class="step-label">নিশ্চিত করুন</div>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="mobileNumber">আপনার মোবাইল নম্বর</label>
-                    <input type="number" id="mobileNumber" placeholder="১১ ডিজিটের মোবাইল নম্বর" required>
+                <!-- Step 1: Select Payment Method -->
+                <div class="form-section active" id="step1">
+                    <h2 class="section-title">উত্তোলন পদ্ধতি নির্বাচন করুন</h2>
+                    
+                    <div class="balance-info">
+                        <div class="balance-label">আপনার ব্যালেন্স</div>
+                        <div class="balance-amount">৫,২৫০৳</div>
+                        <div class="balance-label">উত্তোলনযোগ্য: ৪,৮০০৳</div>
+                    </div>
+                    
+                    <div class="withdraw-limits">
+                        <div class="limit-card">
+                            <div class="limit-value">১০০৳</div>
+                            <div class="limit-label">সর্বনিম্ন উত্তোলন</div>
+                        </div>
+                        <div class="limit-card">
+                            <div class="limit-value">২৫,০০০৳</div>
+                            <div class="limit-label">সর্বোচ্চ উত্তোলন</div>
+                        </div>
+                        <div class="limit-card">
+                            <div class="limit-value">১.৫%</div>
+                            <div class="limit-label">চার্জ</div>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-methods">
+                        <div class="payment-method" data-method="bkash">
+                            <div class="method-icon">
+                                <img src="https://i.postimg.cc/k5NH8C37/bkash-logo.png" alt="Bkash">
+                            </div>
+                            <div class="method-name">বিকাশ</div>
+                            <div class="method-info">মোবাইল ব্যাংকিং</div>
+                        </div>
+                        
+                        <div class="payment-method" data-method="nagad">
+                            <div class="method-icon">
+                                <img src="https://i.postimg.cc/gjjtf6w0/ide-IW55y-Qr-1752975797249.jpg" alt="Nagad">
+                            </div>
+                            <div class="method-name">নগদ</div>
+                            <div class="method-info">মোবাইল ব্যাংকিং</div>
+                        </div>
+                        
+                        <div class="payment-method" data-method="rocket">
+                            <div class="method-icon">
+                                <img src="https://i.postimg.cc/GtfgrhYx/Rocket-logo-505x500.png" alt="Rocket">
+                            </div>
+                            <div class="method-name">রকেট</div>
+                            <div class="method-info">মোবাইল ব্যাংকিং</div>
+                        </div>
+                        
+                        <div class="payment-method" data-method="bank">
+                            <div class="method-icon">
+                                <i class="fas fa-university" style="color: #4361ee; font-size: 30px;"></i>
+                            </div>
+                            <div class="method-name">ব্যাংক ট্রান্সফার</div>
+                            <div class="method-info">সরাসরি ব্যাংকিং</div>
+                        </div>
+                    </div>
+                    
+                    <div class="navigation-buttons">
+                        <button class="btn btn-outline" disabled>
+                            <i class="fas fa-arrow-left btn-icon"></i> পিছনে
+                        </button>
+                        <button class="btn btn-primary" id="nextToStep2">
+                            পরবর্তী <i class="fas fa-arrow-right btn-icon"></i>
+                        </button>
+                    </div>
                 </div>
-
-                <button type="submit" id="submitButton">উইথড্র রিকুয়েস্ট জমা দিন</button>
-            </form>
-
-            <div class="note">
-                **গুরুত্বপূর্ণ:** সঠিক তথ্য পূরণ করুন। ভুল তথ্যের জন্য রিকুয়েস্ট বাতিল হতে পারে এবং প্রক্রিয়া বিলম্বিত হতে পারে।
+                
+                <!-- Step 2: Enter Details -->
+                <div class="form-section" id="step2">
+                    <h2 class="section-title">উত্তোলন বিবরণ লিখুন</h2>
+                    
+                    <div class="account-details" id="accountDetails">
+                        <!-- Dynamically filled based on selected method -->
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="amount" class="form-label">উত্তোলনের পরিমাণ (টাকায়)</label>
+                        <div class="input-group">
+                            <i class="fas fa-money-bill-wave input-icon"></i>
+                            <input type="number" id="withdrawAmount" class="form-control" placeholder="সর্বনিম্ন ১০০ টাকা" min="100" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="accountNumber" class="form-label">অ্যাকাউন্ট নম্বর</label>
+                        <div class="input-group">
+                            <i class="fas fa-credit-card input-icon"></i>
+                            <input type="text" id="accountNumber" class="form-control" placeholder="আপনার অ্যাকাউন্ট নম্বর লিখুন" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="accountName" class="form-label">অ্যাকাউন্টের নাম</label>
+                        <div class="input-group">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="accountName" class="form-control" placeholder="অ্যাকাউন্টধারীর নাম" required>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-title">
+                            <i class="fas fa-info-circle"></i> গুরুত্বপূর্ণ তথ্য
+                        </div>
+                        <div class="info-text">
+                            উত্তোলনের জন্য ১.৫% চার্জ কাটা হবে। উত্তোলন রিকুয়েস্ট দেওয়ার পর সাধারণত ১-৩ ঘন্টার মধ্যে টাকা পেয়ে যাবেন। ব্যাংক ট্রান্সফারের ক্ষেত্রে ২৪ ঘন্টা পর্যন্ত সময় লাগতে পারে।
+                        </div>
+                    </div>
+                    
+                    <div class="navigation-buttons">
+                        <button class="btn btn-outline" id="backToStep1">
+                            <i class="fas fa-arrow-left btn-icon"></i> পিছনে
+                        </button>
+                        <button class="btn btn-primary" id="nextToStep3">
+                            পরবর্তী <i class="fas fa-arrow-right btn-icon"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Confirmation -->
+                <div class="form-section" id="step3">
+                    <h2 class="section-title">উত্তোলন নিশ্চিত করুন</h2>
+                    
+                    <div class="receipt">
+                        <div class="receipt-title">উত্তোলন সুমারি</div>
+                        
+                        <div class="receipt-item">
+                            <span class="receipt-label">পেমেন্ট পদ্ধতি:</span>
+                            <span class="receipt-value" id="confirmMethod">বিকাশ</span>
+                        </div>
+                        
+                        <div class="receipt-item">
+                            <span class="receipt-label">পরিমাণ:</span>
+                            <span class="receipt-value" id="confirmAmount">৫০০ টাকা</span>
+                        </div>
+                        
+                        <div class="receipt-item">
+                            <span class="receipt-label">চার্জ (১.৫%):</span>
+                            <span class="receipt-value" id="confirmCharge">৭.৫ টাকা</span>
+                        </div>
+                        
+                        <div class="receipt-item">
+                            <span class="receipt-label">প্রাপ্ত পরিমাণ:</span>
+                            <span class="receipt-value" id="confirmNetAmount">৪৯২.৫ টাকা</span>
+                        </div>
+                        
+                        <div class="receipt-item">
+                            <span class="receipt-label">অ্যাকাউন্ট নম্বর:</span>
+                            <span class="receipt-value" id="confirmAccountNumber">017XXXXXXXX</span>
+                        </div>
+                        
+                        <div class="receipt-item">
+                            <span class="receipt-label">অ্যাকাউন্টের নাম:</span>
+                            <span class="receipt-value" id="confirmAccountName">জন ডো</span>
+                        </div>
+                        
+                        <div class="receipt-divider"></div>
+                        
+                        <div class="receipt-item">
+                            <span class="receipt-label">তারিখ:</span>
+                            <span class="receipt-value" id="confirmDate">২০ জুলাই, ২০২৩</span>
+                        </div>
+                        
+                        <div class="receipt-item">
+                            <span class="receipt-label">স্ট্যাটাস:</span>
+                            <span class="receipt-value" style="color: var(--warning);">পেন্ডিং</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card" style="margin-top: 20px;">
+                        <div class="info-title">
+                            <i class="fas fa-check-circle"></i> নিশ্চিতকরণ
+                        </div>
+                        <div class="info-text">
+                            আপনি কি নিশ্চিত যে উপরের তথ্যগুলো সঠিক? একবার সাবমিট করলে তথ্য পরিবর্তন করা সম্ভব হবে না।
+                        </div>
+                    </div>
+                    
+                    <div class="navigation-buttons">
+                        <button class="btn btn-outline" id="backToStep2">
+                            <i class="fas fa-arrow-left btn-icon"></i> পিছনে
+                        </button>
+                        <button class="btn btn-primary" id="submitWithdraw">
+                            উত্তোলন করুন <i class="fas fa-paper-plane btn-icon"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Success Message (Hidden initially) -->
+                <div class="form-section" id="successMessage">
+                    <div class="success-message">
+                        <div class="success-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h3 class="success-title">উত্তোলন রিকুয়েস্ট সফল!</h3>
+                        <p class="success-text">আপনার উত্তোলন রিকুয়েস্ট সফলভাবে গ্রহণ করা হয়েছে। সাধারণত ১-৩ ঘন্টার মধ্যে আপনার অ্যাকাউন্টে টাকা চলে যাবে।</p>
+                        
+                        <div class="receipt">
+                            <div class="receipt-title">উত্তোলন রসিদ</div>
+                            
+                            <div class="receipt-item">
+                                <span class="receipt-label">রেফারেন্স নম্বর:</span>
+                                <span class="receipt-value">WDR-2023-78945</span>
+                            </div>
+                            
+                            <div class="receipt-item">
+                                <span class="receipt-label">পেমেন্ট পদ্ধতি:</span>
+                                <span class="receipt-value" id="successMethod">বিকাশ</span>
+                            </div>
+                            
+                            <div class="receipt-item">
+                                <span class="receipt-label">পরিমাণ:</span>
+                                <span class="receipt-value" id="successAmount">৫০০ টাকা</span>
+                            </div>
+                            
+                            <div class="receipt-item">
+                                <span class="receipt-label">চার্জ:</span>
+                                <span class="receipt-value" id="successCharge">৭.৫ টাকা</span>
+                            </div>
+                            
+                            <div class="receipt-item">
+                                <span class="receipt-label">প্রাপ্ত পরিমাণ:</span>
+                                <span class="receipt-value" id="successNetAmount">৪৯২.৫ টাকা</span>
+                            </div>
+                            
+                            <div class="receipt-item">
+                                <span class="receipt-label">তারিখ ও সময়:</span>
+                                <span class="receipt-value" id="successDate">২০ জুলাই, ২০২৩ - ০৩:৪৫ PM</span>
+                            </div>
+                            
+                            <div class="receipt-divider"></div>
+                            
+                            <div class="receipt-item">
+                                <span class="receipt-label">স্ট্যাটাস:</span>
+                                <span class="receipt-value" style="color: var(--warning);">প্রক্রিয়াধীন</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary btn-block" id="doneButton" style="margin-top: 30px;">
+                            <i class="fas fa-check-circle btn-icon"></i> সম্পন্ন
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const methodCards = document.querySelectorAll('.method-icon-wrapper');
-            const withdrawForm = document.getElementById('withdrawForm');
-            let selectedMethod = null; // To store the selected method
-
-            methodCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    // Remove 'selected' class from all cards
-                    methodCards.forEach(mc => mc.classList.remove('selected'));
+            // DOM Elements
+            const steps = document.querySelectorAll('.step');
+            const progressBar = document.querySelector('.progress-bar');
+            const formSections = document.querySelectorAll('.form-section');
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            const accountDetails = document.getElementById('accountDetails');
+            
+            // Navigation Buttons
+            const nextToStep2 = document.getElementById('nextToStep2');
+            const nextToStep3 = document.getElementById('nextToStep3');
+            const backToStep1 = document.getElementById('backToStep1');
+            const backToStep2 = document.getElementById('backToStep2');
+            const submitWithdraw = document.getElementById('submitWithdraw');
+            const doneButton = document.getElementById('doneButton');
+            
+            // Form Inputs
+            const withdrawAmountInput = document.getElementById('withdrawAmount');
+            const accountNumberInput = document.getElementById('accountNumber');
+            const accountNameInput = document.getElementById('accountName');
+            
+            // Confirmation Elements
+            const confirmMethod = document.getElementById('confirmMethod');
+            const confirmAmount = document.getElementById('confirmAmount');
+            const confirmCharge = document.getElementById('confirmCharge');
+            const confirmNetAmount = document.getElementById('confirmNetAmount');
+            const confirmAccountNumber = document.getElementById('confirmAccountNumber');
+            const confirmAccountName = document.getElementById('confirmAccountName');
+            const confirmDate = document.getElementById('confirmDate');
+            
+            // Success Elements
+            const successMethod = document.getElementById('successMethod');
+            const successAmount = document.getElementById('successAmount');
+            const successCharge = document.getElementById('successCharge');
+            const successNetAmount = document.getElementById('successNetAmount');
+            const successDate = document.getElementById('successDate');
+            
+            // Variables
+            let selectedMethod = null;
+            let currentStep = 1;
+            
+            // Payment method data
+            const methodData = {
+                bkash: {
+                    name: "বিকাশ",
+                    instructions: "আপনার বিকাশ অ্যাকাউন্ট নম্বর দিন। নামটি আপনার বিকাশ অ্যাকাউন্টের নামের সাথে মিলতে হবে।"
+                },
+                nagad: {
+                    name: "নগদ",
+                    instructions: "আপনার নগদ অ্যাকাউন্ট নম্বর দিন। নামটি আপনার নগদ অ্যাকাউন্টের নামের সাথে মিলতে হবে।"
+                },
+                rocket: {
+                    name: "রকেট",
+                    instructions: "আপনার রকেট অ্যাকাউন্ট নম্বর দিন। নামটি আপনার রকেট অ্যাকাউন্টের নামের সাথে মিলতে হবে।"
+                },
+                bank: {
+                    name: "ব্যাংক ট্রান্সফার",
+                    instructions: "আপনার ব্যাংক অ্যাকাউন্ট নম্বর এবং সঠিক শাখার নাম দিন। নামটি আপনার ব্যাংক অ্যাকাউন্টের নামের সাথে মিলতে হবে।"
+                }
+            };
+            
+            // Select Payment Method
+            paymentMethods.forEach(method => {
+                method.addEventListener('click', function() {
+                    // Remove selected class from all methods
+                    paymentMethods.forEach(m => m.classList.remove('selected'));
                     
-                    // Add 'selected' class to the clicked card
+                    // Add selected class to clicked method
                     this.classList.add('selected');
                     
-                    // Store the selected method from data-method attribute
+                    // Store selected method
                     selectedMethod = this.dataset.method;
-                    console.log('Selected Method:', selectedMethod); // For debugging
+                    
+                    // Enable next button
+                    nextToStep2.disabled = false;
                 });
             });
-
-            withdrawForm.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent default form submission
-
-                const amount = document.getElementById('amount').value;
-                const mobileNumber = document.getElementById('mobileNumber').value;
-
+            
+            // Next to Step 2
+            nextToStep2.addEventListener('click', function() {
                 if (!selectedMethod) {
-                    alert('দয়া করে উইথড্র মাধ্যম নির্বাচন করুন (বিকাশ, নগদ বা রকেট আইকনে ক্লিক করুন)।');
-                    return;
-                }
-
-                if (amount < 100) {
-                    alert('উইথড্র পরিমাণ সর্বনিম্ন ১০০ টাকা হতে হবে।');
+                    alert('দয়া করে একটি উত্তোলন পদ্ধতি নির্বাচন করুন।');
                     return;
                 }
                 
-                if (mobileNumber.length !== 11) {
-                    alert('মোবাইল নম্বর অবশ্যই ১১ ডিজিটের হতে হবে।');
-                    return;
-                }
-
-                // Here you would typically send this data to your server
-                console.log({
-                    amount: amount,
-                    method: selectedMethod,
-                    mobileNumber: mobileNumber
-                });
-
-                alert(`উইথড্র রিকুয়েস্ট সফলভাবে পাঠানো হয়েছে!\nপরিমাণ: ${amount}৳\nমাধ্যম: ${selectedMethod}\nনম্বর: ${mobileNumber}`);
+                // Update account details based on selected method
+                updateAccountDetails();
                 
-                // Reset the form and selected state after submission
-                withdrawForm.reset();
-                methodCards.forEach(mc => mc.classList.remove('selected'));
-                selectedMethod = null; // Reset selected method
+                // Update UI
+                goToStep(2);
             });
+            
+            // Back to Step 1
+            backToStep1.addEventListener('click', function() {
+                goToStep(1);
+            });
+            
+            // Next to Step 3
+            nextToStep3.addEventListener('click', function() {
+                // Validate inputs
+                if (!validateStep2()) return;
+                
+                // Update confirmation details
+                updateConfirmationDetails();
+                
+                // Update UI
+                goToStep(3);
+            });
+            
+            // Back to Step 2
+            backToStep2.addEventListener('click', function() {
+                goToStep(2);
+            });
+            
+            // Submit Withdraw
+            submitWithdraw.addEventListener('click', function() {
+                // Here you would typically send data to server
+                // For demo, we'll just show success message
+                
+                // Update success details
+                updateSuccessDetails();
+                
+                // Update UI
+                goToStep(4);
+            });
+            
+            // Done Button
+            doneButton.addEventListener('click', function() {
+                // Reset form for new withdraw
+                resetForm();
+                
+                // Go back to step 1
+                goToStep(1);
+            });
+            
+            // Helper Functions
+            function goToStep(step) {
+                currentStep = step;
+                
+                // Update progress bar
+                updateProgressBar();
+                
+                // Update step indicators
+                updateStepIndicators();
+                
+                // Show/hide form sections
+                formSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                if (step === 4) {
+                    document.getElementById('successMessage').classList.add('active');
+                } else {
+                    document.getElementById(`step${step}`).classList.add('active');
+                }
+            }
+            
+            function updateProgressBar() {
+                let width = 0;
+                if (currentStep === 2) width = 50;
+                else if (currentStep === 3) width = 100;
+                else if (currentStep === 4) width = 100;
+                
+                progressBar.style.width = `${width}%`;
+            }
+            
+            function updateStepIndicators() {
+                steps.forEach(step => {
+                    const stepNum = parseInt(step.dataset.step);
+                    
+                    step.classList.remove('active', 'completed');
+                    
+                    if (stepNum < currentStep) {
+                        step.classList.add('completed');
+                    } else if (stepNum === currentStep) {
+                        step.classList.add('active');
+                    }
+                });
+            }
+            
+            function updateAccountDetails() {
+                const method = methodData[selectedMethod];
+                
+                accountDetails.innerHTML = `
+                    <div class="detail-item">
+                        <span class="detail-label">উত্তোলন পদ্ধতি:</span>
+                        <span class="detail-value">${method.name}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">নির্দেশনা:</span>
+                        <span class="detail-value">${method.instructions}</span>
+                    </div>
+                `;
+            }
+            
+            function validateStep2() {
+                const amount = parseInt(withdrawAmountInput.value);
+                
+                if (!amount || amount < 100) {
+                    alert('দয়া করে সঠিক পরিমাণ লিখুন (সর্বনিম্ন ১০০ টাকা)।');
+                    withdrawAmountInput.focus();
+                    return false;
+                }
+                
+                if (amount > 25000) {
+                    alert('সর্বোচ্চ উত্তোলন পরিমাণ ২৫,০০০ টাকা।');
+                    withdrawAmountInput.focus();
+                    return false;
+                }
+                
+                if (!accountNumberInput.value.trim()) {
+                    alert('দয়া করে অ্যাকাউন্ট নম্বর লিখুন।');
+                    accountNumberInput.focus();
+                    return false;
+                }
+                
+                if (!accountNameInput.value.trim()) {
+                    alert('দয়া করে অ্যাকাউন্টধারীর নাম লিখুন।');
+                    accountNameInput.focus();
+                    return false;
+                }
+                
+                return true;
+            }
+            
+            function updateConfirmationDetails() {
+                const method = methodData[selectedMethod];
+                const now = new Date();
+                const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                const formattedDate = now.toLocaleDateString('bn-BD', options);
+                const amount = parseInt(withdrawAmountInput.value);
+                const charge = amount * 0.015;
+                const netAmount = amount - charge;
+                
+                confirmMethod.textContent = method.name;
+                confirmAmount.textContent = `${amount} টাকা`;
+                confirmCharge.textContent = `${charge.toFixed(2)} টাকা`;
+                confirmNetAmount.textContent = `${netAmount.toFixed(2)} টাকা`;
+                confirmAccountNumber.textContent = accountNumberInput.value;
+                confirmAccountName.textContent = accountNameInput.value;
+                confirmDate.textContent = formattedDate;
+            }
+            
+            function updateSuccessDetails() {
+                const method = methodData[selectedMethod];
+                const now = new Date();
+                const options = { 
+                    day: 'numeric', 
+                    month: 'long', 
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true
+                };
+                const formattedDate = now.toLocaleDateString('bn-BD', options);
+                const amount = parseInt(withdrawAmountInput.value);
+                const charge = amount * 0.015;
+                const netAmount = amount - charge;
+                
+                successMethod.textContent = method.name;
+                successAmount.textContent = `${amount} টাকা`;
+                successCharge.textContent = `${charge.toFixed(2)} টাকা`;
+                successNetAmount.textContent = `${netAmount.toFixed(2)} টাকা`;
+                successDate.textContent = formattedDate;
+            }
+            
+            function resetForm() {
+                // Reset form inputs
+                withdrawAmountInput.value = '';
+                accountNumberInput.value = '';
+                accountNameInput.value = '';
+                
+                // Reset selected method
+                paymentMethods.forEach(m => m.classList.remove('selected'));
+                selectedMethod = null;
+                
+                // Reset next button
+                nextToStep2.disabled = true;
+            }
+            
+            // Initialize form
+            resetForm();
         });
     </script>
-
 </body>
 </html>

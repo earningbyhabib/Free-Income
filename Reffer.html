@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রেফারেল সিস্টেম - Freelancer 24</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap');
+
+        :root {
+            --primary-orange: #FF5722;
+            --gradient-start: #FF5722;
+            --gradient-end: #FFA726;
+            --black: #000;
+            --white: #fff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: var(--white);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .logo-box {
+            background-color: var(--black);
+            border-radius: 15px;
+            padding: 12px 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+            transform: perspective(500px) rotateX(10deg);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: perspective(500px) rotateX(10deg) translateY(0); }
+            50% { transform: perspective(500px) rotateX(10deg) translateY(-8px); }
+        }
+
+        .logo-text {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            position: relative;
+            z-index: 1;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .tm-sup {
+            font-size: 0.3em;
+            vertical-align: super;
+            margin-left: 2px;
+            font-weight: 400;
+            color: var(--white);
+            position: relative;
+            top: -5px;
+        }
+
+        .content-box {
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            margin: 0 auto 15px auto;
+            width: 100%;
+            box-sizing: border-box;
+            border: 2px solid;
+            border-image: linear-gradient(45deg, #FF5722, #FF9800, #FFEB3B, #FF9800, #FF5722);
+            border-image-slice: 1;
+            animation: borderGlow 3s linear infinite;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes borderGlow {
+            0% { border-image-source: linear-gradient(45deg, #FF5722, #FF9800, #FFEB3B, #FF9800, #FF5722); }
+            50% { border-image-source: linear-gradient(45deg, #FFEB3B, #FF9800, #FF5722, #FF9800, #FFEB3B); }
+            100% { border-image-source: linear-gradient(45deg, #FF5722, #FF9800, #FFEB3B, #FF9800, #FF5722); }
+        }
+
+        .page-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* রেফারেল বক্স স্টাইল */
+        .referral-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .referral-link-container {
+            display: flex;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .referral-link {
+            flex: 1;
+            padding: 10px 12px;
+            border: none;
+            border-radius: 8px 0 0 8px;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        .copy-btn {
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .copy-btn:hover {
+            background-color: #333;
+        }
+
+        /* কমিশন চার্ট স্টাইল */
+        .chart-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .commission-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .commission-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .commission-level {
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .commission-amount {
+            color: #FFEB3B;
+            font-weight: 700;
+        }
+
+        .highlight {
+            background-color: rgba(255, 152, 0, 0.3);
+            border-left: 4px solid var(--primary-orange);
+        }
+
+        .note {
+            margin-top: 15px;
+            font-size: 13px;
+            color: var(--white);
+            text-align: center;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        .earn-more {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* শেয়ার বাটন স্টাইল */
+        .share-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .share-main-btn {
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .share-main-btn:hover {
+            background-color: #333;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .share-options {
+            display: none;
+            margin-top: 12px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .share-options.active {
+            display: grid;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .share-option {
+            padding: 10px 8px;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 500;
+            transition: all 0.3s;
+            color: var(--white);
+        }
+
+        .share-option:hover {
+            background-color: rgba(255, 152, 0, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .share-option i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .logo-text {
+                font-size: 1.6em;
+            }
+            
+            .page-title {
+                font-size: 1.3em;
+            }
+            
+            .content-box {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .logo-text {
+                font-size: 1.4em;
+            }
+            
+            .page-title, .referral-title, .chart-title {
+                font-size: 1.2em;
+            }
+            
+            .share-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo-section">
+            <div class="logo-box">
+                <div class="logo-text">
+                    FREELANCER-24<span class="tm-sup">TM</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <h1 class="page-title">★ রেফারেল সিস্টেম ★</h1>
+            
+            <h2 class="referral-title">আপনার রেফারেল লিংক</h2>
+            <div class="referral-link-container">
+                <input type="text" id="referral-link" class="referral-link" readonly value="https://t.me/earningbyhabib">
+                <button class="copy-btn" id="copy-btn">
+                    <i class="fas fa-copy"></i> কপি
+                </button>
+            </div>
+            
+            <div class="share-container">
+                <button class="share-main-btn" id="share-main-btn">
+                    <i class="fas fa-share-alt"></i> শেয়ার করুন
+                </button>
+                
+                <div class="share-options" id="share-options">
+                    <div class="share-option" data-app="whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp
+                    </div>
+                    <div class="share-option" data-app="facebook">
+                        <i class="fab fa-facebook"></i>
+                        Facebook
+                    </div>
+                    <div class="share-option" data-app="messenger">
+                        <i class="fab fa-facebook-messenger"></i>
+                        Messenger
+                    </div>
+                    <div class="share-option" data-app="telegram">
+                        <i class="fab fa-telegram"></i>
+                        Telegram
+                    </div>
+                    <div class="share-option" data-app="twitter">
+                        <i class="fab fa-twitter"></i>
+                        Twitter
+                    </div>
+                    <div class="share-option" data-app="more">
+                        <i class="fas fa-ellipsis-h"></i>
+                        আরো অপশন
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <h2 class="chart-title">★ রেফার কমিশন চার্ট ★</h2>
+            
+            <div class="commission-item highlight">
+                <span class="commission-level">👤 সরাসরি রেফার</span>
+                <span class="commission-amount">💰 ৩০ টাকা</span>
+            </div>
+            
+            <div class="commission-item">
+                <span class="commission-level">1️⃣ ১ম জেনারেশন</span>
+                <span class="commission-amount">💰 ১২ টাকা</span>
+            </div>
+            
+            <div class="commission-item">
+                <span class="commission-level">2️⃣ ২য় জেনারেশন</span>
+                <span class="commission-amount">💰 ৮ টাকা</span>
+            </div>
+            
+            <div class="commission-item">
+                <span class="commission-level">3️⃣ ৩য় জেনারেশন</span>
+                <span class="commission-amount">💰 ৫ টাকা</span>
+            </div>
+            
+            <div class="commission-item">
+                <span class="commission-level">4️⃣ ৪র্থ জেনারেশন</span>
+                <span class="commission-amount">💰 ৩ টাকা</span>
+            </div>
+            
+            <div class="commission-item">
+                <span class="commission-level">5️⃣ ৫ম জেনারেশন</span>
+                <span class="commission-amount">💰 ২ টাকা</span>
+            </div>
+            
+            <p class="note">📢 আপনি যত রেফার করবেন, ইনকাম হবে তত বেশি!</p>
+            
+            <p class="earn-more">
+                🧑‍🤝‍🧑 টিম যত বড় হবে, আপনার ইনকামও তত বাড়বে!<br>
+                🚀 আজই শুরু করুন – অন্যদের ইনভাইট করুন, আর ঘরে বসেই আয় করুন!
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // ১. কপি বাটন ফাংশনালিটি
+        document.getElementById('copy-btn').addEventListener('click', function() {
+            const referralInput = document.getElementById('referral-link');
+            referralInput.select();
+            document.execCommand('copy');
+            alert('রেফারেল লিংক কপি করা হয়েছে!');
+        });
+
+        // ২. শেয়ার ফাংশনালিটি
+        document.getElementById('share-main-btn').addEventListener('click', function() {
+            document.getElementById('share-options').classList.toggle('active');
+        });
+
+        // শেয়ার অপশনগুলোর জন্য ইভেন্ট লিসেনার
+        document.querySelectorAll('.share-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const app = this.getAttribute('data-app');
+                shareLink(app);
+            });
+        });
+
+        // শেয়ার ফাংশন
+        function shareLink(app) {
+            const referralLink = document.getElementById('referral-link').value;
+            const shareText = `💰 টাকা উপার্জনের সুযোগ! এই লিংক থেকে রেজিস্টার করুন: ${referralLink}`;
+            
+            let shareUrl = '';
+            
+            switch(app) {
+                case 'whatsapp':
+                    shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+                    break;
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}`;
+                    break;
+                case 'messenger':
+                    shareUrl = `fb-messenger://share/?link=${encodeURIComponent(referralLink)}`;
+                    break;
+                case 'telegram':
+                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent('টাকা উপার্জনের সুযোগ!')}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+                    break;
+                case 'more':
+                    if(navigator.share) {
+                        navigator.share({
+                            title: 'টাকা উপার্জনের সুযোগ!',
+                            text: 'এই লিংক থেকে রেজিস্টার করুন',
+                            url: referralLink
+                        }).catch(console.error);
+                    } else {
+                        alert('শেয়ার অপশনগুলো দেখতে উপরের বাটনগুলো ব্যবহার করুন');
+                    }
+                    return;
+            }
+            
+            window.open(shareUrl, '_blank');
+        }
+    </script>
+</body>
+</html>

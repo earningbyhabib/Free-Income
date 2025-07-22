@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ডিজিটাল লটারি - স্বপ্ন পূরণের প্ল্যাটফর্ম</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a148c;
+            --secondary-color: #7b1fa2;
+            --accent-color: #e91e63;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --danger-color: #f44336;
+            --info-color: #2196f3;
+            --light-bg: #f5f5f5;
+            --card-bg: #ffffff;
+            --text-dark: #212121;
+            --text-medium: #424242;
+            --text-light: #757575;
+            --border-color: #e0e0e0;
+            --shadow-light: 0 2px 5px rgba(0,0,0,0.1);
+            --shadow-medium: 0 4px 10px rgba(0,0,0,0.15);
+            --shadow-dark: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans Bengali', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .balance {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .balance-amount {
+            color: var(--accent-color);
+            font-size: 1.4rem;
+        }
+
+        .add-money-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-money-btn:hover {
+            background-color: #d81b60;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .lottery-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        .tab-btn:hover:not(.active) {
+            color: var(--secondary-color);
+        }
+
+        .lottery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .lottery-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .lottery-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .lottery-header {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .lottery-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .lottery-price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffeb3b;
+        }
+
+        .lottery-body {
+            padding: 20px;
+        }
+
+        .lottery-details {
+            margin-bottom: 20px;
+        }
+
+        .lottery-details p {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+        }
+
+        .lottery-details strong {
+            color: var(--text-dark);
+        }
+
+        .prize-structure {
+            margin-bottom: 20px;
+        }
+
+        .prize-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .prize-list {
+            list-style: none;
+        }
+
+        .prize-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .prize-list li:last-child {
+            border-bottom: none;
+        }
+
+        .prize-position {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .buy-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .buy-btn:hover {
+            background-color: #d81b60;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .buy-btn i {
+            margin-right: 8px;
+        }
+
+        .my-tickets {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 40px;
+        }
+
+        .ticket-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .ticket-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .ticket-item:hover {
+            background-color: rgba(0,0,0,0.02);
+        }
+
+        .ticket-info {
+            flex: 1;
+        }
+
+        .ticket-number {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .ticket-lottery {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .ticket-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-pending {
+            background-color: #fff3e0;
+            color: #e65100;
+        }
+
+        .status-won {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-lost {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+
+        .results-section {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .results-select {
+            padding: 8px 15px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            font-family: inherit;
+        }
+
+        .winning-numbers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .winning-number {
+            background: linear-gradient(135deg, var(--accent-color), #ad1457);
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: var(--shadow-light);
+        }
+
+        .prize-winners {
+            margin-top: 30px;
+        }
+
+        .winner-card {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .winner-position {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .winner-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .winner-number {
+            background-color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-light);
+        }
+
+        .check-result {
+            margin-top: 30px;
+            background-color: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .check-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .check-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .check-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .check-btn:hover {
+            background-color: #38006b;
+        }
+
+        .result-display {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .won {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .lost {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .pending {
+            background-color: var(--warning-color);
+            color: white;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: var(--shadow-dark);
+            position: relative;
+            animation: modalFadeIn 0.3s;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-medium);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 20, 140, 0.1);
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .payment-method {
+            flex: 1;
+            min-width: 120px;
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .payment-method.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(74, 20, 140, 0.05);
+        }
+
+        .payment-method img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .payment-name {
+            font-weight: 600;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #d81b60;
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .lottery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .user-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .check-form {
+                flex-direction: column;
+            }
+            
+            .payment-method {
+                min-width: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
+            }
+            
+            .lottery-tabs {
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+            
+            .tab-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ডিজিটাল লটারি</h1>
+            <p>স্বপ্ন পূরণের সহজ প্ল্যাটফর্ম</p>
+        </header>
+        
+        <div class="user-info">
+            <div class="balance">
+                আপনার ব্যালেন্স: <span class="balance-amount">৳0</span>
+            </div>
+            <button class="add-money-btn">ব্যালেন্স রিচার্জ করুন</button>
+        </div>
+        
+        <h2 class="section-title">লটারি কিনুন</h2>
+        
+        <div class="lottery-tabs">
+            <button class="tab-btn active" data-tab="daily">দৈনিক</button>
+            <button class="tab-btn" data-tab="weekly">সাপ্তাহিক</button>
+            <button class="tab-btn" data-tab="monthly">মাসিক</button>
+            <button class="tab-btn" data-tab="special">স্পেশাল</button>
+        </div>
+        
+        <div class="lottery-grid" id="daily-lotteries">
+            <!-- Daily Lottery Cards -->
+            <div class="lottery-card">
+                <div class="lottery-header">
+                    <div class="lottery-name">দৈনিক লটারি</div>
+                    <div class="lottery-price">প্রতি টিকেট: ৳১০</div>
+                </div>
+                <div class="lottery-body">
+                    <div class="lottery-details">
+                        <p><strong>ড্র তারিখ:</strong> প্রতিদিন রাত ৯:০০ টা</p>
+                        <p><strong>মোট টিকেট:</strong> ১০০০</p>
+                        <p><strong>অবশিষ্ট টিকেট:</strong> ৮৫৬</p>
+                    </div>
+                    <div class="prize-structure">
+                        <div class="prize-title">পুরস্কার:</div>
+                        <ul class="prize-list">
+                            <li><span class="prize-position">১ম:</span> <span>৳৫,০০০</span></li>
+                            <li><span class="prize-position">২য়:</span> <span>৳২,০০০</span></li>
+                            <li><span class="prize-position">৩য়:</span> <span>৳১,০০০</span></li>
+                        </ul>
+                    </div>
+                    <button class="buy-btn" data-lottery-id="daily-1" data-price="10">
+                        <i>🛒</i> টিকেট কিনুন
+                    </button>
+                </div>
+            </div>
+            
+            <div class="lottery-card">
+                <div class="lottery-header">
+                    <div class="lottery-name">সানডে স্পেশাল</div>
+                    <div class="lottery-price">প্রতি টিকেট: ৳২০</div>
+                </div>
+                <div class="lottery-body">
+                    <div class="lottery-details">
+                        <p><strong>ড্র তারিখ:</strong> প্রতি রবিবার রাত ১০:০০ টা</p>
+                        <p><strong>মোট টিকেট:</strong> ৫০০</p>
+                        <p><strong>অবশিষ্ট টিকেট:</strong> ৩২১</p>
+                    </div>
+                    <div class="prize-structure">
+                        <div class="prize-title">পুরস্কার:</div>
+                        <ul class="prize-list">
+                            <li><span class="prize-position">১ম:</span> <span>৳১০,০০০</span></li>
+                            <li><span class="prize-position">২য়:</span> <span>৳৫,০০০</span></li>
+                            <li><span class="prize-position">৩য়:</span> <span>৳২,০০০</span></li>
+                        </ul>
+                    </div>
+                    <button class="buy-btn" data-lottery-id="daily-2" data-price="20">
+                        <i>🛒</i> টিকেট কিনুন
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="lottery-grid" id="weekly-lotteries" style="display: none;">
+            <!-- Weekly Lottery Cards -->
+            <div class="lottery-card">
+                <div class="lottery-header">
+                    <div class="lottery-name">সাপ্তাহিক মেগা ড্র</div>
+                    <div class="lottery-price">প্রতি টিকেট: ৳৫০</div>
+                </div>
+                <div class="lottery-body">
+                    <div class="lottery-details">
+                        <p><strong>ড্র তারিখ:</strong> প্রতি শুক্রবার রাত ১১:০০ টা</p>
+                        <p><strong>মোট টিকেট:</strong> ১০০০</p>
+                        <p><strong>অবশিষ্ট টিকেট:</strong> ৫৬৭</p>
+                    </div>
+                    <div class="prize-structure">
+                        <div class="prize-title">পুরস্কার:</div>
+                        <ul class="prize-list">
+                            <li><span class="prize-position">১ম:</span> <span>৳৫০,০০০</span></li>
+                            <li><span class="prize-position">২য়:</span> <span>৳২০,০০০</span></li>
+                            <li><span class="prize-position">৩য়:</span> <span>৳১০,০০০</span></li>
+                            <li><span class="prize-position">৪র্থ-১০ম:</span> <span>৳৫,০০০</span></li>
+                        </ul>
+                    </div>
+                    <button class="buy-btn" data-lottery-id="weekly-1" data-price="50">
+                        <i>🛒</i> টিকেট কিনুন
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="lottery-grid" id="monthly-lotteries" style="display: none;">
+            <!-- Monthly Lottery Cards -->
+            <div class="lottery-card">
+                <div class="lottery-header">
+                    <div class="lottery-name">মাসিক গোল্ডেন ড্র</div>
+                    <div class="lottery-price">প্রতি টিকেট: ৳১০০</div>
+                </div>
+                <div class="lottery-body">
+                    <div class="lottery-details">
+                        <p><strong>ড্র তারিখ:</strong> প্রতি মাসের ১৫ তারিখ রাত ১০:০০ টা</p>
+                        <p><strong>মোট টিকেট:</strong> ৫০০</p>
+                        <p><strong>অবশিষ্ট টিকেট:</strong> ২৩৪</p>
+                    </div>
+                    <div class="prize-structure">
+                        <div class="prize-title">পুরস্কার:</div>
+                        <ul class="prize-list">
+                            <li><span class="prize-position">১ম:</span> <span>৳১,০০,০০০</span></li>
+                            <li><span class="prize-position">২য়:</span> <span>৳৫০,০০০</span></li>
+                            <li><span class="prize-position">৩য়:</span> <span>৳২৫,০০০</span></li>
+                            <li><span class="prize-position">৪র্থ-১০ম:</span> <span>৳১০,০০০</span></li>
+                        </ul>
+                    </div>
+                    <button class="buy-btn" data-lottery-id="monthly-1" data-price="100">
+                        <i>🛒</i> টিকেট কিনুন
+                    </button>
+                </div>
+            </div>
+            
+            <div class="lottery-card">
+                <div class="lottery-header">
+                    <div class="lottery-name">মাসিক সিলভার ড্র</div>
+                    <div class="lottery-price">প্রতি টিকেট: ৳৫০</div>
+                </div>
+                <div class="lottery-body">
+                    <div class="lottery-details">
+                        <p><strong>ড্র তারিখ:</strong> প্রতি মাসের ১ তারিখ রাত ৯:০০ টা</p>
+                        <p><strong>মোট টিকেট:</strong> ১০০০</p>
+                        <p><strong>অবশিষ্ট টিকেট:</strong> ৪৫৬</p>
+                    </div>
+                    <div class="prize-structure">
+                        <div class="prize-title">পুরস্কার:</div>
+                        <ul class="prize-list">
+                            <li><span class="prize-position">১ম:</span> <span>৳৫০,০০০</span></li>
+                            <li><span class="prize-position">২য়:</span> <span>৳২০,০০০</span></li>
+                            <li><span class="prize-position">৩য়:</span> <span>৳১০,০০০</span></li>
+                        </ul>
+                    </div>
+                    <button class="buy-btn" data-lottery-id="monthly-2" data-price="50">
+                        <i>🛒</i> টিকেট কিনুন
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="lottery-grid" id="special-lotteries" style="display: none;">
+            <!-- Special Lottery Cards -->
+            <div class="lottery-card">
+                <div class="lottery-header">
+                    <div class="lottery-name">ইউথ ফেস্টিভ্যাল স্পেশাল</div>
+                    <div class="lottery-price">প্রতি টিকেট: ৳২০</div>
+                </div>
+                <div class="lottery-body">
+                    <div class="lottery-details">
+                        <p><strong>ড্র তারিখ:</strong> আগস্ট ১২, ২০২৫ - রাত ১০:০০ টা</p>
+                        <p><strong>মোট টিকেট:</strong> ২০০০</p>
+                        <p><strong>অবশিষ্ট টিকেট:</strong> ১২৩৪</p>
+                    </div>
+                    <div class="prize-structure">
+                        <div class="prize-title">পুরস্কার:</div>
+                        <ul class="prize-list">
+                            <li><span class="prize-position">১ম:</span> <span>৳১,০০,০০০</span></li>
+                            <li><span class="prize-position">২য়:</span> <span>৳৫০,০০০</span></li>
+                            <li><span class="prize-position">৩য়:</span> <span>৳২০,০০০</span></li>
+                            <li><span class="prize-position">৪র্থ-২০তম:</span> <span>৳৫,০০০</span></li>
+                        </ul>
+                    </div>
+                    <button class="buy-btn" data-lottery-id="special-1" data-price="20">
+                        <i>🛒</i> টিকেট কিনুন
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="section-title">আমার টিকেট</h2>
+        <div class="my-tickets">
+            <div class="ticket-list" id="ticketList">
+                <!-- Tickets will be added dynamically -->
+                <p style="text-align: center; padding: 20px; color: var(--text-light);">আপনার কোনো টিকেট নেই</p>
+            </div>
+        </div>
+        
+        <h2 class="section-title">ফলাফল</h2>
+        <div class="results-section">
+            <div class="results-header">
+                <h3>সর্বশেষ ফলাফল</h3>
+                <select class="results-select" id="resultSelect">
+                    <option value="daily">দৈনিক লটারি</option>
+                    <option value="weekly">সাপ্তাহিক লটারি</option>
+                    <option value="monthly">মাসিক লটারি</option>
+                </select>
+            </div>
+            
+            <div class="winning-numbers">
+                <div class="winning-number">১২৩৪৫৬৭</div>
+                <div class="winning-number">৭৬৫৪৩২১</div>
+                <div class="winning-number">৯৮৭৬৫৪৩</div>
+            </div>
+            
+            <div class="prize-winners">
+                <div class="winner-card">
+                    <div class="winner-position">১ম পুরস্কার (৳৫০,০০০)</div>
+                    <div class="winner-list">
+                        <span class="winner-number">১২৩৪৫৬৭</span>
+                    </div>
+                </div>
+                
+                <div class="winner-card">
+                    <div class="winner-position">২য় পুরস্কার (৳২০,০০০)</div>
+                    <div class="winner-list">
+                        <span class="winner-number">৭৬৫৪৩২১</span>
+                    </div>
+                </div>
+                
+                <div class="winner-card">
+                    <div class="winner-position">৩য় পুরস্কার (৳১০,০০০)</div>
+                    <div class="winner-list">
+                        <span class="winner-number">৯৮৭৬৫৪৩</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="check-result">
+                <h3>আপনার টিকেট চেক করুন</h3>
+                <form class="check-form" id="checkTicketForm">
+                    <input type="text" class="check-input" placeholder="আপনার টিকেট নম্বর লিখুন" required>
+                    <button type="submit" class="check-btn">চেক করুন</button>
+                </form>
+                <div class="result-display" id="resultDisplay" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Buy Ticket Modal -->
+    <div class="modal" id="buyModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title" id="modalLotteryTitle">টিকেট কিনুন</h2>
+            
+            <form id="buyTicketForm">
+                <div class="form-group">
+                    <label class="form-label" for="ticketQuantity">টিকেট সংখ্যা</label>
+                    <input type="number" class="form-input" id="ticketQuantity" min="1" value="1" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">মোট মূল্য</label>
+                    <div class="total-price" id="totalPrice" style="font-size: 1.2rem; font-weight: 600; color: var(--accent-color);">৳১০</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">পেমেন্ট মাধ্যম</label>
+                    <div class="payment-methods">
+                        <div class="payment-method" data-method="bkash">
+                            <img src="https://i.postimg.cc/k5NH8C37/bkash-logo.png" alt="Bkash">
+                            <div class="payment-name">বিকাশ</div>
+                        </div>
+                        <div class="payment-method" data-method="nagad">
+                            <img src="https://i.postimg.cc/gjjtf6w0/ide-IW55y-Qr-1752975797249.jpg" alt="Nagad">
+                            <div class="payment-name">নগদ</div>
+                        </div>
+                        <div class="payment-method" data-method="rocket">
+                            <img src="https://i.postimg.cc/GtfgrhYx/Rocket-logo-505x500.png" alt="Rocket">
+                            <div class="payment-name">রকেট</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="paymentNumber">পেমেন্ট নম্বর</label>
+                    <input type="text" class="form-input" id="paymentNumber" placeholder="১১ ডিজিটের মোবাইল নম্বর" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">কনফার্ম ও পেমেন্ট করুন</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Add Money Modal -->
+    <div class="modal" id="addMoneyModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">ব্যালেন্স রিচার্জ করুন</h2>
+            
+            <form id="addMoneyForm">
+                <div class="form-group">
+                    <label class="form-label" for="amount">রিচার্জ অ্যামাউন্ট (৳)</label>
+                    <input type="number" class="form-input" id="amount" min="10" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">পেমেন্ট মাধ্যম</label>
+                    <div class="payment-methods">
+                        <div class="payment-method" data-method="bkash">
+                            <img src="https://i.postimg.cc/k5NH8C37/bkash-logo.png" alt="Bkash">
+                            <div class="payment-name">বিকাশ</div>
+                        </div>
+                        <div class="payment-method" data-method="nagad">
+                            <img src="https://i.postimg.cc/gjjtf6w0/ide-IW55y-Qr-1752975797249.jpg" alt="Nagad">
+                            <div class="payment-name">নগদ</div>
+                        </div>
+                        <div class="payment-method" data-method="rocket">
+                            <img src="https://i.postimg.cc/GtfgrhYx/Rocket-logo-505x500.png" alt="Rocket">
+                            <div class="payment-name">রকেট</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="paymentNumberMoney">পেমেন্ট নম্বর</label>
+                    <input type="text" class="form-input" id="paymentNumberMoney" placeholder="১১ ডিজিটের মোবাইল নম্বর" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="transactionId">ট্রানজেকশন আইডি</label>
+                    <input type="text" class="form-input" id="transactionId" placeholder="পেমেন্টের ট্রানজেকশন আইডি" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">রিচার্জ কনফার্ম করুন</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab Switching
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const lotteryGrids = {
+                daily: document.getElementById('daily-lotteries'),
+                weekly: document.getElementById('weekly-lotteries'),
+                monthly: document.getElementById('monthly-lotteries'),
+                special: document.getElementById('special-lotteries')
+            };
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tab = this.dataset.tab;
+                    
+                    // Update active tab
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding grid
+                    Object.values(lotteryGrids).forEach(grid => grid.style.display = 'none');
+                    lotteryGrids[tab].style.display = 'grid';
+                });
+            });
+            
+            // Buy Ticket Modal
+            const buyModal = document.getElementById('buyModal');
+            const buyButtons = document.querySelectorAll('.buy-btn');
+            const closeModalButtons = document.querySelectorAll('.close-modal');
+            const modalLotteryTitle = document.getElementById('modalLotteryTitle');
+            const ticketQuantity = document.getElementById('ticketQuantity');
+            const totalPrice = document.getElementById('totalPrice');
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            const buyTicketForm = document.getElementById('buyTicketForm');
+            const ticketList = document.getElementById('ticketList');
+            
+            let currentLotteryId = '';
+            let currentLotteryPrice = 0;
+            let currentLotteryName = '';
+            let selectedPaymentMethod = '';
+            
+            // Open Buy Modal
+            buyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    currentLotteryId = this.dataset.lotteryId;
+                    currentLotteryPrice = parseInt(this.dataset.price);
+                    currentLotteryName = this.closest('.lottery-card').querySelector('.lottery-name').textContent;
+                    
+                    modalLotteryTitle.textContent = `${currentLotteryName} - টিকেট কিনুন`;
+                    ticketQuantity.value = 1;
+                    totalPrice.textContent = `৳${currentLotteryPrice}`;
+                    
+                    // Reset payment method selection
+                    paymentMethods.forEach(method => method.classList.remove('selected'));
+                    selectedPaymentMethod = '';
+                    
+                    buyModal.style.display = 'flex';
+                });
+            });
+            
+            // Update Total Price
+            ticketQuantity.addEventListener('input', function() {
+                const quantity = parseInt(this.value) || 0;
+                totalPrice.textContent = `৳${quantity * currentLotteryPrice}`;
+            });
+            
+            // Select Payment Method
+            paymentMethods.forEach(method => {
+                method.addEventListener('click', function() {
+                    paymentMethods.forEach(m => m.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedPaymentMethod = this.dataset.method;
+                });
+            });
+            
+            // Close Modal
+            closeModalButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('.modal').forEach(modal => {
+                        modal.style.display = 'none';
+                    });
+                });
+            });
+            
+            window.addEventListener('click', function(event) {
+                if (event.target.classList.contains('modal')) {
+                    event.target.style.display = 'none';
+                }
+            });
+            
+            // Buy Ticket Form Submission
+            buyTicketForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!selectedPaymentMethod) {
+                    alert('দয়া করে একটি পেমেন্ট মাধ্যম নির্বাচন করুন।');
+                    return;
+                }
+                
+                const quantity = parseInt(ticketQuantity.value);
+                const paymentNumber = document.getElementById('paymentNumber').value.trim();
+                
+                if (quantity < 1) {
+                    alert('টিকেট সংখ্যা কমপক্ষে ১ হতে হবে।');
+                    return;
+                }
+                
+                if (paymentNumber.length !== 11 || !/^\d+$/.test(paymentNumber)) {
+                    alert('দয়া করে একটি সঠিক ১১-ডিজিটের মোবাইল নম্বর দিন।');
+                    return;
+                }
+                
+                // Generate ticket numbers (in a real app, this would come from the server)
+                const tickets = [];
+                for (let i = 0; i < quantity; i++) {
+                    tickets.push({
+                        id: currentLotteryId,
+                        name: currentLotteryName,
+                        number: Math.floor(1000000 + Math.random() * 9000000).toString(),
+                        date: new Date().toLocaleDateString('bn-BD'),
+                        status: 'pending'
+                    });
+                }
+                
+                // Save to localStorage (simulating database)
+                let myTickets = JSON.parse(localStorage.getItem('myTickets')) || [];
+                myTickets = myTickets.concat(tickets);
+                localStorage.setItem('myTickets', JSON.stringify(myTickets));
+                
+                // Update UI
+                updateTicketList();
+                
+                // Show success message
+                alert(`আপনার ${quantity}টি টিকেট সফলভাবে কেনা হয়েছে!\nটিকেট নম্বর: ${tickets.map(t => t.number).join(', ')}`);
+                
+                // Close modal
+                buyModal.style.display = 'none';
+                this.reset();
+            });
+            
+            // Add Money Modal
+            const addMoneyBtn = document.querySelector('.add-money-btn');
+            const addMoneyModal = document.getElementById('addMoneyModal');
+            const addMoneyForm = document.getElementById('addMoneyForm');
+            const balanceAmount = document.querySelector('.balance-amount');
+            
+            addMoneyBtn.addEventListener('click', function() {
+                addMoneyModal.style.display = 'flex';
+            });
+            
+            // Add Money Form Submission
+            addMoneyForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const amount = parseInt(document.getElementById('amount').value);
+                const method = document.querySelector('.payment-method.selected')?.dataset.method;
+                const paymentNumber = document.getElementById('paymentNumberMoney').value.trim();
+                const transactionId = document.getElementById('transactionId').value.trim();
+                
+                if (!method) {
+                    alert('দয়া করে একটি পেমেন্ট মাধ্যম নির্বাচন করুন।');
+                    return;
+                }
+                
+                if (amount < 10) {
+                    alert('রিচার্জ অ্যামাউন্ট কমপক্ষে ৳১০ হতে হবে।');
+                    return;
+                }
+                
+                if (paymentNumber.length !== 11 || !/^\d+$/.test(paymentNumber)) {
+                    alert('দয়া করে একটি সঠিক ১১-ডিজিটের মোবাইল নম্বর দিন।');
+                    return;
+                }
+                
+                if (!transactionId) {
+                    alert('দয়া করে ট্রানজেকশন আইডি প্রবেশ করুন।');
+                    return;
+                }
+                
+                // Update balance (in a real app, this would be verified with the payment gateway)
+                let balance = parseInt(localStorage.getItem('balance')) || 0;
+                balance += amount;
+                localStorage.setItem('balance', balance);
+                
+                // Update UI
+                balanceAmount.textContent = `৳${balance}`;
+                
+                // Show success message
+                alert(`আপনার ব্যালেন্স সফলভাবে ৳${amount} রিচার্জ হয়েছে!\nনতুন ব্যালেন্স: ৳${balance}`);
+                
+                // Close modal
+                addMoneyModal.style.display = 'none';
+                this.reset();
+            });
+            
+            // Check Ticket Form
+            const checkTicketForm = document.getElementById('checkTicketForm');
+            const resultDisplay = document.getElementById('resultDisplay');
+            
+            checkTicketForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const ticketNumber = this.querySelector('input').value.trim();
+                
+                if (!ticketNumber) {
+                    resultDisplay.style.display = 'none';
+                    return;
+                }
+                
+                // In a real app, this would check with server
+                // For demo, we'll simulate some results
+                const random = Math.random();
+                
+                if (random > 0.95) {
+                    resultDisplay.className = 'result-display won';
+                    resultDisplay.textContent = 'অভিনন্দন! আপনি ১ম পুরস্কার জিতেছেন!';
+                } else if (random > 0.85) {
+                    resultDisplay.className = 'result-display won';
+                    resultDisplay.textContent = 'অভিনন্দন! আপনি ২য় পুরস্কার জিতেছেন!';
+                } else if (random > 0.7) {
+                    resultDisplay.className = 'result-display won';
+                    resultDisplay.textContent = 'অভিনন্দন! আপনি ৩য় পুরস্কার জিতেছেন!';
+                } else {
+                    resultDisplay.className = 'result-display lost';
+                    resultDisplay.textContent = 'দুঃখিত, আপনি এই ড্রতে জিতেননি। পরেরবার চেষ্টা করুন!';
+                }
+                
+                resultDisplay.style.display = 'block';
+            });
+            
+            // Update Ticket List
+            function updateTicketList() {
+                const tickets = JSON.parse(localStorage.getItem('myTickets')) || [];
+                
+                if (tickets.length === 0) {
+                    ticketList.innerHTML = '<p style="text-align: center; padding: 20px; color: var(--text-light);">আপনার কোনো টিকেট নেই</p>';
+                    return;
+                }
+                
+                ticketList.innerHTML = '';
+                
+                tickets.forEach(ticket => {
+                    const ticketItem = document.createElement('div');
+                    ticketItem.className = 'ticket-item';
+                    
+                    const statusClass = {
+                        pending: 'status-pending',
+                        won: 'status-won',
+                        lost: 'status-lost'
+                    }[ticket.status] || 'status-pending';
+                    
+                    ticketItem.innerHTML = `
+                        <div class="ticket-info">
+                            <div class="ticket-number">${ticket.number}</div>
+                            <div class="ticket-lottery">${ticket.name} - ${ticket.date}</div>
+                        </div>
+                        <div class="ticket-status ${statusClass}">${ticket.status}</div>
+                    `;
+                    
+                    ticketList.appendChild(ticketItem);
+                });
+            }
+            
+            // Initialize balance
+            const balance = parseInt(localStorage.getItem('balance')) || 0;
+            balanceAmount.textContent = `৳${balance}`;
+            
+            // Initialize ticket list
+            updateTicketList();
+        });
+    </script>
+</body>
+</html>

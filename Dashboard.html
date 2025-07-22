@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>হোমপেজ</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap');
+
+        :root {
+            --primary-orange: #FF5722;
+            --gradient-start: #FF5722;
+            --gradient-end: #FFA726;
+            --black: #000;
+            --white: #fff;
+            --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: var(--white);
+            padding-bottom: 80px;
+        }
+        
+        /* হেডার স্টাইল */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--white);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .profile-notification {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .profile-icon, .notification-icon, .menu-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .profile-icon:hover, .notification-icon:hover, .menu-icon:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        /* স্লাইডার স্টাইল */
+        .slider-container {
+            width: 90%;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            border: 2px solid;
+            border-image: linear-gradient(45deg, #FF5722, #FF9800, #FFEB3B, #FF9800, #FF5722);
+            border-image-slice: 1;
+            animation: borderGlow 3s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0% { border-image-source: linear-gradient(45deg, #FF5722, #FF9800, #FFEB3B, #FF9800, #FF5722); }
+            50% { border-image-source: linear-gradient(45deg, #FFEB3B, #FF9800, #FF5722, #FF9800, #FFEB3B); }
+            100% { border-image-source: linear-gradient(45deg, #FF5722, #FF9800, #FFEB3B, #FF9800, #FF5722); }
+        }
+        
+        .slider {
+            width: 100%;
+            height: 150px;
+            background-color: var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 24px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        /* নোটিশ লাইন */
+        .notice-line {
+            width: 90%;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            white-space: nowrap;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .notice-text {
+            display: inline-block;
+            animation: scrollText 20s linear infinite;
+            color: var(--white);
+        }
+        
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* বাটন সেকশন */
+        .button-section {
+            width: 90%;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .big-button {
+            padding: 30px 15px;
+            border-radius: 15px;
+            background-color: var(--white);
+            border: none;
+            box-shadow: var(--box-shadow);
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+            color: var(--black);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .big-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0.3),
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) rotate(30deg); }
+        }
+        
+        .big-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .big-button i {
+            font-size: 24px;
+            color: var(--primary-orange);
+        }
+        
+        /* ভিডিও সেকশন */
+        .video-section {
+            width: 90%;
+            margin: 20px auto;
+            background-color: var(--white);
+            border-radius: 15px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--black);
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-section i {
+            font-size: 50px;
+            margin-bottom: 10px;
+            color: var(--primary-orange);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* নেভিগেশন বার */
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+            gap: 15px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .nav-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            color: var(--white);
+            text-decoration: none;
+            flex: 1;
+            max-width: 60px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button i {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: var(--white);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-5px);
+            color: var(--white);
+        }
+        
+        .premium-button {
+            background-color: var(--black);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: -20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            flex-shrink: 0;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 215, 0, 0.4),
+                rgba(255, 215, 0, 0.2),
+                transparent
+            );
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+        
+        .premium-button:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+        }
+        
+        .nav-buttons-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* সাইডবার স্টাইল */
+        .sidebar {
+            width: 280px;
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: -300px;
+            z-index: 1000;
+            transition: left 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .sidebar.open {
+            left: 0;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        .profile {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            padding: 25px 20px;
+            color: white;
+            text-align: center;
+        }
+        
+        .profile img {
+            width: 70px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .balance {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: white;
+        }
+        
+        .actions {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 10px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .actions div {
+            color: white;
+            text-align: center;
+            font-size: 12px;
+            padding: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 5px;
+        }
+        
+        .actions div:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .actions i {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .menu {
+            padding: 15px;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 15px;
+            margin-bottom: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: var(--white);
+            transition: all 0.2s;
+        }
+        
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .menu-item i {
+            width: 25px;
+            margin-right: 15px;
+            font-size: 18px;
+            text-align: center;
+            color: var(--primary-orange);
+        }
+        
+        .logout {
+            color: #ff3333;
+            font-weight: bold;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 600px) {
+            .button-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .big-button {
+                padding: 25px 15px;
+            }
+            
+            .slider {
+                height: 120px;
+                font-size: 20px;
+            }
+            
+            .video-section {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .logo {
+                font-size: 20px;
+            }
+            
+            .big-button {
+                font-size: 14px;
+            }
+            
+            .big-button i {
+                font-size: 20px;
+            }
+            
+            .nav-button {
+                font-size: 10px;
+            }
+            
+            .nav-button i {
+                font-size: 18px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- ওভারলে (সাইডবার খোলা থাকলে দেখাবে) -->
+    <div id="overlay" class="overlay"></div>
+    
+    <!-- সাইডবার -->
+    <div id="sidebar" class="sidebar">
+        <div class="profile">
+            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User" id="sidebar-profile-img">
+            <div id="sidebar-fullname">Name </div>
+            <div id="sidebar-username" style="font-size: 12px;">User Name </div>
+            <div class="balance" id="sidebar-balance">0.00 TK </div>
+        </div>
+
+        <div class="actions">
+            <div><i class="fas fa-wallet"></i> Deposit </div>
+            <div><i class="fas fa-money-bill-wave"></i> Withdraw </div>
+            <div class="referral-action"><i class="fas fa-user-plus"></i> Reffer </div>
+            <div><a href="https://t.me/earningbyhabib" style="color: white; text-decoration: none;"><i class="fas fa-user-cog"></i> Profile</a></div>
+        </div>
+
+        <div class="menu">
+            <div class="menu-item">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-file-invoice"></i>
+                <span>Deposit History </span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-file-alt"></i>
+                <span>Withdraw History </span>
+            </div>
+            <div class="menu-item referral-menu-item">
+                <i class="fas fa-users"></i>
+                <span>Reffer Frends </span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-cog"></i>
+                <span>Account Setting </span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-key"></i>
+                <span>Password Change </span>
+            </div>
+            <div class="menu-item">
+                <i class="fas fa-question-circle"></i>
+                <span>Help Centre </span>
+            </div>
+            <div class="menu-item logout" id="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Log Out</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- হেডার সেকশন -->
+    <header>
+        <div class="menu-icon" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        
+        <div class="logo">FREELANCER-24<span style="font-size: 0.6em; vertical-align: super;">TM</span></div>
+        
+        <div class="profile-notification">
+            <div class="notification-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <div class="profile-icon">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+    </header>
+    
+    <!-- স্লাইডার সেকশন -->
+    <div class="slider-container">
+        <div class="slider">
+            Slider Image 
+        </div>
+    </div>
+    
+    <!-- নোটিশ লাইন -->
+    <div class="notice-line">
+        <div class="notice-text">
+            🙋‍♂️আসসালামু আলাইকুম। সবাই নিয়ম মেনে কাজ করুন ১০০% পেমেন্ট পাবেন ইনশাআল্লাহ। 💸✅
+        </div>
+    </div>
+    
+    <!-- বাটন সেকশন -->
+    <div class="button-section">
+        <a href="https://t.me/earningbyhabib" target="_blank" class="big-button">
+            <i class="fas fa-question-circle"></i>
+         Help Center ♎
+        </a>
+        
+        <a href="https://t.me/earningbyhabib" target="_blank" class="big-button">
+            <i class="fas fa-user-friends"></i>
+            Reffer Frinds🙋‍♂️
+        </a>
+        
+        <a href="https://t.me/earningbyhabib" target="_blank" class="big-button">
+            <i class="fas fa-download"></i>
+            Apps Download 🔰
+        </a>
+        
+        <a href="https://earningbyhabib.github.io/Free-Income/Task.html" target="_blank" class="big-button">
+            <i class="fas fa-tasks"></i>
+            Video Tutorial ▶️
+        </a>
+        
+        <a href="https://earningbyhabib.github.io/Free-Income/Vip.html" target="_blank" class="big-button" style="grid-column: 1 / span 2;">
+            <i class="fas fa-crown"></i>
+            About Us ℹ️
+        </a>
+    </div>
+    
+    <!-- ভিডিও সেকশন -->
+    <div class="video-section">
+        <i class="fas fa-play-circle"></i>
+        <p></p>
+    </div>
+    
+    <!-- নেভিগেশন বার -->
+    <div class="nav-bar">
+        <a href="#" class="nav-button">
+            <i class="fas fa-home"></i>
+            Home
+        </a>
+        <a href="https://earningbyhabib.github.io/Free-Income/Task.html" target="_blank" class="nav-button">
+            <i class="fas fa-tasks"></i>
+            Task
+        </a>
+        <a href="https://t.me/earningbyhabib" target="_blank" class="premium-button">
+            <i class="fas fa-crown"></i>
+        </a>
+        <a href="https://earningbyhabib.github.io/Free-Income/Join.html" target="_blank" class="nav-button">
+            <i class="fas fa-users"></i>
+            Join Now 
+        </a>
+        <a href="https://earningbyhabib.github.io/Free-Income/Profile.html" target="_blank" class="nav-button">
+            <i class="fas fa-user"></i>
+            Profile
+        </a>
+    </div>
+
+    <script>
+        // মেনু টগল ফাংশনালিটি
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('active');
+        });
+
+        document.getElementById('overlay').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('active');
+        });
+
+        // সাইডবার মেনু আইটেম ক্লিক ইভেন্ট
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // এখানে আপনি প্রতিটি মেনু আইটেমের জন্য আলাদা ফাংশনালিটি যোগ করতে পারেন
+                alert('এই মেনু আইটেমটি ক্লিক করা হয়েছে');
+            });
+        });
+
+        // নোটিশ বার অ্যানিমেশন
+        const noticeText = document.querySelector('.notice-text');
+        noticeText.innerHTML = noticeText.innerHTML + ' &nbsp;&nbsp;&nbsp;&nbsp;' + noticeText.innerHTML;
+
+        // বাটন ক্লিক অ্যানিমেশন
+        document.querySelectorAll('.big-button, .nav-button, .premium-button, .profile-icon, .notification-icon, .menu-icon').forEach(button => {
+            button.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+
+        // স্লাইডার হোভার ইফেক্ট
+        const slider = document.querySelector('.slider');
+        slider.addEventListener('mouseover', () => {
+            slider.style.animation = 'float 1.5s ease-in-out infinite';
+        });
+        slider.addEventListener('mouseout', () => {
+            slider.style.animation = 'float 3s ease-in-out infinite';
+        });
+    </script>
+</body>
+</html>

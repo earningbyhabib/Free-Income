@@ -1,1227 +1,370 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>লগইন ও ড্যাশবোর্ড</title>
+    <title>Freelancer 24 - Login/Register</title>
     <style>
-    /* কমন স্টাইল */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    body {
-        background-color: #f8f9fa;
-        color: #333;
-        transition: all 0.3s;
-    }
-    
-    .hidden {
-        display: none !important;
-    }
-    
-    /* লগইন/রেজিস্ট্রেশন স্টাইল */
-    .auth-container {
-        max-width: 500px;
-        margin: 50px auto;
-        padding: 20px;
-    }
-    
-    .form-container {
-        background: linear-gradient(135deg, #ffffff 0%, #f1f8ff 100%);
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        border: 1px solid #e0e6ed;
-    }
-    
-    .auth-title {
-        text-align: center;
-        color: #2c7be5;
-        margin-bottom: 30px;
-        font-size: 28px;
-        font-weight: 700;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-    
-    .form-group {
-        margin-bottom: 20px;
-    }
-    
-    .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 600;
-        color: #4a5568;
-    }
-    
-    .form-group input {
-        width: 100%;
-        padding: 12px 15px;
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        font-size: 16px;
-        transition: all 0.3s;
-        background-color: #f8fafc;
-    }
-    
-    .form-group input:focus {
-        border-color: #2c7be5;
-        box-shadow: 0 0 0 3px rgba(44, 123, 229, 0.1);
-        outline: none;
-    }
-    
-    .submit-btn {
-        background: linear-gradient(to right, #2c7be5, #00c9a7);
-        color: white;
-        padding: 14px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        width: 100%;
-        font-size: 18px;
-        font-weight: 600;
-        margin-top: 10px;
-        transition: all 0.3s;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    
-    .submit-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-    
-    .toggle-link {
-        text-align: center;
-        margin-top: 20px;
-        color: #718096;
-        font-size: 15px;
-    }
-    
-    .toggle-link a {
-        color: #2c7be5;
-        text-decoration: none;
-        font-weight: 600;
-        transition: all 0.2s;
-    }
-    
-    .toggle-link a:hover {
-        color: #1a56a8;
-        text-decoration: underline;
-    }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap');
 
-    /* ড্যাশবোর্ড স্টাইল */
-    #dashboard-page {
-        padding-bottom: 80px;
-        transition: margin-left 0.3s;
-        background-color: #f8fafc;
-    }
-    
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 5%;
-        background: linear-gradient(to right, #2c7be5, #00c9a7);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
-    
-    .logo {
-        font-size: 24px;
-        font-weight: bold;
-        color: white;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    
-    .profile-notification {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-    }
-    
-    .profile-icon, .notification-icon, .menu-icon {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s;
-        color: white;
-    }
-    
-    .profile-icon:hover, .notification-icon:hover, .menu-icon:hover {
-        background-color: rgba(255, 255, 255, 0.3);
-        transform: scale(1.1);
-    }
-    
-    .slider-container {
-        width: 90%;
-        margin: 20px auto;
-        overflow: hidden;
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-    
-    .slider {
-        width: 100%;
-        height: 150px;
-        background: linear-gradient(135deg, #2c7be5 0%, #00c9a7 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 24px;
-        font-weight: 600;
-        border-radius: 15px;
-    }
-    
-    .notice-line {
-        width: 90%;
-        margin: 20px auto;
-        padding: 15px;
-        background: linear-gradient(to right, #ff7e5f, #feb47b);
-        border-radius: 8px;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        white-space: nowrap;
-        color: white;
-        font-weight: 500;
-    }
-    
-    .notice-text {
-        display: inline-block;
-        animation: scrollText 20s linear infinite;
-    }
-    
-    @keyframes scrollText {
-        0% { transform: translateX(100%); }
-        100% { transform: translateX(-100%); }
-    }
-    
-    .button-section {
-        width: 90%;
-        margin: 20px auto;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-    
-    .big-button {
-        padding: 25px 15px;
-        border-radius: 12px;
-        background: white;
-        border: none;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        text-align: center;
-        color: #2d3748;
-        text-decoration: none;
-        border: 1px solid #e2e8f0;
-    }
-    
-    .big-button:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        border-color: #2c7be5;
-    }
-    
-    .big-button i {
-        font-size: 28px;
-        background: linear-gradient(to right, #2c7be5, #00c9a7);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    
-    .video-section {
-            width: 90%;
-            margin: 20px auto;
-            background-color: #e2e8f0;
-            border-radius: 10px;
-            height: 200px;
+        :root {
+            --primary-orange: #FF5722;
+            --gradient-start: #FF5722;
+            --gradient-end: #FFA726;
+            --black: #000;
+            --white: #fff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: transparent;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .logo-section {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #666666;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            color: var(--white);
+            position: relative;
+            z-index: 2;
         }
-    
-    /* নেভিগেশন বার */
-    .nav-bar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 12px 0;
-        box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.08);
-        z-index: 100;
-        gap: 15px;
-        border-top: 1px solid #e2e8f0;
-    }
-    
-    .nav-button {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 12px;
-        color: #718096;
-        text-decoration: none;
-        flex: 1;
-        max-width: 60px;
-        transition: all 0.2s;
-    }
-    
-    .nav-button i {
-        font-size: 22px;
-        margin-bottom: 5px;
-        color: #4a5568;
-    }
-    
-    .nav-button:hover, .nav-button.active {
-        color: #2c7be5;
-    }
-    
-    .nav-button:hover i, .nav-button.active i {
-        color: #2c7be5;
-    }
-    
-    .premium-button {
-        background: linear-gradient(to right, #ff7e5f, #feb47b);
-        color: white;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: -20px;
-        box-shadow: 0 5px 15px rgba(254, 180, 123, 0.4);
-        flex-shrink: 0;
-        margin: 0 10px;
-        transition: all 0.3s;
-    }
-    
-    .premium-button:hover {
-        transform: scale(1.1) translateY(-5px);
-        box-shadow: 0 8px 20px rgba(254, 180, 123, 0.5);
-    }
-    
-    /* সাইডবার স্টাইল */
-    .sidebar {
-        width: 280px;
-        background: white;
-        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: -300px;
-        z-index: 1000;
-        transition: left 0.3s;
-    }
-    
-    .sidebar.open {
-        left: 0;
-    }
-    
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-        display: none;
-    }
-    
-    .overlay.active {
-        display: block;
-    }
-    
-    .profile {
-        background: linear-gradient(to right, #2c7be5, #00c9a7);
-        padding: 25px 20px;
-        color: white;
-        text-align: center;
-    }
-    
-    .profile img {
-        width: 70px;
-        border-radius: 50%;
-        margin-bottom: 10px;
-        border: 3px solid rgba(255, 255, 255, 0.3);
-    }
-    
-    .balance {
-        font-size: 24px;
-        font-weight: bold;
-        margin-top: 10px;
-        color: white;
-    }
-    
-    .actions {
-        display: flex;
-        justify-content: space-around;
-        padding: 15px 10px;
-        background: linear-gradient(to right, #2c7be5, #00c9a7);
-    }
-    
-    .actions div {
-        color: white;
-        text-align: center;
-        font-size: 12px;
-        padding: 5px;
-        cursor: pointer;
-        transition: all 0.2s;
-        border-radius: 5px;
-    }
-    
-    .actions div:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-    }
-    
-    .actions i {
-        display: block;
-        font-size: 18px;
-        margin-bottom: 5px;
-    }
-    
-    .menu {
-        padding: 15px;
-    }
-    
-    .menu-item {
-        display: flex;
-        align-items: center;
-        padding: 15px 15px;
-        margin-bottom: 5px;
-        border-radius: 10px;
-        cursor: pointer;
-        color: #4a5568;
-        transition: all 0.2s;
-    }
-    
-    .menu-item:hover {
-        background-color: #f0f7ff;
-        transform: translateX(5px);
-        color: #2c7be5;
-    }
-    
-    .menu-item i {
-        width: 25px;
-        margin-right: 15px;
-        font-size: 18px;
-        text-align: center;
-        color: #2c7be5;
-    }
-    
-    .logout {
-        color: #e53e3e;
-        font-weight: bold;
-        margin-top: 20px;
-        border-top: 1px solid #e2e8f0;
-        padding-top: 15px;
-    }
-    
-    /* রেফারেল পেজ স্টাইল */
-    #referral-page {
-        padding: 20px;
-        max-width: 600px;
-        margin: 0 auto;
-        padding-bottom: 80px;
-    }
-    
-    .page-title {
-        text-align: center;
-        color: #2c7be5;
-        margin-bottom: 20px;
-        font-size: 26px;
-        font-weight: 700;
-    }
-    
-    .back-button {
-        background: linear-gradient(to right, #2c7be5, #00c9a7);
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        font-weight: 600;
-        box-shadow: 0 3px 10px rgba(44, 123, 229, 0.2);
-        transition: all 0.2s;
-    }
-    
-    .back-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(44, 123, 229, 0.3);
-    }
-    
-    /* রেফারেল বক্স স্টাইল */
-    .referral-box {
-        background: white;
-        border-radius: 12px;
-        padding: 25px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        margin-bottom: 30px;
-        border: 1px solid #e2e8f0;
-    }
-    
-    .referral-title {
-        font-size: 22px;
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: #2c7be5;
-        text-align: center;
-    }
-    
-    .referral-link-container {
-        display: flex;
-        margin-bottom: 15px;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    }
-    
-    .referral-link {
-        flex: 1;
-        padding: 12px 15px;
-        border: 1px solid #e2e8f0;
-        border-right: none;
-        border-radius: 8px 0 0 8px;
-        font-size: 14px;
-        background-color: #f8fafc;
-    }
-    
-    .copy-btn {
-        background: linear-gradient(to right, #2c7be5, #00c9a7);
-        color: white;
-        border: none;
-        padding: 0 20px;
-        border-radius: 0 8px 8px 0;
-        cursor: pointer;
-        font-weight: 600;
-        transition: all 0.2s;
-    }
-    
-    .copy-btn:hover {
-        opacity: 0.9;
-    }
-    
-    /* কমিশন চার্ট স্টাইল */
-    .commission-chart {
-        background: white;
-        border-radius: 12px;
-        padding: 25px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        border: 1px solid #e2e8f0;
-    }
-    
-    .chart-title {
-        font-size: 22px;
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: #2c7be5;
-        text-align: center;
-    }
-    
-    .commission-item {
-        display: flex;
-        justify-content: space-between;
-        padding: 12px 15px;
-        border-bottom: 1px solid #edf2f7;
-        transition: all 0.2s;
-    }
-    
-    .commission-item:hover {
-        background-color: #f8fafc;
-    }
-    
-    .commission-level {
-        font-weight: 600;
-        color: #4a5568;
-    }
-    
-    .commission-amount {
-        color: #00c9a7;
-        font-weight: 700;
-    }
-    
-    .highlight {
-        background-color: #f0f7ff;
-        border-radius: 8px;
-        border-left: 4px solid #2c7be5;
-    }
-    
-    .note {
-        margin-top: 20px;
-        font-size: 14px;
-        color: #718096;
-        text-align: center;
-        line-height: 1.5;
-    }
-    
-    .earn-more {
-        margin-top: 30px;
-        text-align: center;
-        font-weight: 700;
-        color: #2c7be5;
-        line-height: 1.6;
-    }
-    
-    /* শেয়ার বাটন স্টাইল */
-    .share-container {
-        margin-top: 20px;
-        text-align: center;
-    }
-    
-    .share-main-btn {
-        background: linear-gradient(to right, #2c7be5, #00c9a7);
-        color: white;
-        border: none;
-        padding: 14px 20px;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        width: 100%;
-        transition: all 0.2s;
-        box-shadow: 0 4px 10px rgba(44, 123, 229, 0.2);
-    }
-    
-    .share-main-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(44, 123, 229, 0.3);
-    }
-    
-    .share-options {
-        display: none;
-        margin-top: 15px;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-    }
-    
-    .share-options.active {
-        display: grid;
-    }
-    
-    .share-option {
-        padding: 12px 10px;
-        border-radius: 8px;
-        background-color: #f8fafc;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        cursor: pointer;
-        font-size: 12px;
-        font-weight: 500;
-        transition: all 0.2s;
-        border: 1px solid #e2e8f0;
-    }
-    
-    .share-option:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
-    }
-    
-    .share-option i {
-        font-size: 24px;
-        margin-bottom: 5px;
-    }
-    
-    .whatsapp { color: #25D366; }
-    .facebook { color: #1877F2; }
-    .messenger { color: #006AFF; }
-    .telegram { color: #0088cc; }
-    .twitter { color: #1DA1F2; }
-    .more { color: #4a5568; }
-</style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+        .logo-box {
+            background-color: var(--black);
+            border-radius: 15px;
+            padding: 15px 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+            transform: perspective(500px) rotateX(10deg);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: perspective(500px) rotateX(10deg) translateY(0); }
+            50% { transform: perspective(500px) rotateX(10deg) translateY(-8px); }
+        }
+
+        .logo-text {
+            font-size: 2.8em;
+            font-weight: 800;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            position: relative;
+            z-index: 1;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .tm-sup {
+            font-size: 0.3em;
+            vertical-align: super;
+            margin-left: 2px;
+            font-weight: 400;
+            color: var(--white);
+            position: relative;
+            top: -5px;
+        }
+
+        .main-content {
+            padding: 25px;
+            position: relative;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            margin: 0 auto;
+            width: calc(100% - 50px);
+            border: 2px solid;
+            border-image: linear-gradient(45deg, #FF5722, #FF9800, #FFEB3B, #FF9800, #FF5722);
+            border-image-slice: 1;
+            animation: borderGlow 3s linear infinite;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes borderGlow {
+            0% { border-image-source: linear-gradient(45deg, #FF5722, #FF9800, #FFEB3B, #FF9800, #FF5722); }
+            50% { border-image-source: linear-gradient(45deg, #FFEB3B, #FF9800, #FF5722, #FF9800, #FFEB3B); }
+            100% { border-image-source: linear-gradient(45deg, #FF5722, #FF9800, #FFEB3B, #FF9800, #FF5722); }
+        }
+
+        .title {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .title .tm {
+            font-size: 0.3em;
+            vertical-align: super;
+            margin-left: 2px;
+            font-weight: 400;
+            color: var(--white);
+            position: relative;
+            top: -5px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .input-group input {
+            width: calc(100% - 40px);
+            padding: 15px 20px 15px 40px;
+            border: none;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 1em;
+            outline: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .input-group input::placeholder {
+            color: #888;
+        }
+
+        .input-group .icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-orange);
+            font-size: 1.2em;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin: -10px 10px 20px 0;
+        }
+
+        .forgot-password a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: var(--black);
+            text-decoration: underline;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background-color: var(--black);
+            color: var(--white);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: #333;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            .logo-text {
+                font-size: 2.2em;
+            }
+            .title {
+                font-size: 1.8em;
+            }
+            .main-content {
+                padding: 20px;
+                width: calc(100% - 40px);
+            }
+        }
+
+        @media (max-width: 400px) {
+            .logo-text {
+                font-size: 2em;
+            }
+            .title {
+                font-size: 1.6em;
+            }
+            .main-content {
+                padding: 15px;
+                width: calc(100% - 30px);
+            }
+            .input-group input {
+                padding: 12px 15px 12px 35px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <!-- লগইন পেজ -->
-    <div id="login-page" class="auth-container">
-        <div class="form-container">
-            <h1 class="auth-title">লগইন করুন</h1>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="login-username">ইউজারনেম</label>
-                    <input type="text" id="login-username" placeholder="আপনার ইউজারনেম লিখুন" required>
+    <div class="container">
+        <div class="logo-section">
+            <div class="logo-box">
+                <div class="logo-text">
+                    FREELANCER-24<span class="tm-sup">TM</span>
                 </div>
-                
-                <div class="form-group">
-                    <label for="login-password">পাসওয়ার্ড</label>
-                    <input type="password" id="login-password" placeholder="আপনার পাসওয়ার্ড লিখুন" required>
+            </div>
+        </div>
+
+        <!-- Login Page -->
+        <div class="main-content page active" id="login-page">
+            <div class="title">
+                ★ Login Forme ★<span class=""></span>
+            </div>
+
+            <form id="login-form">
+                <div class="input-group">
+                    <i class="fas fa-phone icon"></i>
+                    <input type="text" placeholder="Phone Number" required>
                 </div>
-                
-                <button type="submit" class="submit-btn">লগইন করুন</button>
-                
-                <div class="toggle-link">
-                    অ্যাকাউন্ট নেই? <a href="#" id="show-register">রেজিস্ট্রেশন করুন</a>
+                <div class="input-group">
+                    <i class="fas fa-lock icon"></i>
+                    <input type="password" placeholder="Password" required>
                 </div>
+                <div class="forgot-password">
+                    <a href="#">Forget Password ?</a>
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Dashboard.html'; return false;">Sign In</button>
+                <button type="button" class="btn btn-secondary" id="show-register">Create Account</button>
             </form>
         </div>
-    </div>
 
-    <!-- রেজিস্ট্রেশন পেজ -->
-    <div id="register-page" class="auth-container hidden">
-        <div class="form-container">
-            <h1 class="auth-title">রেজিস্ট্রেশন করুন</h1>
-            <form id="registerForm">
-                <div class="form-group">
-                    <label for="reg-fullname">পুরো নাম</label>
-                    <input type="text" id="reg-fullname" placeholder="আপনার পুরো নাম লিখুন" required>
+        <!-- Registration Page -->
+        <div class="main-content page" id="register-page">
+            <div class="title">
+                ‍‌‌‌★ Registration Forme ★<span class="tm"></span>
+            </div>
+
+            <form id="register-form">
+                <div class="input-group">
+                    <i class="fas fa-user icon"></i>
+                    <input type="text" placeholder="Full Name" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope icon"></i>
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-phone icon"></i>
+                    <input type="text" placeholder="Phone Number" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock icon"></i>
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock icon"></i>
+                    <input type="password" placeholder="Confirm Password" required>
                 </div>
                 
-                <div class="form-group">
-                    <label for="reg-email">ইমেইল</label>
-                    <input type="email" id="reg-email" placeholder="আপনার ইমেইল লিখুন" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="reg-mobile">মোবাইল নম্বর</label>
-                    <input 
-                        type="tel" 
-                        id="reg-mobile" 
-                        pattern="(\+880|0)[0-9]{10}" 
-                        placeholder="01XXXXXXXXX বা +8801XXXXXXXXX" 
-                        required
-                        title="বাংলাদেশী মোবাইল নম্বর দিন (01601735574 বা +8801601735574)"
-                    >
-                </div>
-                
-                <div class="form-group">
-                    <label for="reg-username">ইউজারনেম</label>
-                    <input type="text" id="reg-username" placeholder="একটি ইউজারনেম তৈরি করুন" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="reg-password">পাসওয়ার্ড</label>
-                    <input type="password" id="reg-password" placeholder="একটি শক্তিশালী পাসওয়ার্ড দিন" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="reg-confirm-password">পাসওয়ার্ড নিশ্চিত করুন</label>
-                    <input type="password" id="reg-confirm-password" placeholder="পাসওয়ার্ড আবার লিখুন" required>
-                </div>
-                
-                <button type="submit" class="submit-btn">রেজিস্ট্রেশন সম্পন্ন করুন</button>
-                
-                <div class="toggle-link">
-                    ইতিমধ্যে অ্যাকাউন্ট আছে? <a href="#" id="show-login">লগইন করুন</a>
-                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="button" class="btn btn-secondary" id="show-login">Already have an account? Login</button>
             </form>
-        </div>
-    </div>
-
-    <!-- ড্যাশবোর্ড পেজ -->
-    <div id="dashboard-page" class="hidden">
-        <!-- ওভারলে (সাইডবার খোলা থাকলে দেখাবে) -->
-        <div id="overlay" class="overlay"></div>
-        
-        <!-- সাইডবার -->
-        <div id="sidebar" class="sidebar">
-            <div class="profile">
-                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User" id="sidebar-profile-img">
-                <div id="sidebar-fullname">নাম</div>
-                <div id="sidebar-username" style="font-size: 12px;">ইউজারনেম</div>
-                <div class="balance" id="sidebar-balance">0.00 টাকা</div>
-            </div>
-
-            <div class="actions">
-                <div><i class="fas fa-wallet"></i> ডিপোজিট</div>
-                <div><i class="fas fa-money-bill-wave"></i> উইদ্র</div>
-                <div class="referral-action"><i class="fas fa-user-plus"></i> রেফারেল</div>
-                <div><a href="https://earningbyhabib.github.io/Free-Income/Profile.html" style="color: white; text-decoration: none;"><i class="fas fa-user-cog"></i> প্রোফাইল</a></div>
-            </div>
-
-            <div class="menu">
-                <div class="menu-item">
-                    <i class="fas fa-home"></i>
-                    <span>হোম</span>
-                </div>
-                <div class="menu-item">
-                    <i class="fas fa-file-invoice"></i>
-                    <span>ডিপোজিট হিসটরি</span>
-                </div>
-                <div class="menu-item">
-                    <i class="fas fa-file-alt"></i>
-                    <span>মোট উইদ্র হিসটরি</span>
-                </div>
-                <div class="menu-item referral-menu-item">
-                    <i class="fas fa-users"></i>
-                    <span>রেফারেল</span>
-                </div>
-                <div class="menu-item">
-                    <i class="fas fa-cog"></i>
-                    <span>অ্যাকাউন্ট সেটিংস</span>
-                </div>
-                <div class="menu-item">
-                    <i class="fas fa-key"></i>
-                    <span>পাসওয়ার্ড পরিবর্তন</span>
-                </div>
-                <div class="menu-item">
-                    <i class="fas fa-question-circle"></i>
-                    <span>সাহায্য</span>
-                </div>
-                <div class="menu-item logout" id="logout-btn">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>লগ আউট করুন</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- হেডার সেকশন -->
-        <header>
-            <div class="menu-icon" id="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-            
-            <div class="logo">Free Lancer 24</div>
-            
-            <div class="profile-notification">
-                <div class="notification-icon">
-                    <i class="fas fa-bell"></i>
-                </div>
-                <div class="profile-icon">
-                    <a href="https://earningbyhabib.github.io/Free-Income/Profile.html" style="color: white;"><i class="fas fa-user"></i></a>
-                </div>
-            </div>
-        </header>
-        
-        <!-- স্লাইডার সেকশন -->
-        <div class="slider-container">
-            <div class="slider">
-                স্লাইডার ইমেজ/কন্টেন্ট
-            </div>
-        </div>
-        
-        <!-- নোটিশ লাইন -->
-        <div class="notice-line">
-            <div class="notice-text">
-                🙋‍♂️আসসালামু আলাইকুম। সবাই নিয়ম মেনে কাজ করুন ১০০% পেমেন্ট পাবেন ইনশাআল্লাহ। 💸✅
-            </div>
-        </div>
-        
-        <!-- বাটন সেকশন -->
-        <div class="button-section">
-            <a href="https://t.me/earningbyhabib" target="_blank" class="big-button">
-                <i class="fas fa-question-circle"></i>
-                সহায়তা কেন্দ্র
-            </a>
-            
-            <button class="big-button" id="invite-friends-btn">
-                <i class="fas fa-user-friends"></i>
-                বন্ধুকে রেফার করুন 🙋‍♂️
-            </button>
-            
-            <a href="https://t.me/earningbyhabib" target="_blank" class="big-button">
-                <i class="fas fa-download"></i>
-                ডাউনলোড করুন অ্যাপ
-            </a>
-            
-            <a href="https://earningbyhabib.github.io/Free-Income/Task.html" class="big-button">
-                <i class="fas fa-tasks"></i>
-                টাস্ক সেকশন
-            </a>
-            
-            <a href="https://earningbyhabib.github.io/Free-Income/Vip.html" class="big-button" style="grid-column: 1 / span 2;">
-                <i class="fas fa-crown"></i>
-                ভিআইপি মেম্বারশিপ
-            </a>
-        </div>
-        
-        <!-- ভিডিও সেকশন -->
-        <div class="video-section">
-            <i class="fas fa-play-circle" style="font-size: 50px;"></i>
-            <p>শর্ট ভিডিও কন্টেন্ট</p>
-        </div>
-        
-        <!-- নেভিগেশন বার -->
-        <div class="nav-bar">
-            <a href="#" class="nav-button">
-                <i class="fas fa-home"></i>
-                হোম
-            </a>
-            <a href="https://earningbyhabib.github.io/Free-Income/Task.html" class="nav-button">
-                <i class="fas fa-tasks"></i>
-                টাস্ক
-            </a>
-            <a href="https://earningbyhabib.github.io/Free-Income/Vip.html" class="premium-button">
-                <i class="fas fa-crown"></i>
-            </a>
-            <a href="https://earningbyhabib.github.io/Free-Income/Join.html" class="nav-button">
-                <i class="fas fa-users"></i>
-                জয়েন করুন
-            </a>
-            <a href="https://earningbyhabib.github.io/Free-Income/Profile.html" class="nav-button">
-                <i class="fas fa-user"></i>
-                প্রোফাইল
-            </a>
-        </div>
-    </div>
-
-    <!-- রেফারেল পেজ (শুরুতে লুকানো) -->
-    <div id="referral-page" class="hidden">
-        <button class="back-button" id="back-button">
-            <i class="fas fa-arrow-left"></i> পিছনে যান
-        </button>
-        
-        <h1 class="page-title">রেফারেল সিস্টেম</h1>
-        
-        <!-- রেফারেল বক্স -->
-        <div class="referral-box">
-            <h2 class="referral-title">আপনার রেফারেল লিংক</h2>
-            <div class="referral-link-container">
-                <input type="text" id="referral-link" class="referral-link" readonly>
-                <button class="copy-btn" id="copy-btn">
-                    <i class="fas fa-copy"></i> কপি
-                </button>
-            </div>
-            
-            <div class="share-container">
-                <button class="share-main-btn" id="share-main-btn">
-                    <i class="fas fa-share-alt"></i> শেয়ার করুন
-                </button>
-                
-                <div class="share-options" id="share-options">
-                    <div class="share-option" data-app="whatsapp">
-                        <i class="fab fa-whatsapp whatsapp"></i>
-                        WhatsApp
-                    </div>
-                    <div class="share-option" data-app="facebook">
-                        <i class="fab fa-facebook facebook"></i>
-                        Facebook
-                    </div>
-                    <div class="share-option" data-app="messenger">
-                        <i class="fab fa-facebook-messenger messenger"></i>
-                        Messenger
-                    </div>
-                    <div class="share-option" data-app="telegram">
-                        <i class="fab fa-telegram telegram"></i>
-                        Telegram
-                    </div>
-                    <div class="share-option" data-app="twitter">
-                        <i class="fab fa-twitter twitter"></i>
-                        Twitter
-                    </div>
-                    <div class="share-option" data-app="more">
-                        <i class="fas fa-ellipsis-h more"></i>
-                        আরো অপশন
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- কমিশন চার্ট -->
-        <div class="commission-chart">
-            <h2 class="chart-title">🎯 রেফার কমিশন চার্ট 💸</h2>
-            
-            <div class="commission-item highlight">
-                <span class="commission-level">👤 সরাসরি রেফার</span>
-                <span class="commission-amount">💰 ৩০ টাকা</span>
-            </div>
-            
-            <div class="commission-item">
-                <span class="commission-level">1️⃣ ১ম জেনারেশন</span>
-                <span class="commission-amount">💰 ১২ টাকা</span>
-            </div>
-            
-            <div class="commission-item">
-                <span class="commission-level">2️⃣ ২য় জেনারেশন</span>
-                <span class="commission-amount">💰 ৮ টাকা</span>
-            </div>
-            
-            <div class="commission-item">
-                <span class="commission-level">3️⃣ ৩য় জেনারেশন</span>
-                <span class="commission-amount">💰 ৫ টাকা</span>
-            </div>
-            
-            <div class="commission-item">
-                <span class="commission-level">4️⃣ ৪র্থ জেনারেশন</span>
-                <span class="commission-amount">💰 ৩ টাকা</span>
-            </div>
-            
-            <div class="commission-item">
-                <span class="commission-level">5️⃣ ৫ম জেনারেশন</span>
-                <span class="commission-amount">💰 ২ টাকা</span>
-            </div>
-            
-            <p class="note">📢 আপনি যত রেফার করবেন, ইনকাম হবে তত বেশি!</p>
-            
-            <p class="earn-more">
-                🧑‍🤝‍🧑 টিম যত বড় হবে, আপনার ইনকামও তত বাড়বে!<br>
-                🚀 আজই শুরু করুন – অন্যদের ইনভাইট করুন, আর ঘরে বসেই আয় করুন!
-            </p>
         </div>
     </div>
 
     <script>
-        // ১. ফর্ম টগল করার ফাংশনালিটি
-        document.getElementById('show-register').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('login-page').classList.add('hidden');
-            document.getElementById('register-page').classList.remove('hidden');
-        });
-
-        document.getElementById('show-login').addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('register-page').classList.add('hidden');
-            document.getElementById('login-page').classList.remove('hidden');
-        });
-
-        // ২. পাসওয়ার্ড মিলানো যাচাই
-        var password = document.getElementById("reg-password");
-        var confirm_password = document.getElementById("reg-confirm-password");
-
-        function validatePassword() {
-            if(password.value != confirm_password.value) {
-                confirm_password.setCustomValidity("পাসওয়ার্ড মিলছে না");
-            } else {
-                confirm_password.setCustomValidity('');
-            }
-        }
-        password.onchange = validatePassword;
-        confirm_password.onkeyup = validatePassword;
-
-        // ৩. রেজিস্ট্রেশন ফাংশনালিটি
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginPage = document.getElementById('login-page');
+            const registerPage = document.getElementById('register-page');
+            const showRegister = document.getElementById('show-register');
+            const showLogin = document.getElementById('show-login');
             
-            const username = document.getElementById('reg-username').value;
+            showRegister.addEventListener('click', function() {
+                loginPage.classList.remove('active');
+                registerPage.classList.add('active');
+            });
             
-            // লোকাল স্টোরেজ চেক (ইউজারনেম ইউনিক কিনা)
-            if(localStorage.getItem(username)) {
-                alert("⚠️ এই ইউজারনেমটি ইতিমধ্যে নেওয়া হয়েছে!");
-                return;
-            }
+            showLogin.addEventListener('click', function() {
+                registerPage.classList.remove('active');
+                loginPage.classList.add('active');
+            });
             
-            // নতুন ইউজার ডেটা
-            const user = {
-                fullname: document.getElementById('reg-fullname').value,
-                email: document.getElementById('reg-email').value,
-                mobile: document.getElementById('reg-mobile').value,
-                username: username,
-                password: document.getElementById('reg-password').value,
-                balance: 0.00
-            };
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                window.location.href = 'https://earningbyhabib.github.io/Free-Income/Dashboard.html';
+            });
             
-            // ব্রাউজারের লোকাল স্টোরেজে সেভ করুন
-            localStorage.setItem(user.username, JSON.stringify(user));
-            
-            // সাকসেস মেসেজ সহ লগইন পেজে রিডাইরেক্ট
-            document.getElementById('register-page').classList.add('hidden');
-            document.getElementById('login-page').classList.remove('hidden');
-            alert("✅ রেজিস্ট্রেশন সফল! এখন লগইন করুন");
-        });
-
-        // ৪. লগইন ফাংশনালিটি
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('login-username').value;
-            const password = document.getElementById('login-password').value;
-            
-            // লোকাল স্টোরেজ থেকে ইউজার ডেটা লোড
-            const user = JSON.parse(localStorage.getItem(username));
-            
-            if(user && user.password === password) {
-                document.getElementById('login-page').classList.add('hidden');
-                document.getElementById('dashboard-page').classList.remove('hidden');
-                
-                // সাইডবারে ইউজার ইনফো সেট করুন
-                document.getElementById('sidebar-fullname').textContent = user.fullname;
-                document.getElementById('sidebar-username').textContent = user.username;
-                document.getElementById('sidebar-balance').textContent = user.balance.toFixed(2) + ' টাকা';
-                
-                // কারেন্ট ইউজার স্টোর করুন
-                localStorage.setItem('currentUser', JSON.stringify(user));
-            } else {
-                alert("❌ ভুল ইউজারনেম বা পাসওয়ার্ড! আবার চেষ্টা করুন");
-            }
-        });
-
-        // ৫. মেনু টগল ফাংশনালিটি
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.toggle('open');
-            document.getElementById('overlay').classList.toggle('active');
-        });
-
-        document.getElementById('overlay').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('overlay').classList.remove('active');
-        });
-
-        // ৬. লগআউট ফাংশনালিটি
-        document.getElementById('logout-btn').addEventListener('click', function() {
-            localStorage.removeItem('currentUser');
-            document.getElementById('dashboard-page').classList.add('hidden');
-            document.getElementById('login-page').classList.remove('hidden');
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('overlay').classList.remove('active');
-        });
-
-        // ৭. রেফারেল পেজ দেখান/লুকান
-        document.getElementById('invite-friends-btn').addEventListener('click', function() {
-            document.getElementById('dashboard-page').classList.add('hidden');
-            document.getElementById('referral-page').classList.remove('hidden');
-            
-            // কারেন্ট ইউজার এর রেফারেল লিংক জেনারেট করুন
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            if(currentUser) {
-                document.getElementById('referral-link').value = `https://t.me/earningbyhabib?ref=${currentUser.username}`;
-            }
-        });
-        
-        // সাইডবার রেফারেল বাটন
-        document.querySelector('.referral-action').addEventListener('click', function() {
-            document.getElementById('dashboard-page').classList.add('hidden');
-            document.getElementById('referral-page').classList.remove('hidden');
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('overlay').classList.remove('active');
-            
-            // কারেন্ট ইউজার এর রেফারেল লিংক জেনারেট করুন
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            if(currentUser) {
-                document.getElementById('referral-link').value = `https://t.me/earningbyhabib?ref=${currentUser.username}`;
-            }
-        });
-        
-        // সাইডবার মেনু রেফারেল আইটেম
-        document.querySelector('.referral-menu-item').addEventListener('click', function() {
-            document.getElementById('dashboard-page').classList.add('hidden');
-            document.getElementById('referral-page').classList.remove('hidden');
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('overlay').classList.remove('active');
-            
-            // কারেন্ট ইউজার এর রেফারেল লিংক জেনারেট করুন
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            if(currentUser) {
-                document.getElementById('referral-link').value = `https://t.me/earningbyhabib?ref=${currentUser.username}`;
-            }
-        });
-
-        // ৮. পিছনে বাটন ফাংশনালিটি
-        document.getElementById('back-button').addEventListener('click', function() {
-            document.getElementById('referral-page').classList.add('hidden');
-            document.getElementById('dashboard-page').classList.remove('hidden');
-        });
-
-        // ৯. কপি বাটন ফাংশনালিটি
-        document.getElementById('copy-btn').addEventListener('click', function() {
-            const referralInput = document.getElementById('referral-link');
-            referralInput.select();
-            document.execCommand('copy');
-            alert('রেফারেল লিংক কপি করা হয়েছে!');
-        });
-
-        // ১০. শেয়ার ফাংশনালিটি
-        document.getElementById('share-main-btn').addEventListener('click', function() {
-            document.getElementById('share-options').classList.toggle('active');
-        });
-
-        // শেয়ার অপশনগুলোর জন্য ইভেন্ট লিসেনার
-        document.querySelectorAll('.share-option').forEach(option => {
-            option.addEventListener('click', function() {
-                const app = this.getAttribute('data-app');
-                shareLink(app);
+            document.getElementById('register-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // After registration, redirect to login page
+                registerPage.classList.remove('active');
+                loginPage.classList.add('active');
             });
         });
-
-        // শেয়ার ফাংশন
-        function shareLink(app) {
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            if(!currentUser) return;
-            
-            const referralLink = `https://t.me/earningbyhabib?ref=${currentUser.username}`;
-            const shareText = `💰 টাকা উপার্জনের সুযোগ! এই লিংক থেকে রেজিস্টার করুন: ${referralLink}`;
-            
-            let shareUrl = '';
-            
-            switch(app) {
-                case 'whatsapp':
-                    shareUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
-                    break;
-                case 'facebook':
-                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}`;
-                    break;
-                case 'messenger':
-                    shareUrl = `fb-messenger://share/?link=${encodeURIComponent(referralLink)}`;
-                    break;
-                case 'telegram':
-                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent('টাকা উপার্জনের সুযোগ!')}`;
-                    break;
-                case 'twitter':
-                    shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
-                    break;
-                case 'more':
-                    if(navigator.share) {
-                        navigator.share({
-                            title: 'টাকা উপার্জনের সুযোগ!',
-                            text: 'এই লিংক থেকে রেজিস্টার করুন',
-                            url: referralLink
-                        }).catch(console.error);
-                    } else {
-                        alert('শেয়ার অপশনগুলো দেখতে উপরের বাটনগুলো ব্যবহার করুন');
-                    }
-                    return;
-            }
-            
-            window.open(shareUrl, '_blank');
-        }
-
-        // ১১. পেজ লোড হলে কারেন্ট ইউজার চেক করুন
-        document.addEventListener('DOMContentLoaded', function() {
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        
-        if(currentUser) {
-            // যদি ইউজার লগইন করা থাকে
-            document.getElementById('login-page').classList.add('hidden');
-            document.getElementById('dashboard-page').classList.remove('hidden');
-            
-            // সাইডবারে ইউজার ইনফো সেট করুন
-            document.getElementById('sidebar-fullname').textContent = currentUser.fullname;
-            document.getElementById('sidebar-username').textContent = currentUser.username;
-            document.getElementById('sidebar-balance').textContent = currentUser.balance.toFixed(2) + ' টাকা';
-        } else {
-            // যদি ইউজার লগইন না করা থাকে
-            document.getElementById('login-page').classList.remove('hidden');
-            document.getElementById('dashboard-page').classList.add('hidden');
-        }
-    });
     </script>
 </body>
 </html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ডিপোজিট হিস্ট্রি - ফিল্টারিং সহ</title>
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --success-color: #2ecc71;
+            --light-bg: #f8f9fa;
+            --dark-text: #2c3e50;
+            --light-text: #7f8c8d;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            color: var(--light-text);
+            font-size: 1.1rem;
+        }
+        
+        .deposit-stats {
+            display: flex;
+            justify-content: space-between;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .stat-card {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .stat-card p {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        .deposit-list {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .deposit-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .deposit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .deposit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--success-color);
+        }
+        
+        .deposit-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .deposit-id {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+        
+        .deposit-date {
+            color: var(--light-text);
+            font-size: 0.85rem;
+        }
+        
+        .deposit-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .deposit-method {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .method-icon {
+            width: 40px;
+            height: 40px;
+            background: #e3f2fd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        .method-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+        }
+        
+        .method-info p {
+            color: var(--light-text);
+            font-size: 0.85rem;
+        }
+        
+        .deposit-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--success-color);
+        }
+        
+        .deposit-meta {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            background: #f1f8e9;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #2e7d32;
+        }
+        
+        .status-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .completed {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .pending {
+            background: #fff8e1;
+            color: #ff8f00;
+        }
+        
+        .search-filter {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            padding-left: 45px;
+            border: none;
+            border-radius: 30px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            font-size: 1rem;
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-text);
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .no-result {
+            text-align: center;
+            padding: 50px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        @media (max-width: 768px) {
+            .deposit-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ডিপোজিট হিস্ট্রি</h1>
+            <p>আপনার সমস্ত ডিপোজিট লেনদেনের ইতিহাস</p>
+        </div>
+        
+        <div class="deposit-stats">
+            <div class="stat-card">
+                <h3 id="last-deposit">৫,০০০ ৳</h3>
+                <p>সর্বশেষ ডিপোজিট</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="total-count">১২</h3>
+                <p>মোট ডিপোজিট</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="total-amount">৪৫,২০০ ৳</h3>
+                <p>মোট জমাকৃত</p>
+            </div>
+        </div>
+        
+        <div class="search-filter">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="ট্রানজেকশন আইডি বা পদ্ধতি খুঁজুন..." onkeyup="filterTransactions()">
+            </div>
+            
+            <div class="filter-options">
+                <button class="filter-btn active" onclick="filterByType('all')">সব</button>
+                <button class="filter-btn" onclick="filterByType('bkash')">বিকাশ</button>
+                <button class="filter-btn" onclick="filterByType('rocket')">রকেট</button>
+                <button class="filter-btn" onclick="filterByType('bank')">ব্যাংক</button>
+                <button class="filter-btn" onclick="filterByType('cash')">নগদ</button>
+            </div>
+        </div>
+        
+        <div class="deposit-list" id="deposit-container">
+            <!-- Deposit items will be dynamically inserted here -->
+        </div>
+    </div>
+
+    <script>
+        // Sample deposit data
+        const deposits = [
+            {
+                id: "DP-78945612",
+                date: "২০ জুন, ২০২৩ - ১০:৩০ AM",
+                method: "bkash",
+                methodName: "বিকাশ ডিপোজিট",
+                reference: "রেফারেন্স: Bkash-789456",
+                amount: 5000,
+                balance: 15200,
+                invoice: "DP20230620",
+                status: "completed",
+                icon: "fas fa-mobile-alt"
+            },
+            {
+                id: "DP-32165498",
+                date: "১৮ জুন, ২০২৩ - ০৩:১৫ PM",
+                method: "bank",
+                methodName: "ব্যাংক ট্রান্সফার",
+                reference: "ডিবিবিএল একাউন্ট ****৪৫৬৭",
+                amount: 10000,
+                balance: 10200,
+                invoice: "DP20230618",
+                status: "completed",
+                icon: "fas fa-university"
+            },
+            {
+                id: "DP-14725836",
+                date: "৫ জুন, ২০২৩ - ০৪:৫০ PM",
+                method: "rocket",
+                methodName: "রকেট ডিপোজিট",
+                reference: "রেফারেন্স: Rocket-369852",
+                amount: 7500,
+                balance: 3900,
+                invoice: "DP20230605",
+                status: "pending",
+                icon: "fas fa-rocket"
+            },
+            {
+                id: "DP-96385274",
+                date: "২৮ মে, ২০২৩ - ১১:২০ AM",
+                method: "cash",
+                methodName: "নগদ ডিপোজিট",
+                reference: "শাখা: গুলশান ব্রাঞ্চ",
+                amount: 8000,
+                balance: 12500,
+                invoice: "DP20230528",
+                status: "completed",
+                icon: "fas fa-money-bill-wave"
+            },
+            {
+                id: "DP-85274196",
+                date: "২০ মে, ২০২৩ - ০২:৪৫ PM",
+                method: "bkash",
+                methodName: "বিকাশ ডিপোজিট",
+                reference: "রেফারেন্স: Bkash-123456",
+                amount: 3000,
+                balance: 4500,
+                invoice: "DP20230520",
+                status: "completed",
+                icon: "fas fa-mobile-alt"
+            },
+            {
+                id: "DP-36925814",
+                date: "১৫ মে, ২০২৩ - ০৯:৩০ AM",
+                method: "bank",
+                methodName: "ব্যাংক ট্রান্সফার",
+                reference: "এসবিএল একাউন্ট ****৭৮৯০",
+                amount: 12000,
+                balance: 15000,
+                invoice: "DP20230515",
+                status: "completed",
+                icon: "fas fa-university"
+            }
+        ];
+
+        // Initialize the page with all deposits
+        document.addEventListener('DOMContentLoaded', function() {
+            displayDeposits(deposits);
+            updateStats(deposits);
+        });
+
+        // Display deposits function
+        function displayDeposits(depositsToShow) {
+            const container = document.getElementById('deposit-container');
+            container.innerHTML = '';
+
+            if (depositsToShow.length === 0) {
+                container.innerHTML = `
+                    <div class="no-result">
+                        <i class="fas fa-search" style="font-size: 3rem; color: var(--light-text); margin-bottom: 20px;"></i>
+                        <h3>কোনো ডিপোজিট পাওয়া যায়নি</h3>
+                        <p>আপনার অনুসন্ধানের সাথে মিলে যায় এমন কোনো ডিপোজিট নেই</p>
+                    </div>
+                `;
+                return;
+            }
+
+            depositsToShow.forEach(deposit => {
+                const depositCard = document.createElement('div');
+                depositCard.className = 'deposit-card';
+                depositCard.innerHTML = `
+                    <span class="status-badge ${deposit.status}">${deposit.status === 'completed' ? 'সম্পন্ন' : 'মুলতুবি'}</span>
+                    <div class="deposit-header">
+                        <span class="deposit-id">${deposit.id}</span>
+                        <span class="deposit-date">${deposit.date}</span>
+                    </div>
+                    <div class="deposit-details">
+                        <div class="deposit-method">
+                            <div class="method-icon">
+                                <i class="${deposit.icon}"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>${deposit.methodName}</h4>
+                                <p>${deposit.reference}</p>
+                            </div>
+                        </div>
+                        <div class="deposit-amount">+ ${deposit.amount.toLocaleString('bn-BD')} ৳</div>
+                    </div>
+                    <div class="deposit-meta">
+                        <span class="meta-item">
+                            <i class="fas fa-wallet"></i> ব্যালেন্স: ${deposit.balance.toLocaleString('bn-BD')} ৳
+                        </span>
+                        <span class="meta-item">
+                            <i class="fas fa-receipt"></i> ইনভয়েস: ${deposit.invoice}
+                        </span>
+                        ${deposit.status === 'pending' ? 
+                        '<span class="meta-item"><i class="fas fa-clock"></i> প্রসেসিং</span>' : ''}
+                    </div>
+                `;
+                container.appendChild(depositCard);
+            });
+        }
+
+        // Filter by type function
+        function filterByType(type) {
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            let filteredDeposits = [];
+            if (type === 'all') {
+                filteredDeposits = deposits;
+            } else {
+                filteredDeposits = deposits.filter(deposit => deposit.method === type);
+            }
+
+            // Apply search filter if there's any search text
+            const searchText = document.getElementById('search-input').value.toLowerCase();
+            if (searchText) {
+                filteredDeposits = filteredDeposits.filter(deposit => 
+                    deposit.id.toLowerCase().includes(searchText) || 
+                    deposit.methodName.toLowerCase().includes(searchText) ||
+                    deposit.reference.toLowerCase().includes(searchText)
+                );
+            }
+
+            displayDeposits(filteredDeposits);
+            updateStats(filteredDeposits);
+        }
+
+        // Search filter function
+        function filterTransactions() {
+            const searchText = document.getElementById('search-input').value.toLowerCase();
+            const activeFilter = document.querySelector('.filter-btn.active').textContent.trim();
+
+            let filteredDeposits = deposits.filter(deposit => 
+                deposit.id.toLowerCase().includes(searchText) || 
+                deposit.methodName.toLowerCase().includes(searchText) ||
+                deposit.reference.toLowerCase().includes(searchText)
+            );
+
+            // Apply type filter if not "all"
+            if (activeFilter !== 'সব') {
+                const typeMap = {
+                    'বিকাশ': 'bkash',
+                    'রকেট': 'rocket',
+                    'ব্যাংক': 'bank',
+                    'নগদ': 'cash'
+                };
+                const type = typeMap[activeFilter];
+                filteredDeposits = filteredDeposits.filter(deposit => deposit.method === type);
+            }
+
+            displayDeposits(filteredDeposits);
+            updateStats(filteredDeposits);
+        }
+
+        // Update statistics function
+        function updateStats(filteredDeposits) {
+            if (filteredDeposits.length === 0) {
+                document.getElementById('last-deposit').textContent = '০ ৳';
+                document.getElementById('total-count').textContent = '০';
+                document.getElementById('total-amount').textContent = '০ ৳';
+                return;
+            }
+
+            // Last deposit
+            const lastDeposit = filteredDeposits[0].amount;
+            document.getElementById('last-deposit').textContent = lastDeposit.toLocaleString('bn-BD') + ' ৳';
+
+            // Total count
+            document.getElementById('total-count').textContent = filteredDeposits.length;
+
+            // Total amount
+            const totalAmount = filteredDeposits.reduce((sum, deposit) => sum + deposit.amount, 0);
+            document.getElementById('total-amount').textContent = totalAmount.toLocaleString('bn-BD') + ' ৳';
+        }
+    </script>
+</body>
+</html>

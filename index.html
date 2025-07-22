@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>হোমপেজ</title>
+    <title>Freelancer 24 - Login/Register</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap');
 
@@ -13,82 +13,94 @@
             --gradient-end: #FFA726;
             --black: #000;
             --white: #fff;
-            --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
-        }
-        
-        body {
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            color: var(--white);
-            padding-bottom: 80px;
-        }
-        
-        /* হেডার স্টাইল */
-        header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            background-color: rgba(0, 0, 0, 0.2);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(5px);
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--white);
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .profile-notification {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .profile-icon, .notification-icon, .menu-icon {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
             justify-content: center;
-            cursor: pointer;
+            align-items: center;
+            min-height: 100vh;
             color: var(--white);
-            transition: all 0.3s ease;
+            overflow-x: hidden;
         }
 
-        .profile-icon:hover, .notification-icon:hover, .menu-icon:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
-        
-        /* স্লাইডার স্টাইল */
-        .slider-container {
-            width: 90%;
-            margin: 20px auto;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: transparent;
+            text-align: center;
             position: relative;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--white);
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-box {
+            background-color: var(--black);
+            border-radius: 15px;
+            padding: 15px 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+            transform: perspective(500px) rotateX(10deg);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: perspective(500px) rotateX(10deg) translateY(0); }
+            50% { transform: perspective(500px) rotateX(10deg) translateY(-8px); }
+        }
+
+        .logo-text {
+            font-size: 2.8em;
+            font-weight: 800;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            position: relative;
+            z-index: 1;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .tm-sup {
+            font-size: 0.3em;
+            vertical-align: super;
+            margin-left: 2px;
+            font-weight: 400;
+            color: var(--white);
+            position: relative;
+            top: -5px;
+        }
+
+        .main-content {
+            padding: 25px;
+            position: relative;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            margin: 0 auto;
+            width: calc(100% - 50px);
             border: 2px solid;
             border-image: linear-gradient(45deg, #FF5722, #FF9800, #FFEB3B, #FF9800, #FF5722);
             border-image-slice: 1;
             animation: borderGlow 3s linear infinite;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
         }
 
         @keyframes borderGlow {
@@ -96,583 +108,262 @@
             50% { border-image-source: linear-gradient(45deg, #FFEB3B, #FF9800, #FF5722, #FF9800, #FFEB3B); }
             100% { border-image-source: linear-gradient(45deg, #FF5722, #FF9800, #FFEB3B, #FF9800, #FF5722); }
         }
-        
-        .slider {
-            width: 100%;
-            height: 150px;
-            background-color: var(--black);
+
+        .title {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
-            font-size: 24px;
-            animation: float 3s ease-in-out infinite;
-            background-image: url('https://i.postimg.cc/0Qsp2n0h/images-8.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-        
-        /* নোটিশ লাইন */
-        .notice-line {
-            width: 90%;
-            margin: 10px auto;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            overflow: hidden;
-            white-space: nowrap;
-            border: 3px solid rgba(255, 255, 255, 0.1);
             position: relative;
         }
-        
-        .notice-text {
-            display: inline-block;
-            animation: scrollText 20s linear infinite;
-            color: var(white);
+
+        .title .tm {
+            font-size: 0.3em;
+            vertical-align: super;
+            margin-left: 2px;
+            font-weight: 400;
+            color: var(--white);
+            position: relative;
+            top: -5px;
         }
-        
-        @keyframes scrollText {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+            width: 100%;
         }
-        
-        /* বাটন সেকশন */
-        .button-section {
-            width: 90%;
-            margin: 20px auto;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-        
-        .big-button {
-            padding: 30px 15px;
-            border-radius: 15px;
-            background-color: var(--white);
+
+        .input-group input {
+            width: calc(100% - 40px);
+            padding: 15px 20px 15px 40px;
             border: none;
-            box-shadow: var(--box-shadow);
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-align: center;
-            color: var(--black);
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .big-button::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                rgba(255, 255, 255, 0.3),
-                rgba(255, 255, 255, 0.2),
-                transparent
-            );
-            transform: rotate(30deg);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) rotate(30deg); }
-            100% { transform: translateX(100%) rotate(30deg); }
-        }
-        
-        .big-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
-            border-color: var(--primary-orange);
-        }
-        
-        .big-button i {
-            font-size: 24px;
-            color: var(--primary-orange);
-        }
-        
-        /* ভিডিও সেকশন */
-        .video-section {
-            width: 90%;
-            margin: 20px auto;
-            background-color: var(--white);
-            border-radius: 15px;
-            height: 200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--black);
-            box-shadow: var(--box-shadow);
-            position: relative;
-            overflow: hidden;
-            border: 2px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .video-section i {
-            font-size: 50px;
-            margin-bottom: 10px;
-            color: var(--primary-orange);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        /* নেভিগেশন বার */
-        .nav-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 0;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
-            z-index: 100;
-            gap: 15px;
-            backdrop-filter: blur(5px);
-        }
-        
-        .nav-button {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 12px;
-            color: var(--white);
-            text-decoration: none;
-            flex: 1;
-            max-width: 60px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 1em;
+            outline: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
-        
-        .nav-button i {
-            font-size: 20px;
-            margin-bottom: 5px;
-            color: var(--white);
+
+        .input-group input:focus {
+            box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.3);
+            transform: translateY(-2px);
         }
 
-        .nav-button:hover {
-            transform: translateY(-5px);
-            color: var(--white);
+        .input-group input::placeholder {
+            color: #888;
         }
-        
-        .premium-button {
+
+        .input-group .icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-orange);
+            font-size: 1.2em;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin: -10px 10px 20px 0;
+        }
+
+        .forgot-password a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: var(--black);
+            text-decoration: underline;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
             background-color: var(--black);
             color: var(--white);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: -20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            flex-shrink: 0;
-            margin: 0 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid rgba(255, 215, 0, 0.5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .premium-button::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                rgba(255, 215, 0, 0.4),
-                rgba(255, 215, 0, 0.2),
-                transparent
-            );
-            transform: rotate(30deg);
-            animation: shine 3s infinite;
-        }
-        
-        .premium-button:hover {
-            transform: scale(1.1) translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-        }
-        
-        .nav-buttons-container {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            max-width: 400px;
+        .btn-primary:hover {
+            background-color: #333;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* সাইডবার স্টাইল */
-        .sidebar {
-            width: 280px;
-            background: rgba(0, 0, 0, 0.8);
-            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: -300px;
-            z-index: 1000;
-            transition: left 0.3s;
-            backdrop-filter: blur(10px);
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
-        
-        .sidebar.open {
-            left: 0;
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
         }
-        
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
+
+        .page {
             display: none;
         }
-        
-        .overlay.active {
+
+        .page.active {
             display: block;
-        }
-        
-        .profile {
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            padding: 25px 20px;
-            color: white;
-            text-align: center;
-        }
-        
-        .profile img {
-            width: 70px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .balance {
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 10px;
-            color: white;
-        }
-        
-        .actions {
-            display: flex;
-            justify-content: space-around;
-            padding: 15px 10px;
-            background: rgba(0, 0, 0, 0.3);
-        }
-        
-        .actions div {
-            color: white;
-            text-align: center;
-            font-size: 12px;
-            padding: 5px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border-radius: 5px;
-        }
-        
-        .actions div:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .actions i {
-            display: block;
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-        
-        .menu {
-            padding: 15px;
-        }
-        
-        .menu-item {
-            display: flex;
-            align-items: center;
-            padding: 15px 15px;
-            margin-bottom: 5px;
-            border-radius: 10px;
-            cursor: pointer;
-            color: var(--white);
-            transition: all 0.2s;
-        }
-        
-        .menu-item:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
-        }
-        
-        .menu-item i {
-            width: 25px;
-            margin-right: 15px;
-            font-size: 18px;
-            text-align: center;
-            color: var(--primary-orange);
-        }
-        
-        .logout {
-            color: #ff3333;
-            font-weight: bold;
-            margin-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 15px;
+            animation: fadeIn 0.5s ease;
         }
 
-        /* Responsive styles */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @media (max-width: 600px) {
-            .button-section {
-                grid-template-columns: 1fr;
+            .container {
+                padding: 15px;
             }
-            
-            .big-button {
-                padding: 25px 15px;
+            .logo-text {
+                font-size: 2.2em;
             }
-            
-            .slider {
-                height: 120px;
-                font-size: 20px;
+            .title {
+                font-size: 1.8em;
             }
-            
-            .video-section {
-                height: 180px;
+            .main-content {
+                padding: 20px;
+                width: calc(100% - 40px);
             }
         }
 
         @media (max-width: 400px) {
-            .logo {
-                font-size: 20px;
+            .logo-text {
+                font-size: 2em;
             }
-            
-            .big-button {
-                font-size: 14px;
+            .title {
+                font-size: 1.6em;
             }
-            
-            .big-button i {
-                font-size: 20px;
+            .main-content {
+                padding: 15px;
+                width: calc(100% - 30px);
             }
-            
-            .nav-button {
-                font-size: 10px;
-            }
-            
-            .nav-button i {
-                font-size: 18px;
+            .input-group input {
+                padding: 12px 15px 12px 35px;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <!-- ওভারলে (সাইডবার খোলা থাকলে দেখাবে) -->
-    <div id="overlay" class="overlay"></div>
-    
-    <!-- সাইডবার -->
-    <div id="sidebar" class="sidebar">
-        <div class="profile">
-            <img src="https://i.postimg.cc/zBrfRPMS/images-7.jpg" alt="User" id="sidebar-profile-img">
-            <div id="sidebar-fullname">Name </div>
-            <div id="sidebar-username" style="font-size: 12px;">User Name </div>
-            <div class="balance" id="sidebar-balance">0.00 TK </div>
+    <div class="container">
+        <div class="logo-section">
+            <div class="logo-box">
+                <div class="logo-text">
+                    FREELANCER-24<span class="tm-sup">TM</span>
+                </div>
+            </div>
         </div>
 
-        <div class="actions">
-            <div onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Deposite.html'"><i class="fas fa-wallet"></i> Deposit </div>
-            <div onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Withdraw.html'"><i class="fas fa-money-bill-wave"></i> Withdraw </div>
-            <div class="referral-action" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Reffer.html'"><i class="fas fa-user-plus"></i> Reffer </div>
-            <div><a href="https://earningbyhabib.github.io/Free-Income/Profile.html" style="color: white; text-decoration: none;"><i class="fas fa-user-cog"></i> Profile</a></div>
+        <!-- Login Page -->
+        <div class="main-content page active" id="login-page">
+            <div class="title">
+                ★ Login Forme ★<span class=""></span>
+            </div>
+
+            <form id="login-form">
+                <div class="input-group">
+                    <i class="fas fa-phone icon"></i>
+                    <input type="text" placeholder="Phone Number" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock icon"></i>
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <div class="forgot-password">
+                    <a href="#">Forget Password ?</a>
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Dashboard.html'; return false;">Sign In</button>
+                <button type="button" class="btn btn-secondary" id="show-register">Create Account</button>
+            </form>
         </div>
 
-        <div class="menu">
-            <div class="menu-item" onclick="window.location.href='#'">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
+        <!-- Registration Page -->
+        <div class="main-content page" id="register-page">
+            <div class="title">
+                ‍‌‌‌★ Registration Forme ★<span class="tm"></span>
             </div>
-            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Deposithistory.html'">
-                <i class="fas fa-file-invoice"></i>
-                <span>Deposit History </span>
-            </div>
-            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Withdrawhistory.html'">
-                <i class="fas fa-file-alt"></i>
-                <span>Withdraw History </span>
-            </div>
-            <div class="menu-item referral-menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Reffer.html'">
-                <i class="fas fa-users"></i>
-                <span>Reffer Frends </span>
-            </div>
-            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Profile.html'">
-                <i class="fas fa-cog"></i>
-                <span>Account Setting </span>
-            </div>
-            <div class="menu-item" onclick="window.location.href='https://wa.me/8801601735574'">
-                <i class="fas fa-key"></i>
-                <span>Password Change </span>
-            </div>
-            <div class="menu-item" onclick="window.location.href='https://wa.me/8801601735574'">
-                <i class="fas fa-question-circle"></i>
-                <span>Help Centre </span>
-            </div>
-            <div class="menu-item logout" id="logout-btn" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/login.html'">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Log Out</span>
-            </div>
+
+            <form id="register-form">
+                <div class="input-group">
+                    <i class="fas fa-user icon"></i>
+                    <input type="text" placeholder="Full Name" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope icon"></i>
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-phone icon"></i>
+                    <input type="text" placeholder="Phone Number" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock icon"></i>
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock icon"></i>
+                    <input type="password" placeholder="Confirm Password" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="button" class="btn btn-secondary" id="show-login">Already have an account? Login</button>
+            </form>
         </div>
-    </div>
-    
-    <!-- হেডার সেকশন -->
-    <header>
-        <div class="menu-icon" id="menu-toggle">
-            <i class="fas fa-bars"></i>
-        </div>
-        
-        <div class="logo">FREELANCER-24<span style="font-size: 0.6em; vertical-align: super;">TM</span></div>
-        
-        <div class="profile-notification">
-            <div class="notification-icon" onclick="window.location.href='https://t.me/earningbyhabib'">
-                <i class="fas fa-bell"></i>
-            </div>
-            <div class="profile-icon" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Profile.html'">
-                <i class="fas fa-user"></i>
-            </div>
-        </div>
-    </header>
-    
-    <!-- স্লাইডার সেকশন -->
-    <div class="slider-container">
-        <div class="slider">
-            <!-- Slider content replaced with background image -->
-        </div>
-    </div>
-    
-    <!-- নোটিশ লাইন -->
-    <div class="notice-line">
-        <div class="notice-text">
-            🙋‍♂️আসসালামু আলাইকুম। সবাই নিয়ম মেনে কাজ করুন ১০০% পেমেন্ট পাবেন ইনশাআল্লাহ। 💸✅
-        </div>
-    </div>
-    
-    <!-- বাটন সেকশন -->
-    <div class="button-section">
-        <a href="https://t.me/earningbyhabib" target="_blank" class="big-button">
-            <i class="fas fa-question-circle"></i>
-         Help Center ♎
-        </a>
-        
-        <a href="https://earningbyhabib.github.io/Free-Income/Reffer.html" target="_blank" class="big-button">
-            <i class="fas fa-user-friends"></i>
-            Reffer Frinds🙋‍♂️
-        </a>
-        
-        <a href="https://t.me/earningbyhabib" target="_blank" class="big-button">
-            <i class="fas fa-download"></i>
-            Apps Download 🔰
-        </a>
-        
-        <a href="https://youtube.com/@earningbyhabib" target="_blank" class="big-button">
-            <i class="fas fa-video"></i>
-            Video Tutorial ▶️
-        </a>
-        
-        <a href="https://t.me/earningbyhabib" target="_blank" class="big-button" style="grid-column: 1 / span 2;">
-            <i class="fas fa-info-circle"></i>
-            About Us ℹ️
-        </a>
-    </div>
-    
-    <!-- ভিডিও সেকশন -->
-    <div class="video-section" onclick="window.location.href='https://t.me/earningbyhabib'">
-        <i class="fas fa-play-circle"></i>
-        <p>Click to watch tutorial videos</p>
-    </div>
-    
-    <!-- নেভিগেশন বার -->
-    <div class="nav-bar">
-        <a href="#" class="nav-button">
-            <i class="fas fa-home"></i>
-            Home
-        </a>
-        <a href="https://earningbyhabib.github.io/Free-Income/Task.html" target="_blank" class="nav-button">
-            <i class="fas fa-tasks"></i>
-            Task
-        </a>
-        <a href="https://earningbyhabib.github.io/Free-Income/Vip.html" target="_blank" class="premium-button">
-            <i class="fas fa-crown"></i>
-        </a>
-        <a href="https://earningbyhabib.github.io/Free-Income/Join.html" target="_blank" class="nav-button">
-            <i class="fas fa-users"></i>
-            Join Now 
-        </a>
-        <a href="https://earningbyhabib.github.io/Free-Income/Profile.html" target="_blank" class="nav-button">
-            <i class="fas fa-user"></i>
-            Profile
-        </a>
     </div>
 
     <script>
-        // মেনু টগল ফাংশনালিটি
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.toggle('open');
-            document.getElementById('overlay').classList.toggle('active');
-        });
-
-        document.getElementById('overlay').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('overlay').classList.remove('active');
-        });
-
-        // সাইডবার মেনু আইটেম ক্লিক ইভেন্ট
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', function() {
-                // All menu items now have onclick events with the Telegram link
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginPage = document.getElementById('login-page');
+            const registerPage = document.getElementById('register-page');
+            const showRegister = document.getElementById('show-register');
+            const showLogin = document.getElementById('show-login');
+            
+            showRegister.addEventListener('click', function() {
+                loginPage.classList.remove('active');
+                registerPage.classList.add('active');
             });
-        });
-
-        // নোটিশ বার অ্যানিমেশন
-        const noticeText = document.querySelector('.notice-text');
-        noticeText.innerHTML = noticeText.innerHTML + ' &nbsp;&nbsp;&nbsp;&nbsp;' + noticeText.innerHTML;
-
-        // বাটন ক্লিক অ্যানিমেশন
-        document.querySelectorAll('.big-button, .nav-button, .premium-button, .profile-icon, .notification-icon, .menu-icon').forEach(button => {
-            button.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 200);
+            
+            showLogin.addEventListener('click', function() {
+                registerPage.classList.remove('active');
+                loginPage.classList.add('active');
             });
-        });
-
-        // স্লাইডার হোভার ইফেক্ট
-        const slider = document.querySelector('.slider');
-        slider.addEventListener('mouseover', () => {
-            slider.style.animation = 'float 1.5s ease-in-out infinite';
-        });
-        slider.addEventListener('mouseout', () => {
-            slider.style.animation = 'float 3s ease-in-out infinite';
+            
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                window.location.href = 'https://earningbyhabib.github.io/Free-Income/Dashboard.html';
+            });
+            
+            document.getElementById('register-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // After registration, redirect to login page
+                registerPage.classList.remove('active');
+                loginPage.classList.add('active');
+            });
         });
     </script>
 </body>

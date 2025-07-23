@@ -31,12 +31,12 @@
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
-            padding: 5px 20px 20px;
+            padding: 20px 20px 30px;
         }
 
         /* লোগো স্টাইল - ডেমো অনুযায়ী */
         .logo-container {
-            margin: 5px 0;
+            margin: 20px 0 15px;
             position: relative;
             z-index: 10;
         }
@@ -74,7 +74,7 @@
             padding: 20px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
             border: 2px solid var(--accent-gold);
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .box-tagline {
@@ -217,6 +217,9 @@
             const spinCanvas = document.getElementById('spinCanvas');
             const ctx = spinCanvas.getContext('2d');
 
+            // Local storage key for tracking last spin time
+            const LAST_SPIN_KEY = 'lastSpinTime';
+            
             // সেগমেন্ট কনফিগারেশন
             const segments = [
                 { value: 1, color: '#E53935', text: '৳১' },
@@ -257,6 +260,31 @@
             const radius = spinCanvas.width / 2;
             const textRadius = radius * 0.7;
 
+            // Check if user can spin (24 hour cooldown)
+            function canSpin() {
+                const lastSpinTime = localStorage.getItem(LAST_SPIN_KEY);
+                if (!lastSpinTime) return true;
+                
+                const now = new Date().getTime();
+                const twentyFourHours = 24 * 60 * 60 * 1000;
+                return (now - parseInt(lastSpinTime)) >= twentyFourHours;
+            }
+
+            // Initialize spin button state
+            function initSpinButton() {
+                const lastSpinTime = localStorage.getItem(LAST_SPIN_KEY);
+                if (!lastSpinTime) return;
+                
+                const now = new Date().getTime();
+                const twentyFourHours = 24 * 60 * 60 * 1000;
+                const nextSpinTime = parseInt(lastSpinTime) + twentyFourHours;
+                
+                if (now < nextSpinTime) {
+                    spinButton.disabled = true;
+                    updateCountdown(nextSpinTime - now);
+                }
+            }
+
             // চাকা আঁকা
             function drawWheel() {
                 ctx.clearRect(0, 0, spinCanvas.width, spinCanvas.height);
@@ -287,11 +315,17 @@
             }
 
             drawWheel();
+            initSpinButton();
 
             // স্পিন ফাংশন
             spinButton.addEventListener('click', function() {
+                if (!canSpin()) return;
+                
                 spinButton.disabled = true;
                 resultDisplay.style.opacity = 0;
+                
+                // Save current time as last spin time
+                localStorage.setItem(LAST_SPIN_KEY, new Date().getTime().toString());
                 
                 const spinDuration = 3000;
                 const startRotation = Math.random() * 360;
@@ -318,7 +352,10 @@
                         setTimeout(() => {
                             resultDisplay.textContent = `You Win: ${segments[winningIndex].text}`;
                             resultDisplay.style.opacity = '1';
-                            startCountdown();
+                            
+                            // Start 24 hour countdown
+                            const nextSpinTime = new Date().getTime() + (24 * 60 * 60 * 1000);
+                            updateCountdown(24 * 60 * 60 * 1000);
                         }, 500);
                     }
                 }
@@ -326,13 +363,22 @@
                 requestAnimationFrame(animate);
             });
 
-            // কাউন্টডাউন টাইমার
-            function startCountdown() {
-                const cooldown = 5000;
-                const endTime = Date.now() + cooldown;
+            // Update countdown display
+            function updateCountdown(remainingTime) {
+                function formatTime(ms) {
+                    const hours = Math.floor(ms / (1000 * 60 * 60));
+                    const minutes = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((ms % (1000 * 60)) / 1000);
+                    
+                    return `${hours} ঘন্টা ${minutes} মিনিট ${seconds} সেকেন্ড`;
+                }
                 
                 function update() {
-                    const remaining = endTime - Date.now();
+                    const now = new Date().getTime();
+                    const lastSpinTime = parseInt(localStorage.getItem(LAST_SPIN_KEY));
+                    const twentyFourHours = 24 * 60 * 60 * 1000;
+                    const nextSpinTime = lastSpinTime + twentyFourHours;
+                    const remaining = nextSpinTime - now;
                     
                     if (remaining <= 0) {
                         countdownDisplay.textContent = "আপনি এখন স্পিন করতে পারবেন!";
@@ -340,7 +386,7 @@
                         return;
                     }
                     
-                    countdownDisplay.textContent = `পরবর্তী স্পিনের জন্য বাকি: ${Math.ceil(remaining/1000)} সেকেন্ড`;
+                    countdownDisplay.textContent = `পরবর্তী স্পিনের জন্য বাকি: ${formatTime(remaining)}`;
                     setTimeout(update, 1000);
                 }
                 

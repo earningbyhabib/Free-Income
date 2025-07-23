@@ -2,1120 +2,564 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>তহবিল জমা ফর্ম - আধুনিক ডিজাইন</title>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ফ্রিল্যান্সার-২৪</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap');
+        
         :root {
-            --primary: #4361ee; /* Vibrant Royal Blue */
-            --primary-dark: #3a56d4;
-            --secondary: #3f37c9; /* Deep Blue */
-            --accent: #4cc9f0; /* Light Blue */
-            --success: #38b000; /* Green */
-            --warning: #ff9e00; /* Orange */
-            --danger: #f72585; /* Pink */
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-            --card-bg: #ffffff;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --primary: #FF6B00;
+            --secondary: #FFA726;
+            --dark: #1A1A1A;
+            --light: #F5F5F5;
+            --button-bg: #F0F2F5;
+            --shadow: 0 4px 12px rgba(0,0,0,0.15);
+            --border: 1px solid rgba(0, 0, 0, 0.3); /* বর্ডার চিকন ও হালকা করা হয়েছে */
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        body {
             font-family: 'Hind Siliguri', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-            color: var(--dark);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            -webkit-tap-highlight-color: transparent;
         }
-
-        .container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
+        
+        body {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #333;
+            padding-bottom: 85px;
+            overflow-x: hidden;
         }
-
-        .deposit-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            transition: var(--transition);
-            margin-bottom: 30px;
-        }
-
-        .deposit-card:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-5px);
-        }
-
-        .card-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 25px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-header::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            transform: rotate(30deg);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: rotate(30deg) translate(-30%, -30%); }
-            100% { transform: rotate(30deg) translate(30%, 30%); }
-        }
-
-        .card-header h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .card-header p {
-            font-size: 16px;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
-        }
-
-        .card-body {
-            padding: 30px;
-        }
-
-        .progress-steps {
+        
+        /* হেডার */
+        header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 40px;
-            position: relative;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+            border-bottom: var(--border);
         }
-
-        .progress-steps::before {
-            content: "";
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
             position: absolute;
-            top: 15px;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--light-gray);
-            z-index: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
         }
-
-        .progress-bar {
-            position: absolute;
-            top: 15px;
-            left: 0;
-            height: 4px;
-            background: var(--primary);
-            z-index: 1;
-            transition: width 0.4s ease;
+        
+        .icons {
+            display: flex;
+            gap: 15px;
         }
-
-        .step {
+        
+        .icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        /* স্লাইডার */
+        .slider {
+            width: 92%;
+            height: 140px;
+            margin: 20px auto;
+            border-radius: 15px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://i.postimg.cc/T1gxby5G/20250723-092356.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            animation: float 4s ease-in-out infinite;
+            border: var(--border);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        /* নোটিশ বার */
+        .notice {
+            width: 92%;
+            margin: 15px auto;
+            padding: 12px;
+            background: rgba(0,0,0,0.15);
+            border-radius: 10px;
+            color: white;
+            font-size: 14px;
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: var(--shadow);
+            border: var(--border);
+        }
+        
+        .notice-text {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* বাটন গ্রিড */
+        .button-grid {
+            width: 92%;
+            margin: 25px auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .btn {
+            background: var(--button-bg);
+            border: var(--border);
+            border-radius: 12px;
+            padding: 20px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .step-icon {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            background: var(--light-gray);
-            display: flex;
-            align-items: center;
             justify-content: center;
-            color: var(--gray);
+            gap: 8px;
+            color: #333;
             font-weight: 600;
-            margin-bottom: 10px;
-            border: 3px solid var(--light-gray);
-            transition: var(--transition);
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
         }
-
-        .step.active .step-icon {
-            background: var(--primary);
-            color: white;
-            border-color: white;
-            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.3);
-        }
-
-        .step.completed .step-icon {
-            background: var(--success);
-            color: white;
-            border-color: white;
-        }
-
-        .step.completed .step-icon::after {
-            content: "\f00c";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-        }
-
-        .step-label {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--gray);
-            text-align: center;
-        }
-
-        .step.active .step-label {
+        
+        .btn i {
+            font-size: 26px;
             color: var(--primary);
-            font-weight: 600;
+            animation: pulse 1.5s infinite;
         }
-
-        .step.completed .step-label {
-            color: var(--success);
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
-
-        .form-section {
-            display: none;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .form-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 25px;
-            text-align: center;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: "";
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: var(--primary);
-            margin: 10px auto 0;
-        }
-
-        .payment-methods {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .payment-method {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 2px solid var(--light-gray);
-            position: relative;
+        
+        /* ভিডিও থাম্বনেল (সংশোধিত) */
+        .video-thumbnail {
+            width: 92%;
+            margin: 25px auto;
+            border-radius: 15px;
             overflow: hidden;
+            box-shadow: var(--shadow);
+            border: var(--border);
+            position: relative;
+            cursor: pointer;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio (height / width * 100%) */
+            height: 0;
         }
-
-        .payment-method:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        }
-
-        .payment-method.selected {
-            border-color: var(--primary);
-            background: rgba(67, 97, 238, 0.05);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
-        }
-
-        .payment-method.selected::after {
-            content: "\f00c";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
+        
+        .video-thumbnail img {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 22px;
-            height: 22px;
-            background: var(--success);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
-
-        .method-icon {
+        
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 60px;
             height: 60px;
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--light);
-            border-radius: 12px;
-            padding: 10px;
-        }
-
-        .method-icon img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .method-name {
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 5px;
-        }
-
-        .method-info {
-            font-size: 13px;
-            color: var(--gray);
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark);
-            font-size: 15px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 15px 20px;
-            border: 2px solid var(--light-gray);
-            border-radius: 12px;
-            font-size: 16px;
-            transition: var(--transition);
-            background: var(--light);
-        }
-
-        .form-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.2);
-            outline: none;
-            background: white;
-        }
-
-        .input-group {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .input-group .form-control {
-            padding-left: 45px;
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 15px;
-            color: var(--gray);
-            font-size: 18px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px 30px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-            text-decoration: none;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
-        .btn-block {
-            display: flex;
-            width: 100%;
-        }
-
-        .btn-icon {
-            margin-right: 8px;
-        }
-
-        .navigation-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--light-gray);
-            color: var(--dark);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: rgba(67, 97, 238, 0.05);
-        }
-
-        .info-card {
-            background: rgba(67, 97, 238, 0.05);
-            border-left: 4px solid var(--primary);
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 30px;
-        }
-
-        .info-title {
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .info-title i {
-            margin-right: 8px;
-        }
-
-        .info-text {
-            font-size: 14px;
-            color: var(--gray);
-            line-height: 1.6;
-        }
-
-        .account-details {
-            background: var(--light);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-
-        .detail-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px dashed var(--light-gray);
-        }
-
-        .detail-item:last-child {
-            border-bottom: none;
-        }
-
-        .detail-label {
-            font-weight: 500;
-            color: var(--gray);
-        }
-
-        .detail-value {
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        .copy-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 5px 10px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: var(--transition);
-            margin-left: 10px;
-        }
-
-        .copy-btn:hover {
-            background: var(--primary-dark);
-        }
-
-        .success-message {
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .success-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--success);
-            color: white;
+            background: rgba(255, 0, 0, 0.8);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 25px;
-            font-size: 36px;
-            animation: bounceIn 0.8s;
-        }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); }
-        }
-
-        .success-title {
+            color: white;
             font-size: 24px;
-            font-weight: 700;
-            color: var(--success);
-            margin-bottom: 15px;
+            animation: pulse 1.5s infinite;
+            z-index: 10;
+            pointer-events: none;
         }
-
-        .success-text {
-            color: var(--gray);
-            margin-bottom: 30px;
-            font-size: 16px;
-        }
-
-        .receipt {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: var(--shadow);
-            margin-top: 30px;
-            text-align: left;
-        }
-
-        .receipt-title {
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 18px;
-        }
-
-        .receipt-item {
+        
+        /* নেভিগেশন বার */
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.15);
+            backdrop-filter: blur(8px);
+            padding: 10px 0;
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 100;
+            border-top: var(--border);
         }
-
-        .receipt-label {
-            color: var(--gray);
+        
+        .nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 11px;
+            transition: all 0.3s;
+            flex: 1;
+            max-width: 60px;
         }
-
-        .receipt-value {
+        
+        .nav-btn i {
+            font-size: 18px;
+            margin-bottom: 4px;
+            animation: pulse 2s infinite;
+        }
+        
+        .premium-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--dark);
+            color: gold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+            margin: 0 5px;
+            border: 1px solid gold;
+        }
+        
+        /* সাইডবার */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100vh;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            transition: all 0.3s;
+            overflow-y: auto;
+            border-right: var(--border);
+        }
+        
+        .sidebar.open {
+            left: 0;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        .profile-section {
+            padding: 25px 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            border-bottom: var(--border);
+        }
+        
+        .profile-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255,255,255,0.3);
+            margin-bottom: 10px;
+        }
+        
+        .balance {
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+        
+        .quick-actions {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 10px;
+            background: rgba(0,0,0,0.3);
+            border-bottom: var(--border);
+        }
+        
+        .action-btn {
+            color: white;
+            text-align: center;
+            font-size: 11px;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .action-btn i {
+            font-size: 18px;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .menu {
+            padding: 15px 10px;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            color: white;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .menu-item i {
+            width: 25px;
+            font-size: 16px;
+            margin-right: 12px;
+            color: var(--secondary);
+        }
+        
+        .logout {
+            color: #FF5252;
             font-weight: 600;
-        }
-
-        .receipt-divider {
-            height: 1px;
-            background: var(--light-gray);
-            margin: 20px 0;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .payment-methods {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .card-header h1 {
-                font-size: 24px;
-            }
-            
-            .section-title {
-                font-size: 18px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .card-body {
-                padding: 25px 20px;
-            }
-            
-            .payment-methods {
-                grid-template-columns: 1fr;
-            }
-            
-            .progress-steps {
-                margin-bottom: 30px;
-            }
-            
-            .step-label {
-                font-size: 12px;
-            }
-            
-            .btn {
-                padding: 12px 20px;
-                font-size: 15px;
-            }
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 15px;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="deposit-card">
-            <div class="card-header">
-                <h1>তহবিল জমা করুন</h1>
-                <p>আপনার অ্যাকাউন্টে টাকা জমা করতে নিচের ধাপগুলো অনুসরণ করুন</p>
+    <div class="overlay"></div>
+    
+    <div class="sidebar">
+        <div class="profile-section">
+            <img src="https://i.postimg.cc/Qx67zP1h/20250723-124200.jpg" class="profile-img" alt="Profile">
+            <div class="name">Full Name </div>
+            <div class="username" style="font-size: 13px; opacity: 0.8;">@username</div>
+            <div class="balance">৳0.00</div>
+        </div>
+        
+        <div class="quick-actions">
+            <div class="action-btn" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Deposite.html'">
+                <i class="fas fa-wallet"></i>
+                Deposit 
             </div>
-            
-            <div class="card-body">
-                <!-- Progress Steps -->
-                <div class="progress-steps">
-                    <div class="progress-bar" style="width: 0%;"></div>
-                    <div class="step active" data-step="1">
-                        <div class="step-icon">1</div>
-                        <div class="step-label">পদ্ধতি নির্বাচন</div>
-                    </div>
-                    <div class="step" data-step="2">
-                        <div class="step-icon">2</div>
-                        <div class="step-label">বিবরণ দিন</div>
-                    </div>
-                    <div class="step" data-step="3">
-                        <div class="step-icon">3</div>
-                        <div class="step-label">নিশ্চিত করুন</div>
-                    </div>
-                </div>
-                
-                <!-- Step 1: Select Payment Method -->
-                <div class="form-section active" id="step1">
-                    <h2 class="section-title">পেমেন্ট পদ্ধতি নির্বাচন করুন</h2>
-                    
-                    <div class="payment-methods">
-                        <div class="payment-method" data-method="bkash">
-                            <div class="method-icon">
-                                <img src="https://i.postimg.cc/k5NH8C37/bkash-logo.png" alt="Bkash">
-                            </div>
-                            <div class="method-name">বিকাশ</div>
-                            <div class="method-info">মোবাইল ব্যাংকিং</div>
-                        </div>
-                        
-                        <div class="payment-method" data-method="nagad">
-                            <div class="method-icon">
-                                <img src="https://i.postimg.cc/gjjtf6w0/ide-IW55y-Qr-1752975797249.jpg" alt="Nagad">
-                            </div>
-                            <div class="method-name">নগদ</div>
-                            <div class="method-info">মোবাইল ব্যাংকিং</div>
-                        </div>
-                        
-                        <div class="payment-method" data-method="rocket">
-                            <div class="method-icon">
-                                <img src="https://i.postimg.cc/GtfgrhYx/Rocket-logo-505x500.png" alt="Rocket">
-                            </div>
-                            <div class="method-name">রকেট</div>
-                            <div class="method-info">মোবাইল ব্যাংকিং</div>
-                        </div>
-                        
-                        <div class="payment-method" data-method="bank">
-                            <div class="method-icon">
-                                <i class="fas fa-university" style="color: #4361ee; font-size: 30px;"></i>
-                            </div>
-                            <div class="method-name">ব্যাংক ট্রান্সফার</div>
-                            <div class="method-info">সরাসরি ব্যাংকিং</div>
-                        </div>
-                    </div>
-                    
-                    <div class="navigation-buttons">
-                        <button class="btn btn-outline" disabled>
-                            <i class="fas fa-arrow-left btn-icon"></i> পিছনে
-                        </button>
-                        <button class="btn btn-primary" id="nextToStep2">
-                            পরবর্তী <i class="fas fa-arrow-right btn-icon"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Step 2: Enter Details -->
-                <div class="form-section" id="step2">
-                    <h2 class="section-title">ডিপোজিট বিবরণ লিখুন</h2>
-                    
-                    <div class="account-details" id="accountDetails">
-                        <!-- Dynamically filled based on selected method -->
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="amount" class="form-label">জমা করার পরিমাণ (টাকায়)</label>
-                        <div class="input-group">
-                            <i class="fas fa-money-bill-wave input-icon"></i>
-                            <input type="number" id="amount" class="form-control" placeholder="সর্বনিম্ন ১০০ টাকা" min="100" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="transactionId" class="form-label">ট্রানজেকশন আইডি (TxID)</label>
-                        <div class="input-group">
-                            <i class="fas fa-receipt input-icon"></i>
-                            <input type="text" id="transactionId" class="form-control" placeholder="আপনার TxID এখানে লিখুন" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="senderNumber" class="form-label">আপনার মোবাইল নম্বর</label>
-                        <div class="input-group">
-                            <i class="fas fa-mobile-alt input-icon"></i>
-                            <input type="text" id="senderNumber" class="form-control" placeholder="01XXXXXXXXX" required>
-                        </div>
-                    </div>
-                    
-                    <div class="info-card">
-                        <div class="info-title">
-                            <i class="fas fa-info-circle"></i> গুরুত্বপূর্ণ তথ্য
-                        </div>
-                        <div class="info-text">
-                            অনুগ্রহ করে সঠিক ট্রানজেকশন আইডি দিন। ভুল আইডি দিলে আপনার ডিপোজিট প্রক্রিয়া সম্পন্ন হবে না। ডিপোজিট সম্পন্ন হতে ৫-৩০ মিনিট সময় লাগতে পারে।
-                        </div>
-                    </div>
-                    
-                    <div class="navigation-buttons">
-                        <button class="btn btn-outline" id="backToStep1">
-                            <i class="fas fa-arrow-left btn-icon"></i> পিছনে
-                        </button>
-                        <button class="btn btn-primary" id="nextToStep3">
-                            পরবর্তী <i class="fas fa-arrow-right btn-icon"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Step 3: Confirmation -->
-                <div class="form-section" id="step3">
-                    <h2 class="section-title">ডিপোজিট নিশ্চিত করুন</h2>
-                    
-                    <div class="receipt">
-                        <div class="receipt-title">ডিপোজিট সুমারি</div>
-                        
-                        <div class="receipt-item">
-                            <span class="receipt-label">পেমেন্ট পদ্ধতি:</span>
-                            <span class="receipt-value" id="confirmMethod">বিকাশ</span>
-                        </div>
-                        
-                        <div class="receipt-item">
-                            <span class="receipt-label">পরিমাণ:</span>
-                            <span class="receipt-value" id="confirmAmount">৫০০ টাকা</span>
-                        </div>
-                        
-                        <div class="receipt-item">
-                            <span class="receipt-label">ট্রানজেকশন আইডি:</span>
-                            <span class="receipt-value" id="confirmTxId">TRX123456789</span>
-                        </div>
-                        
-                        <div class="receipt-item">
-                            <span class="receipt-label">মোবাইল নম্বর:</span>
-                            <span class="receipt-value" id="confirmMobile">017XXXXXXXX</span>
-                        </div>
-                        
-                        <div class="receipt-divider"></div>
-                        
-                        <div class="receipt-item">
-                            <span class="receipt-label">তারিখ:</span>
-                            <span class="receipt-value" id="confirmDate">২০ জুলাই, ২০২৩</span>
-                        </div>
-                        
-                        <div class="receipt-item">
-                            <span class="receipt-label">স্ট্যাটাস:</span>
-                            <span class="receipt-value" style="color: var(--warning);">পেন্ডিং</span>
-                        </div>
-                    </div>
-                    
-                    <div class="info-card" style="margin-top: 20px;">
-                        <div class="info-title">
-                            <i class="fas fa-check-circle"></i> নিশ্চিতকরণ
-                        </div>
-                        <div class="info-text">
-                            আপনি কি নিশ্চিত যে উপরের তথ্যগুলো সঠিক? একবার সাবমিট করলে তথ্য পরিবর্তন করা সম্ভব হবে না।
-                        </div>
-                    </div>
-                    
-                    <div class="navigation-buttons">
-                        <button class="btn btn-outline" id="backToStep2">
-                            <i class="fas fa-arrow-left btn-icon"></i> পিছনে
-                        </button>
-                        <button class="btn btn-primary" id="submitDeposit">
-                            জমা দিন <i class="fas fa-paper-plane btn-icon"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Success Message (Hidden initially) -->
-                <div class="form-section" id="successMessage">
-                    <div class="success-message">
-                        <div class="success-icon">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <h3 class="success-title">ডিপোজিট সফলভাবে জমা হয়েছে!</h3>
-                        <p class="success-text">আপনার ডিপোজিট রিকুয়েস্ট সফলভাবে গ্রহণ করা হয়েছে। সাধারণত ৫-৩০ মিনিটের মধ্যে আপনার অ্যাকাউন্টে টাকা যোগ হবে।</p>
-                        
-                        <div class="receipt">
-                            <div class="receipt-title">ডিপোজিট রসিদ</div>
-                            
-                            <div class="receipt-item">
-                                <span class="receipt-label">রেফারেন্স নম্বর:</span>
-                                <span class="receipt-value">DEP-2023-78945</span>
-                            </div>
-                            
-                            <div class="receipt-item">
-                                <span class="receipt-label">পেমেন্ট পদ্ধতি:</span>
-                                <span class="receipt-value" id="successMethod">বিকাশ</span>
-                            </div>
-                            
-                            <div class="receipt-item">
-                                <span class="receipt-label">পরিমাণ:</span>
-                                <span class="receipt-value" id="successAmount">৫০০ টাকা</span>
-                            </div>
-                            
-                            <div class="receipt-item">
-                                <span class="receipt-label">তারিখ ও সময়:</span>
-                                <span class="receipt-value" id="successDate">২০ জুলাই, ২০২৩ - ০৩:৪৫ PM</span>
-                            </div>
-                            
-                            <div class="receipt-divider"></div>
-                            
-                            <div class="receipt-item">
-                                <span class="receipt-label">স্ট্যাটাস:</span>
-                                <span class="receipt-value" style="color: var(--success);">প্রক্রিয়াধীন</span>
-                            </div>
-                        </div>
-                        
-                        <button class="btn btn-primary btn-block" id="doneButton" style="margin-top: 30px;">
-                            <i class="fas fa-check-circle btn-icon"></i> সম্পন্ন
-                        </button>
-                    </div>
-                </div>
+            <div class="action-btn" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Withdraw.html'">
+                <i class="fas fa-money-bill-wave"></i>
+                Withdraw 
+            </div>
+            <div class="action-btn" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Reffer.html'">
+                <i class="fas fa-user-plus"></i>
+                Reffer
+            </div>
+        </div>
+        
+        <div class="menu">
+            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Dashboard.htm'">
+                <i class="fas fa-home"></i>
+                Home
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Spin.html'">
+                <i class="fas fa-sync-alt"></i>
+                Daily Spin. 
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Reffer.html'">
+                <i class="fas fa-users"></i>
+                Reffer Friends 
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://t.me/earningbyhabib'">
+                <i class="fas fa-envelope"></i>
+               Gmail Sell
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://t.me/earningbyhabib'">
+                <i class="fab fa-facebook"></i>
+                Facebook ID Sell 
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://t.me/earningbyhabib'">
+                <i class="fab fa-instagram"></i>
+                Instragram ID Sell 
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://youtube.com/@earningbyhabib?si=GWTUP-ZfacQQva0D'">
+                <i class="fab fa-whatsapp"></i>
+                Whatsapp ID Sell
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://t.me/earningbyhabib'">
+                <i class="fab fa-telegram"></i>
+                Telegram ID Sell
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Deposithistory.html'">
+                <i class="fas fa-file-invoice"></i>
+               Deposit history 
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Withdrawhistory.html'">
+                <i class="fas fa-file-alt"></i>
+                withdraw history 
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Profile.html'">
+                <i class="fas fa-cog"></i>
+                Account Setings 
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/'">
+                <i class="fas fa-key"></i>
+                Passward Change 
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://t.me/earningbyhabib'">
+                <i class="fas fa-question-circle"></i>
+                Help Center 
+            </div>
+            <div class="menu-item logout" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/login.html">
+                <i class="fas fa-sign-out-alt"></i>
+               Log Out 
             </div>
         </div>
     </div>
+    
+    <header>
+        <div class="icon menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        
+        <div class="logo">FREELANCER 24™</div>
+        
+        <div class="icons">
+            <div class="icon notification" onclick="window.location.href='https://example.com/notifications'">
+                <i class="fas fa-bell"></i>
+            </div>
+            <div class="icon profile" onclick="window.location.href='https://example.com/profile'">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+    </header>
+    
+    <div class="slider">
+        WELCOME to FREELANCER 24™
+    </div>
+    
+    <div class="notice">
+        <div class="notice-text">
+            🙋‍♂️ আসসালামু আলাইকুম। সবাই নিয়ম মেনে কাজ করুন ১০০% পেমেন্ট পাবেন ইনশাআল্লাহ। 💸✅
+        </div>
+    </div>
+    
+    <div class="button-grid">
+        <a href="https://earningbyhabib.github.io/Free-Income/Spin.html" class="btn">
+            <i class="fas fa-sync-alt"></i>
+            Daily Spin 
+        </a>
+        
+        <a href="https://earningbyhabib.github.io/Free-Income/Reffer.html" class="btn">
+            <i class="fas fa-user-friends"></i>
+            Reffer Friends 
+        </a>
+        
+        <a href="http://www.appcreator24.com/app3561799-vx87kn" class="btn">
+            <i class="fas fa-download"></i>
+            Apps Download 
+        </a>
+        
+        <a href="https://youtube.com/@earningbyhabib" class="btn">
+            <i class="fas fa-video"></i>
+            Video Toturial
+        </a>
+        
+        <a href="https://t.me/earningbyhabib" class="btn">
+            <i class="fas fa-question-circle"></i>
+            Help Center 
+        </a>
+        
+        <a href="https://t.me/earningbyhabib" class="btn">
+            <i class="fas fa-info-circle"></i>
+          About us 
+        </a>
+    </div>
+    
+    <div class="video-thumbnail" onclick="window.open('https://youtu.be/xXMJoj5X6yU', '_blank')">
+        <img src="https://img.youtube.com/vi/xXMJoj5X6yU/maxresdefault.jpg" alt="ভিডিও থাম্বনেল">
+        <div class="play-icon">
+            <i class="fas fa-play"></i>
+        </div>
+    </div>
+    
+    <nav>
+        <a href="https://earningbyhabib.github.io/Free-Income/Dashboard.html" class="nav-btn">
+            <i class="fas fa-home"></i>
+            Home 
+        </a>
+        
+        <a href="https://earningbyhabib.github.io/Free-Income/Task.html" class="nav-btn">
+            <i class="fas fa-tasks"></i>
+            Task
+        </a>
+        
+        <a href="https://earningbyhabib.github.io/Free-Income/Vip.html" class="premium-btn">
+            <i class="fas fa-crown"></i>
+        </a>
+        
+        <a href="https://earningbyhabib.github.io/Free-Income/Join.html" class="nav-btn">
+            <i class="fas fa-user-plus"></i>
+            Join Now 
+        </a>
+        
+        <a href="https://earningbyhabib.github.io/Free-Income/Profile.html" class="nav-btn">
+            <i class="fas fa-user"></i>
+            Profile 
+        </a>
+    </nav>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // DOM Elements
-            const steps = document.querySelectorAll('.step');
-            const progressBar = document.querySelector('.progress-bar');
-            const formSections = document.querySelectorAll('.form-section');
-            const paymentMethods = document.querySelectorAll('.payment-method');
-            const accountDetails = document.getElementById('accountDetails');
-            
-            // Navigation Buttons
-            const nextToStep2 = document.getElementById('nextToStep2');
-            const nextToStep3 = document.getElementById('nextToStep3');
-            const backToStep1 = document.getElementById('backToStep1');
-            const backToStep2 = document.getElementById('backToStep2');
-            const submitDeposit = document.getElementById('submitDeposit');
-            const doneButton = document.getElementById('doneButton');
-            
-            // Form Inputs
-            const amountInput = document.getElementById('amount');
-            const transactionIdInput = document.getElementById('transactionId');
-            const senderNumberInput = document.getElementById('senderNumber');
-            
-            // Confirmation Elements
-            const confirmMethod = document.getElementById('confirmMethod');
-            const confirmAmount = document.getElementById('confirmAmount');
-            const confirmTxId = document.getElementById('confirmTxId');
-            const confirmMobile = document.getElementById('confirmMobile');
-            const confirmDate = document.getElementById('confirmDate');
-            
-            // Success Elements
-            const successMethod = document.getElementById('successMethod');
-            const successAmount = document.getElementById('successAmount');
-            const successDate = document.getElementById('successDate');
-            
-            // Variables
-            let selectedMethod = null;
-            let currentStep = 1;
-            
-            // Payment method data
-            const methodData = {
-                bkash: {
-                    name: "বিকাশ",
-                    account: "01601735574",
-                    type: "পার্সোনাল",
-                    instructions: "বিকাশ অ্যাপে গিয়ে 'Send Money' অপশন সিলেক্ট করুন, তারপর উপরের নম্বরে টাকা সেন্ড করুন।"
-                },
-                nagad: {
-                    name: "নগদ",
-                    account: "01601735574",
-                    type: "পার্সোনাল",
-                    instructions: "নগদ অ্যাপে গিয়ে 'Send Money' অপশন সিলেক্ট করুন, তারপর উপরের নম্বরে টাকা সেন্ড করুন।"
-                },
-                rocket: {
-                    name: "রকেট",
-                    account: "01601735574",
-                    type: "পার্সোনাল",
-                    instructions: "রকেট অ্যাপে গিয়ে 'Send Money' অপশন সিলেক্ট করুন, তারপর উপরের নম্বরে টাকা সেন্ড করুন।"
-                },
-                bank: {
-                    name: "ব্যাংক ট্রান্সফার",
-                    account: "BRAC BANK - 151XXXXXX",
-                    type: "কারেন্ট অ্যাকাউন্ট",
-                    instructions: "আপনার ব্যাংক অ্যাপ/ইন্টারনেট ব্যাংকিং থেকে উপরের অ্যাকাউন্টে টাকা ট্রান্সফার করুন।"
-                }
-            };
-            
-            // Select Payment Method
-            paymentMethods.forEach(method => {
-                method.addEventListener('click', function() {
-                    // Remove selected class from all methods
-                    paymentMethods.forEach(m => m.classList.remove('selected'));
-                    
-                    // Add selected class to clicked method
-                    this.classList.add('selected');
-                    
-                    // Store selected method
-                    selectedMethod = this.dataset.method;
-                    
-                    // Enable next button
-                    nextToStep2.disabled = false;
-                });
-            });
-            
-            // Next to Step 2
-            nextToStep2.addEventListener('click', function() {
-                if (!selectedMethod) {
-                    alert('দয়া করে একটি পেমেন্ট পদ্ধতি নির্বাচন করুন।');
-                    return;
-                }
-                
-                // Update account details based on selected method
-                updateAccountDetails();
-                
-                // Update UI
-                goToStep(2);
-            });
-            
-            // Back to Step 1
-            backToStep1.addEventListener('click', function() {
-                goToStep(1);
-            });
-            
-            // Next to Step 3
-            nextToStep3.addEventListener('click', function() {
-                // Validate inputs
-                if (!validateStep2()) return;
-                
-                // Update confirmation details
-                updateConfirmationDetails();
-                
-                // Update UI
-                goToStep(3);
-            });
-            
-            // Back to Step 2
-            backToStep2.addEventListener('click', function() {
-                goToStep(2);
-            });
-            
-            // Submit Deposit
-            submitDeposit.addEventListener('click', function() {
-                // Here you would typically send data to server
-                // For demo, we'll just show success message
-                
-                // Update success details
-                updateSuccessDetails();
-                
-                // Update UI
-                goToStep(4);
-            });
-            
-            // Done Button
-            doneButton.addEventListener('click', function() {
-                // Reset form for new deposit
-                resetForm();
-                
-                // Go back to step 1
-                goToStep(1);
-            });
-            
-            // Helper Functions
-            function goToStep(step) {
-                currentStep = step;
-                
-                // Update progress bar
-                updateProgressBar();
-                
-                // Update step indicators
-                updateStepIndicators();
-                
-                // Show/hide form sections
-                formSections.forEach(section => {
-                    section.classList.remove('active');
-                });
-                
-                if (step === 4) {
-                    document.getElementById('successMessage').classList.add('active');
-                } else {
-                    document.getElementById(`step${step}`).classList.add('active');
-                }
-            }
-            
-            function updateProgressBar() {
-                let width = 0;
-                if (currentStep === 2) width = 50;
-                else if (currentStep === 3) width = 100;
-                else if (currentStep === 4) width = 100;
-                
-                progressBar.style.width = `${width}%`;
-            }
-            
-            function updateStepIndicators() {
-                steps.forEach(step => {
-                    const stepNum = parseInt(step.dataset.step);
-                    
-                    step.classList.remove('active', 'completed');
-                    
-                    if (stepNum < currentStep) {
-                        step.classList.add('completed');
-                    } else if (stepNum === currentStep) {
-                        step.classList.add('active');
-                    }
-                });
-            }
-            
-            function updateAccountDetails() {
-                const method = methodData[selectedMethod];
-                
-                accountDetails.innerHTML = `
-                    <div class="detail-item">
-                        <span class="detail-label">পেমেন্ট পদ্ধতি:</span>
-                        <span class="detail-value">${method.name}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">অ্যাকাউন্ট নম্বর/আইডি:</span>
-                        <span class="detail-value">${method.account}
-                            <button class="copy-btn" onclick="copyToClipboard('${method.account}')">
-                                <i class="fas fa-copy"></i> কপি
-                            </button>
-                        </span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">অ্যাকাউন্ট টাইপ:</span>
-                        <span class="detail-value">${method.type}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label">নির্দেশনা:</span>
-                        <span class="detail-value">${method.instructions}</span>
-                    </div>
-                `;
-            }
-            
-            function validateStep2() {
-                if (!amountInput.value || parseInt(amountInput.value) < 100) {
-                    alert('দয়া করে সঠিক পরিমাণ লিখুন (সর্বনিম্ন ১০০ টাকা)।');
-                    amountInput.focus();
-                    return false;
-                }
-                
-                if (!transactionIdInput.value.trim()) {
-                    alert('দয়া করে ট্রানজেকশন আইডি লিখুন।');
-                    transactionIdInput.focus();
-                    return false;
-                }
-                
-                if (!senderNumberInput.value.trim() || senderNumberInput.value.length < 11) {
-                    alert('দয়া করে সঠিক মোবাইল নম্বর লিখুন।');
-                    senderNumberInput.focus();
-                    return false;
-                }
-                
-                return true;
-            }
-            
-            function updateConfirmationDetails() {
-                const method = methodData[selectedMethod];
-                const now = new Date();
-                const options = { day: 'numeric', month: 'long', year: 'numeric' };
-                const formattedDate = now.toLocaleDateString('bn-BD', options);
-                
-                confirmMethod.textContent = method.name;
-                confirmAmount.textContent = `${amountInput.value} টাকা`;
-                confirmTxId.textContent = transactionIdInput.value;
-                confirmMobile.textContent = senderNumberInput.value;
-                confirmDate.textContent = formattedDate;
-            }
-            
-            function updateSuccessDetails() {
-                const method = methodData[selectedMethod];
-                const now = new Date();
-                const options = { 
-                    day: 'numeric', 
-                    month: 'long', 
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: true
-                };
-                const formattedDate = now.toLocaleDateString('bn-BD', options);
-                
-                successMethod.textContent = method.name;
-                successAmount.textContent = `${amountInput.value} টাকা`;
-                successDate.textContent = formattedDate;
-            }
-            
-            function resetForm() {
-                // Reset form inputs
-                amountInput.value = '';
-                transactionIdInput.value = '';
-                senderNumberInput.value = '';
-                
-                // Reset selected method
-                paymentMethods.forEach(m => m.classList.remove('selected'));
-                selectedMethod = null;
-                
-                // Reset next button
-                nextToStep2.disabled = true;
-            }
-            
-            // Global function for copy to clipboard
-            window.copyToClipboard = function(text) {
-                navigator.clipboard.writeText(text)
-                    .then(() => {
-                        alert('কপি করা হয়েছে: ' + text);
-                    })
-                    .catch(err => {
-                        console.error('Could not copy text: ', err);
-                    });
-            };
-            
-            // Initialize form
-            resetForm();
+        // সাইডবার টগল
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('open');
+            document.querySelector('.overlay').classList.toggle('active');
         });
+        
+        document.querySelector('.overlay').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.remove('open');
+            document.querySelector('.overlay').classList.remove('active');
+        });
+        
+        // নোটিশ বার টেক্সট ডুপ্লিকেট
+        const noticeText = document.querySelector('.notice-text');
+        noticeText.innerHTML += ' ' + noticeText.innerHTML;
     </script>
 </body>
 </html>

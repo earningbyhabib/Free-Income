@@ -2,343 +2,272 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>হোমপেজ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ফ্রিল্যান্সার-২৪</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap');
-
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap');
+        
         :root {
-            --primary-orange: #FF5722;
-            --gradient-start: #FF5722;
-            --gradient-end: #FFA726;
-            --black: #000;
-            --white: #fff;
-            --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            --primary: #FF6B00;
+            --secondary: #FFA726;
+            --dark: #1A1A1A;
+            --light: #F5F5F5;
+            --button-bg: #F0F2F5;
+            --shadow: 0 4px 12px rgba(0,0,0,0.15);
+            --border: 1px solid rgba(0, 0, 0, 0.3); /* বর্ডার চিকন ও হালকা করা হয়েছে */
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Hind Siliguri', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-            color: var(--white);
-            padding-bottom: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #333;
+            padding-bottom: 85px;
+            overflow-x: hidden;
         }
         
-        /* হেডার স্টাইল */
+        /* হেডার */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 5%;
-            background-color: rgba(0, 0, 0, 0.2);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px 20px;
+            background-color: rgba(0,0,0,0.15);
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            border-bottom: var(--border);
         }
         
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--white);
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            white-space: nowrap;
         }
         
-        .profile-notification {
+        .icons {
             display: flex;
-            align-items: center;
-            gap: 20px;
+            gap: 15px;
         }
         
-        .profile-icon, .notification-icon, .menu-icon {
-            width: 30px;
-            height: 30px;
+        .icon {
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255,255,255,0.2);
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            color: var(--white);
-            transition: all 0.3s ease;
-        }
-
-        .profile-icon:hover, .notification-icon:hover, .menu-icon:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.3);
         }
         
-        /* স্লাইডার স্টাইল */
-        .slider-container {
-            width: 90%;
-            margin: 20px auto;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
-            position: relative;
-            border: 2px solid;
-            border-image: linear-gradient(45deg, #FF5722, #FF9800, #FFEB3B, #FF9800, #FF5722);
-            border-image-slice: 1;
-            animation: borderGlow 3s linear infinite;
-        }
-
-        @keyframes borderGlow {
-            0% { border-image-source: linear-gradient(45deg, #FF5722, #FF9800, #FFEB3B, #FF9800, #FF5722); }
-            50% { border-image-source: linear-gradient(45deg, #FFEB3B, #FF9800, #FF5722, #FF9800, #FFEB3B); }
-            100% { border-image-source: linear-gradient(45deg, #FF5722, #FF9800, #FFEB3B, #FF9800, #FF5722); }
-        }
-        
+        /* স্লাইডার */
         .slider {
-            width: 100%;
-            height: 150px;
-            background-color: var(--black);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 24px;
-            animation: float 3s ease-in-out infinite;
-            background-image: url('https://i.postimg.cc/0Qsp2n0h/images-8.jpg');
+            width: 92%;
+            height: 140px;
+            margin: 20px auto;
+            border-radius: 15px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://i.postimg.cc/T1gxby5G/20250723-092356.png');
             background-size: cover;
             background-position: center;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            animation: float 4s ease-in-out infinite;
+            border: var(--border);
         }
         
-        /* নোটিশ লাইন */
-        .notice-line {
-            width: 90%;
-            margin: 10px auto;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            box-shadow: var(--box-shadow);
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        /* নোটিশ বার */
+        .notice {
+            width: 92%;
+            margin: 15px auto;
+            padding: 12px;
+            background: rgba(0,0,0,0.15);
+            border-radius: 10px;
+            color: white;
+            font-size: 14px;
             overflow: hidden;
             white-space: nowrap;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            position: relative;
+            box-shadow: var(--shadow);
+            border: var(--border);
         }
         
         .notice-text {
             display: inline-block;
-            animation: scrollText 20s linear infinite;
-            color: var(white);
+            animation: scroll 20s linear infinite;
         }
         
-        @keyframes scrollText {
+        @keyframes scroll {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
         
-        /* বাটন সেকশন */
-        .button-section {
-            width: 90%;
-            margin: 20px auto;
+        /* বাটন গ্রিড */
+        .button-grid {
+            width: 92%;
+            margin: 25px auto;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 12px;
         }
         
-        .big-button {
-            padding: 30px 15px;
-            border-radius: 15px;
-            background-color: var(--white);
-            border: none;
-            box-shadow: var(--box-shadow);
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
+        .btn {
+            background: var(--button-bg);
+            border: var(--border);
+            border-radius: 12px;
+            padding: 20px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            text-align: center;
-            color: var(--black);
+            gap: 8px;
+            color: #333;
+            font-weight: 600;
             text-decoration: none;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .big-button::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                rgba(255, 255, 255, 0.3),
-                rgba(255, 255, 255, 0.2),
-                transparent
-            );
-            transform: rotate(30deg);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) rotate(30deg); }
-            100% { transform: translateX(100%) rotate(30deg); }
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
         }
         
-        .big-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
-            border-color: var(--primary-orange);
+        .btn i {
+            font-size: 26px;
+            color: var(--primary);
+            animation: pulse 1.5s infinite;
         }
         
-        .big-button i {
-            font-size: 24px;
-            color: var(--primary-orange);
-        }
-        
-        /* ভিডিও সেকশন */
-        .video-section {
-            width: 90%;
-            margin: 20px auto;
-            background-color: var(--white);
-            border-radius: 15px;
-            height: 200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--black);
-            box-shadow: var(--box-shadow);
-            position: relative;
-            overflow: hidden;
-            border: 2px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .video-section i {
-            font-size: 50px;
-            margin-bottom: 10px;
-            color: var(--primary-orange);
-            animation: pulse 2s infinite;
-        }
-
         @keyframes pulse {
-            0% { transform: scale(1); }
+            0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
         }
         
-        /* নেভিগেশন বার */
-        .nav-bar {
-            position: fixed;
-            bottom: 0;
+        /* ভিডিও থাম্বনেল (সংশোধিত) */
+        .video-thumbnail {
+            width: 92%;
+            margin: 25px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: var(--border);
+            position: relative;
+            cursor: pointer;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio (height / width * 100%) */
+            height: 0;
+        }
+        
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 0;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
-            z-index: 100;
-            gap: 15px;
-            backdrop-filter: blur(5px);
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
         
-        .nav-button {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 12px;
-            color: var(--white);
-            text-decoration: none;
-            flex: 1;
-            max-width: 60px;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-button i {
-            font-size: 20px;
-            margin-bottom: 5px;
-            color: var(--white);
-        }
-
-        .nav-button:hover {
-            transform: translateY(-5px);
-            color: var(--white);
-        }
-        
-        .premium-button {
-            background-color: var(--black);
-            color: var(--white);
-            width: 50px;
-            height: 50px;
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 0, 0, 0.8);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: -20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            flex-shrink: 0;
-            margin: 0 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid rgba(255, 215, 0, 0.5);
-        }
-
-        .premium-button::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                rgba(255, 215, 0, 0.4),
-                rgba(255, 215, 0, 0.2),
-                transparent
-            );
-            transform: rotate(30deg);
-            animation: shine 3s infinite;
+            color: white;
+            font-size: 24px;
+            animation: pulse 1.5s infinite;
+            z-index: 10;
+            pointer-events: none;
         }
         
-        .premium-button:hover {
-            transform: scale(1.1) translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-        }
-        
-        .nav-buttons-container {
+        /* নেভিগেশন বার */
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.15);
+            backdrop-filter: blur(8px);
+            padding: 10px 0;
             display: flex;
             justify-content: space-around;
-            width: 100%;
-            max-width: 400px;
+            align-items: center;
+            z-index: 100;
+            border-top: var(--border);
         }
-
-        /* সাইডবার স্টাইল */
+        
+        .nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 11px;
+            transition: all 0.3s;
+            flex: 1;
+            max-width: 60px;
+        }
+        
+        .nav-btn i {
+            font-size: 18px;
+            margin-bottom: 4px;
+            animation: pulse 2s infinite;
+        }
+        
+        .premium-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--dark);
+            color: gold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+            margin: 0 5px;
+            border: 1px solid gold;
+        }
+        
+        /* সাইডবার */
         .sidebar {
-            width: 280px;
-            background: rgba(0, 0, 0, 0.8);
-            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
-            height: 100vh;
             position: fixed;
             top: 0;
-            left: -300px;
+            left: -280px;
+            width: 280px;
+            height: 100vh;
+            background: rgba(0,0,0,0.95);
             z-index: 1000;
-            transition: left 0.3s;
-            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            overflow-y: auto;
+            border-right: var(--border);
         }
         
         .sidebar.open {
@@ -351,7 +280,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background: rgba(0,0,0,0.5);
             z-index: 999;
             display: none;
         }
@@ -360,320 +289,277 @@
             display: block;
         }
         
-        .profile {
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+        .profile-section {
             padding: 25px 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
             text-align: center;
+            border-bottom: var(--border);
         }
         
-        .profile img {
+        .profile-img {
             width: 70px;
+            height: 70px;
             border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255,255,255,0.3);
             margin-bottom: 10px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
         }
         
         .balance {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 22px;
+            font-weight: 700;
             margin-top: 10px;
-            color: white;
         }
         
-        .actions {
+        .quick-actions {
             display: flex;
             justify-content: space-around;
             padding: 15px 10px;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0,0,0,0.3);
+            border-bottom: var(--border);
         }
         
-        .actions div {
+        .action-btn {
             color: white;
             text-align: center;
-            font-size: 12px;
-            padding: 5px;
+            font-size: 11px;
             cursor: pointer;
-            transition: all 0.2s;
-            border-radius: 5px;
+            padding: 5px;
         }
         
-        .actions div:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .actions i {
-            display: block;
+        .action-btn i {
             font-size: 18px;
             margin-bottom: 5px;
+            display: block;
         }
         
         .menu {
-            padding: 15px;
+            padding: 15px 10px;
         }
         
         .menu-item {
             display: flex;
             align-items: center;
-            padding: 15px 15px;
+            padding: 12px 15px;
             margin-bottom: 5px;
-            border-radius: 10px;
+            border-radius: 8px;
+            color: white;
+            transition: all 0.3s;
             cursor: pointer;
-            color: var(--white);
-            transition: all 0.2s;
-        }
-        
-        .menu-item:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
+            font-size: 14px;
         }
         
         .menu-item i {
             width: 25px;
-            margin-right: 15px;
-            font-size: 18px;
-            text-align: center;
-            color: var(--primary-orange);
+            font-size: 16px;
+            margin-right: 12px;
+            color: var(--secondary);
         }
         
         .logout {
-            color: #ff3333;
-            font-weight: bold;
+            color: #FF5252;
+            font-weight: 600;
             margin-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 15px;
         }
-
-        /* Responsive styles */
-        @media (max-width: 600px) {
-            .button-section {
-                grid-template-columns: 1fr;
-            }
-            
-            .big-button {
-                padding: 25px 15px;
-            }
-            
-            .slider {
-                height: 120px;
-                font-size: 20px;
-            }
-            
-            .video-section {
-                height: 180px;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .logo {
-                font-size: 20px;
-            }
-            
-            .big-button {
-                font-size: 14px;
-            }
-            
-            .big-button i {
-                font-size: 20px;
-            }
-            
-            .nav-button {
-                font-size: 10px;
-            }
-            
-            .nav-button i {
-                font-size: 18px;
-            }
-        }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- ওভারলে (সাইডবার খোলা থাকলে দেখাবে) -->
-    <div id="overlay" class="overlay"></div>
+    <div class="overlay"></div>
     
-    <!-- সাইডবার -->
-    <div id="sidebar" class="sidebar">
-        <div class="profile">
-            <img src="https://i.postimg.cc/zBrfRPMS/images-7.jpg" alt="User" id="sidebar-profile-img">
-            <div id="sidebar-fullname">Name </div>
-            <div id="sidebar-username" style="font-size: 12px;">User Name </div>
-            <div class="balance" id="sidebar-balance">0.00 TK </div>
+    <div class="sidebar">
+        <div class="profile-section">
+            <img src="https://i.postimg.cc/zBrfRPMS/images-7.jpg" class="profile-img" alt="Profile">
+            <div class="name">Full Name </div>
+            <div class="username" style="font-size: 13px; opacity: 0.8;">@username</div>
+            <div class="balance">৳0.00</div>
         </div>
-
-        <div class="actions">
-            <div onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Deposite.html'"><i class="fas fa-wallet"></i> Deposit </div>
-            <div onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Withdraw.html'"><i class="fas fa-money-bill-wave"></i> Withdraw </div>
-            <div class="referral-action" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Reffer.html'"><i class="fas fa-user-plus"></i> Reffer </div>
-            <div><a href="https://earningbyhabib.github.io/Free-Income/Profile.html" style="color: white; text-decoration: none;"><i class="fas fa-user-cog"></i> Profile</a></div>
+        
+        <div class="quick-actions">
+            <div class="action-btn" onclick="window.location.href='https://example.com/deposit'">
+                <i class="fas fa-wallet"></i>
+                Deposit 
+            </div>
+            <div class="action-btn" onclick="window.location.href='https://example.com/withdraw'">
+                <i class="fas fa-money-bill-wave"></i>
+                Withdraw 
+            </div>
+            <div class="action-btn" onclick="window.location.href='https://example.com/refer'">
+                <i class="fas fa-user-plus"></i>
+                Reffer
+            </div>
         </div>
-
+        
         <div class="menu">
-            <div class="menu-item" onclick="window.location.href='#'">
+            <div class="menu-item" onclick="window.location.href='https://example.com'">
                 <i class="fas fa-home"></i>
-                <span>Home</span>
+                Home
             </div>
-            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Deposithistory.html'">
-                <i class="fas fa-file-invoice"></i>
-                <span>Deposit History </span>
+            <div class="menu-item" onclick="window.location.href='https://example.com/spin'">
+                <i class="fas fa-sync-alt"></i>
+                Daily Spin. 
             </div>
-            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Withdrawhistory.html'">
-                <i class="fas fa-file-alt"></i>
-                <span>Withdraw History </span>
-            </div>
-            <div class="menu-item referral-menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Reffer.html'">
+            <div class="menu-item" onclick="window.location.href='https://example.com/refer'">
                 <i class="fas fa-users"></i>
-                <span>Reffer Frends </span>
+                Reffer Friends 
             </div>
-            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Profile.html'">
+            <div class="menu-item" onclick="window.location.href='https://example.com/gmail'">
+                <i class="fas fa-envelope"></i>
+               Gmail Sell
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://example.com/facebook'">
+                <i class="fab fa-facebook"></i>
+                Facebook ID Sell 
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://example.com/instagram'">
+                <i class="fab fa-instagram"></i>
+                Instragram ID Sell 
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://example.com/whatsapp'">
+                <i class="fab fa-whatsapp"></i>
+                Whatsapp ID Sell
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://example.com/telegram'">
+                <i class="fab fa-telegram"></i>
+                Telegram ID Sell
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://example.com/deposit-history'">
+                <i class="fas fa-file-invoice"></i>
+               Deposit history 
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://example.com/withdraw-history'">
+                <i class="fas fa-file-alt"></i>
+                withdraw history 
+            </div>
+            <div class="menu-item" onclick="window.location.href='https://example.com/settings'">
                 <i class="fas fa-cog"></i>
-                <span>Account Setting </span>
+                Account Setings 
             </div>
-            <div class="menu-item" onclick="window.location.href='https://wa.me/8801601735574'">
+            <div class="menu-item" onclick="window.location.href='https://example.com/change-password'">
                 <i class="fas fa-key"></i>
-                <span>Password Change </span>
+                Passward Change 
             </div>
-            <div class="menu-item" onclick="window.location.href='https://wa.me/8801601735574'">
+            <div class="menu-item" onclick="window.location.href='https://example.com/help'">
                 <i class="fas fa-question-circle"></i>
-                <span>Help Centre </span>
+                Help Center 
             </div>
-            <div class="menu-item logout" id="logout-btn" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/login.html'">
+            <div class="menu-item logout" onclick="window.location.href='https://example.com/logout'">
                 <i class="fas fa-sign-out-alt"></i>
-                <span>Log Out</span>
+               Log Out 
             </div>
         </div>
     </div>
     
-    <!-- হেডার সেকশন -->
     <header>
-        <div class="menu-icon" id="menu-toggle">
+        <div class="icon menu-toggle">
             <i class="fas fa-bars"></i>
         </div>
         
-        <div class="logo">FREELANCER-24<span style="font-size: 0.6em; vertical-align: super;">TM</span></div>
+        <div class="logo">FREELANCER 24™</div>
         
-        <div class="profile-notification">
-            <div class="notification-icon" onclick="window.location.href='https://t.me/earningbyhabib'">
+        <div class="icons">
+            <div class="icon notification" onclick="window.location.href='https://example.com/notifications'">
                 <i class="fas fa-bell"></i>
             </div>
-            <div class="profile-icon" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Profile.html'">
+            <div class="icon profile" onclick="window.location.href='https://example.com/profile'">
                 <i class="fas fa-user"></i>
             </div>
         </div>
     </header>
     
-    <!-- স্লাইডার সেকশন -->
-    <div class="slider-container">
-        <div class="slider">
-            <!-- Slider content replaced with background image -->
-        </div>
+    <div class="slider">
+        WELCOME to FREELANCER 24™
     </div>
     
-    <!-- নোটিশ লাইন -->
-    <div class="notice-line">
+    <div class="notice">
         <div class="notice-text">
-            🙋‍♂️আসসালামু আলাইকুম। সবাই নিয়ম মেনে কাজ করুন ১০০% পেমেন্ট পাবেন ইনশাআল্লাহ। 💸✅
+            🙋‍♂️ আসসালামু আলাইকুম। সবাই নিয়ম মেনে কাজ করুন ১০০% পেমেন্ট পাবেন ইনশাআল্লাহ। 💸✅
         </div>
     </div>
     
-    <!-- বাটন সেকশন -->
-    <div class="button-section">
-        <a href="https://t.me/earningbyhabib" target="_blank" class="big-button">
-            <i class="fas fa-question-circle"></i>
-         Help Center ♎
+    <div class="button-grid">
+        <a href="https://example.com/spin" class="btn">
+            <i class="fas fa-sync-alt"></i>
+            Daily Spin 
         </a>
         
-        <a href="https://earningbyhabib.github.io/Free-Income/Reffer.html" target="_blank" class="big-button">
+        <a href="https://example.com/refer" class="btn">
             <i class="fas fa-user-friends"></i>
-            Reffer Frinds🙋‍♂️
+            Reffer Friends 
         </a>
         
-        <a href="https://t.me/earningbyhabib" target="_blank" class="big-button">
+        <a href="https://example.com/app" class="btn">
             <i class="fas fa-download"></i>
-            Apps Download 🔰
+            Apps Download 
         </a>
         
-        <a href="https://youtube.com/@earningbyhabib" target="_blank" class="big-button">
+        <a href="https://example.com/tutorial" class="btn">
             <i class="fas fa-video"></i>
-            Video Tutorial ▶️
+            Video Toturial
         </a>
         
-        <a href="https://t.me/earningbyhabib" target="_blank" class="big-button" style="grid-column: 1 / span 2;">
+        <a href="https://example.com/help" class="btn">
+            <i class="fas fa-question-circle"></i>
+            Help Center 
+        </a>
+        
+        <a href="https://example.com/about" class="btn">
             <i class="fas fa-info-circle"></i>
-            About Us ℹ️
+          About us 
         </a>
     </div>
     
-    <!-- ভিডিও সেকশন -->
-    <div class="video-section" onclick="window.location.href='https://t.me/earningbyhabib'">
-        <i class="fas fa-play-circle"></i>
-        <p>Click to watch tutorial videos</p>
+    <div class="video-thumbnail" onclick="window.open('https://youtu.be/xXMJoj5X6yU', '_blank')">
+        <img src="https://img.youtube.com/vi/xXMJoj5X6yU/maxresdefault.jpg" alt="ভিডিও থাম্বনেল">
+        <div class="play-icon">
+            <i class="fas fa-play"></i>
+        </div>
     </div>
     
-    <!-- নেভিগেশন বার -->
-    <div class="nav-bar">
-        <a href="#" class="nav-button">
+    <nav>
+        <a href="https://example.com" class="nav-btn">
             <i class="fas fa-home"></i>
-            Home
+            Home 
         </a>
-        <a href="https://earningbyhabib.github.io/Free-Income/Task.html" target="_blank" class="nav-button">
+        
+        <a href="https://example.com/tasks" class="nav-btn">
             <i class="fas fa-tasks"></i>
             Task
         </a>
-        <a href="https://earningbyhabib.github.io/Free-Income/Vip.html" target="_blank" class="premium-button">
+        
+        <a href="https://example.com/vip" class="premium-btn">
             <i class="fas fa-crown"></i>
         </a>
-        <a href="https://earningbyhabib.github.io/Free-Income/Join.html" target="_blank" class="nav-button">
-            <i class="fas fa-users"></i>
+        
+        <a href="https://example.com/join" class="nav-btn">
+            <i class="fas fa-user-plus"></i>
             Join Now 
         </a>
-        <a href="https://earningbyhabib.github.io/Free-Income/Profile.html" target="_blank" class="nav-button">
+        
+        <a href="https://example.com/profile" class="nav-btn">
             <i class="fas fa-user"></i>
-            Profile
+            Profile 
         </a>
-    </div>
+    </nav>
 
     <script>
-        // মেনু টগল ফাংশনালিটি
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.toggle('open');
-            document.getElementById('overlay').classList.toggle('active');
+        // সাইডবার টগল
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('open');
+            document.querySelector('.overlay').classList.toggle('active');
         });
-
-        document.getElementById('overlay').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('overlay').classList.remove('active');
+        
+        document.querySelector('.overlay').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.remove('open');
+            document.querySelector('.overlay').classList.remove('active');
         });
-
-        // সাইডবার মেনু আইটেম ক্লিক ইভেন্ট
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', function() {
-                // All menu items now have onclick events with the Telegram link
-            });
-        });
-
-        // নোটিশ বার অ্যানিমেশন
+        
+        // নোটিশ বার টেক্সট ডুপ্লিকেট
         const noticeText = document.querySelector('.notice-text');
-        noticeText.innerHTML = noticeText.innerHTML + ' &nbsp;&nbsp;&nbsp;&nbsp;' + noticeText.innerHTML;
-
-        // বাটন ক্লিক অ্যানিমেশন
-        document.querySelectorAll('.big-button, .nav-button, .premium-button, .profile-icon, .notification-icon, .menu-icon').forEach(button => {
-            button.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 200);
-            });
-        });
-
-        // স্লাইডার হোভার ইফেক্ট
-        const slider = document.querySelector('.slider');
-        slider.addEventListener('mouseover', () => {
-            slider.style.animation = 'float 1.5s ease-in-out infinite';
-        });
-        slider.addEventListener('mouseout', () => {
-            slider.style.animation = 'float 3s ease-in-out infinite';
-        });
+        noticeText.innerHTML += ' ' + noticeText.innerHTML;
     </script>
 </body>
 </html>

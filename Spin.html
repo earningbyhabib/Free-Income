@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ডেইলি স্পিন - আপনার ভাগ্য পরীক্ষা করুন!</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-orange: #FF5722;
+            --gradient-start: #FF5722;
+            --gradient-end: #FFA726;
+            --black: #000;
+            --white: #fff;
+            --accent-gold: #FFD700;
+            --dark-bg: #1a1a1a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans Bengali', sans-serif;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 5px 20px 20px;
+        }
+
+        /* লোগো স্টাইল - ডেমো অনুযায়ী */
+        .logo-container {
+            margin: 5px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-box {
+            background-color: var(--black);
+            border-radius: 15px;
+            padding: 15px 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            transform: perspective(500px) rotateX(10deg);
+            animation: float 3s ease-in-out infinite;
+            border: 2px solid var(--accent-gold);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: perspective(500px) rotateX(10deg) translateY(0); }
+            50% { transform: perspective(500px) rotateX(10deg) translateY(-8px); }
+        }
+
+        .logo-text {
+            font-size: 2.2em;
+            font-weight: 800;
+            color: var(--accent-gold);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--accent-gold);
+            margin-top: 10px;
+        }
+
+        .box-tagline {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+        }
+
+        .wheel-container {
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, #fff 0%, #eee 50%, #333 100%);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.3), 0 10px 30px rgba(0,0,0,0.5);
+            border: 8px solid var(--black);
+            position: relative;
+        }
+
+        #spinCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            transform: rotate(0deg);
+            transition: transform 3s cubic-bezier(0.17, 0.89, 0.32, 1.28);
+        }
+
+        .spinner-arrow {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-top: 40px solid var(--accent-gold);
+            z-index: 10;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7));
+        }
+
+        #spinButton {
+            background: linear-gradient(to bottom, var(--accent-gold), #FFA500);
+            color: var(--black);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            margin: 10px auto 15px;
+            width: 80%;
+            max-width: 250px;
+            display: block;
+        }
+
+        #spinButton:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        #spinButton:disabled {
+            background: linear-gradient(to bottom, #555, #333);
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        #resultDisplay {
+            margin: 10px 0;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--accent-gold);
+            min-height: 1.5em;
+            padding: 10px 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50px;
+            display: inline-block;
+            border: 1px solid rgba(255,215,0,0.3);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .countdown-info {
+            font-size: 1em;
+            color: var(--white);
+            margin: 5px 0;
+            padding: 8px 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 600px) {
+            .logo-text {
+                font-size: 1.8em;
+            }
+            .wheel-container {
+                width: 260px;
+                height: 260px;
+            }
+            #spinButton {
+                font-size: 1.1em;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- লোগো সেকশন - ডেমো অনুযায়ী -->
+    <div class="logo-container">
+        <div class="logo-box">
+            <div class="logo-text">FREELANCER 24™</div>
+        </div>
+    </div>
+
+    <!-- মূল কন্টেন্ট -->
+    <div class="container">
+        <div class="box-tagline">আপনার ভাগ্য পরীক্ষা করুন</div>
+        
+        <div class="wheel-container">
+            <canvas id="spinCanvas" width="280" height="280"></canvas>
+            <div class="spinner-arrow"></div>
+        </div>
+
+        <button id="spinButton">Spin Now</button>
+
+        <div id="resultDisplay"></div>
+        <div class="countdown-info" id="countdown">পরবর্তী স্পিনের জন্য অপেক্ষা করুন...</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const spinButton = document.getElementById('spinButton');
+            const resultDisplay = document.getElementById('resultDisplay');
+            const countdownDisplay = document.getElementById('countdown');
+            const spinCanvas = document.getElementById('spinCanvas');
+            const ctx = spinCanvas.getContext('2d');
+
+            // সেগমেন্ট কনফিগারেশন
+            const segments = [
+                { value: 1, color: '#E53935', text: '৳১' },
+                { value: 2, color: '#D81B60', text: '৳২' },
+                { value: 1, color: '#8E24AA', text: '৳১' },
+                { value: 3, color: '#5E35B1', text: '৳৩' },
+                { value: 1, color: '#3949AB', text: '৳১' },
+                { value: 2, color: '#1E88E5', text: '৳২' },
+                { value: 5, color: '#039BE5', text: '৳৫' },
+                { value: 1, color: '#00ACC1', text: '৳১' },
+                { value: 2, color: '#00897B', text: '৳২' },
+                { value: 20, color: '#43A047', text: '৳২০' },
+                { value: 1, color: '#7CB342', text: '৳১' },
+                { value: 3, color: '#C0CA33', text: '৳৩' },
+                { value: 2, color: '#FDD835', text: '৳২' },
+                { value: 1, color: '#FFB300', text: '৳১' },
+                { value: 5, color: '#FB8C00', text: '৳৫' },
+                { value: 2, color: '#F4511E', text: '৳২' },
+                { value: 1, color: '#6D4C41', text: '৳১' },
+                { value: 30, color: '#546E7A', text: '৳৩০' },
+                { value: 2, color: '#757575', text: '৳২' },
+                { value: 1, color: '#E53935', text: '৳১' },
+                { value: 3, color: '#D81B60', text: '৳৩' },
+                { value: 2, color: '#8E24AA', text: '৳২' },
+                { value: 1, color: '#5E35B1', text: '৳১' },
+                { value: 5, color: '#3949AB', text: '৳৫' },
+                { value: 40, color: '#1E88E5', text: '৳৪০' },
+                { value: 1, color: '#039BE5', text: '৳১' },
+                { value: 2, color: '#00ACC1', text: '৳২' },
+                { value: 1, color: '#00897B', text: '৳১' },
+                { value: 3, color: '#43A047', text: '৳৩' },
+                { value: 2, color: '#7CB342', text: '৳২' },
+                { value: 1, color: '#C0CA33', text: '৳১' },
+                { value: 50, color: '#FDD835', text: '৳৫০' }
+            ];
+
+            const arc = Math.PI * 2 / segments.length;
+            const radius = spinCanvas.width / 2;
+            const textRadius = radius * 0.7;
+
+            // চাকা আঁকা
+            function drawWheel() {
+                ctx.clearRect(0, 0, spinCanvas.width, spinCanvas.height);
+                
+                segments.forEach((segment, i) => {
+                    const startAngle = i * arc;
+                    const endAngle = startAngle + arc;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(radius, radius);
+                    ctx.arc(radius, radius, radius, startAngle, endAngle);
+                    ctx.closePath();
+                    ctx.fillStyle = segment.color;
+                    ctx.fill();
+                    
+                    ctx.save();
+                    ctx.translate(radius, radius);
+                    ctx.rotate(startAngle + arc / 2);
+                    
+                    ctx.font = [20,30,40,50].includes(segment.value) ? 
+                        'bold 16px IBM Plex Sans Bengali' : 'bold 12px IBM Plex Sans Bengali';
+                    ctx.fillStyle = [20,30,40,50].includes(segment.value) ? '#000' : '#FFF';
+                    ctx.shadowBlur = [20,30,40,50].includes(segment.value) ? 8 : 0;
+                    ctx.textAlign = 'right';
+                    ctx.fillText(segment.text, textRadius, 5);
+                    ctx.restore();
+                });
+            }
+
+            drawWheel();
+
+            // স্পিন ফাংশন
+            spinButton.addEventListener('click', function() {
+                spinButton.disabled = true;
+                resultDisplay.style.opacity = 0;
+                
+                const spinDuration = 3000;
+                const startRotation = Math.random() * 360;
+                const endRotation = startRotation + 1080 + (Math.random() * 360);
+                const winningIndex = Math.floor(Math.random() * segments.length);
+                const targetRotation = 360 - (winningIndex * (360/segments.length) + (360/segments.length)/2);
+                const finalRotation = endRotation + targetRotation;
+                
+                let startTime = null;
+                
+                function animate(currentTime) {
+                    if (!startTime) startTime = currentTime;
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / spinDuration, 1);
+                    const easeProgress = progress < 0.8 ? 
+                        progress / 0.8 : 
+                        0.5 + 0.5 * Math.sin((progress - 0.8) * Math.PI / 0.4);
+                    
+                    spinCanvas.style.transform = `rotate(${startRotation + (finalRotation - startRotation) * easeProgress}deg)`;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        setTimeout(() => {
+                            resultDisplay.textContent = `You Win: ${segments[winningIndex].text}`;
+                            resultDisplay.style.opacity = '1';
+                            startCountdown();
+                        }, 500);
+                    }
+                }
+                
+                requestAnimationFrame(animate);
+            });
+
+            // কাউন্টডাউন টাইমার
+            function startCountdown() {
+                const cooldown = 5000;
+                const endTime = Date.now() + cooldown;
+                
+                function update() {
+                    const remaining = endTime - Date.now();
+                    
+                    if (remaining <= 0) {
+                        countdownDisplay.textContent = "আপনি এখন স্পিন করতে পারবেন!";
+                        spinButton.disabled = false;
+                        return;
+                    }
+                    
+                    countdownDisplay.textContent = `পরবর্তী স্পিনের জন্য বাকি: ${Math.ceil(remaining/1000)} সেকেন্ড`;
+                    setTimeout(update, 1000);
+                }
+                
+                update();
+            }
+        });
+    </script>
+</body>
+</html>

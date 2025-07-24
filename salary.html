@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>মাসিক সেলারি সিস্টেম</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap');
+
+        :root {
+            --black: #000;
+            --white: #fff;
+            --gold: #FFD700;
+            --red: #ff0000;
+            --brown: #8B4513;
+            --dark-bg: rgba(0, 0, 0, 0.85);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--red), var(--brown), var(--gold));
+            color: var(--white);
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .logo-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            padding: 10px 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin-bottom: 5px;
+            position: relative;
+            overflow: hidden;
+            transform: perspective(500px) rotateX(10deg);
+            animation: float 3s ease-in-out infinite;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: perspective(500px) rotateX(10deg) translateY(0); }
+            50% { transform: perspective(500px) rotateX(10deg) translateY(-5px); }
+        }
+
+        .logo-text {
+            font-size: 1.4em;
+            font-weight: 800;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .tm-sup {
+            font-size: 0.3em;
+            vertical-align: super;
+            margin-left: 2px;
+            font-weight: 400;
+            color: var(--white);
+            position: relative;
+            top: -5px;
+        }
+
+        .title-box {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 8px 12px;
+            border-radius: 10px;
+            margin: 5px 30px 20px 30px; /* দুই পাশে 30px মার্জিন দিয়ে আরও সংকুচিত */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2),
+                        inset 0 0 8px rgba(255, 215, 0, 0.1);
+            animation: titleEntrance 0.8s ease-out forwards;
+        }
+
+        @keyframes titleEntrance {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .title-box::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                transparent,
+                transparent,
+                rgba(255, 215, 0, 0.05),
+                transparent,
+                transparent
+            );
+            transform: rotate(30deg);
+            animation: shine 6s infinite;
+            animation-delay: 1s;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) rotate(30deg); }
+        }
+
+        .title-text {
+            font-size: 24px;
+            color: var(--gold);
+            font-weight: 700;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8), 
+                         0 0 5px rgba(255, 215, 0, 0.3);
+            letter-spacing: 1px;
+            animation: textGlow 2s ease-in-out infinite alternate;
+            -webkit-text-stroke: 0.3px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8), 0 0 5px rgba(255, 215, 0, 0.3); }
+            100% { text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.5); }
+        }
+
+        .salary-box {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .salary-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 215, 0, 0.1),
+                rgba(255, 215, 0, 0)
+            );
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+
+        .salary-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .salary-box h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--gold);
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .salary-box h2::before {
+            content: "★";
+            margin-right: 8px;
+            color: var(--gold);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .conditions {
+            margin-top: 5px;
+            line-height: 1.5;
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .conditions span {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            animation: itemFadeIn 0.5s forwards;
+            opacity: 0;
+        }
+
+        @keyframes itemFadeIn {
+            to { opacity: 1; }
+        }
+
+        .conditions span::before {
+            content: "✅";
+            margin-right: 8px;
+            color: var(--gold);
+            font-size: 16px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .note {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 12px;
+            margin-top: 15px;
+            border-left: 3px solid var(--gold);
+            font-weight: 500;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.4;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.5s forwards;
+            animation-delay: 0.8s;
+            opacity: 0;
+        }
+
+        .note::before {
+            content: "⚠️";
+            margin-right: 8px;
+            color: #ffcc00;
+            animation: shake 0.5s infinite alternate;
+        }
+
+        @keyframes shake {
+            from { transform: rotate(-5deg); }
+            to { transform: rotate(5deg); }
+        }
+
+        /* Different animations for each box */
+        .salary-box:nth-child(1) { animation-delay: 0.1s; }
+        .salary-box:nth-child(2) { animation-delay: 0.3s; }
+        .salary-box:nth-child(3) { animation-delay: 0.5s; }
+        .salary-box:nth-child(4) { animation-delay: 0.7s; }
+
+        .conditions span:nth-child(1) { animation-delay: 0.2s; }
+        .conditions span:nth-child(2) { animation-delay: 0.4s; }
+        .conditions span:nth-child(3) { animation-delay: 0.6s; }
+
+        @media (max-width: 400px) {
+            .logo-text {
+                font-size: 1.2em;
+            }
+            
+            .title-text {
+                font-size: 20px;
+            }
+            
+            .title-box {
+                margin: 5px 20px 20px 20px; /* মোবাইলে দুই পাশে 20px মার্জিন */
+                padding: 6px 10px;
+            }
+            
+            .salary-box {
+                padding: 12px;
+            }
+            
+            .salary-box h2 {
+                font-size: 16px;
+            }
+            
+            .conditions {
+                font-size: 13px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo-section">
+            <div class="logo-box">
+                <div class="logo-text">
+                    FREELANCER-24<span class="tm-sup">TM</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="title-box">
+            <h1 class="title-text">মাসিক সেলারি সিস্টেম</h1>
+        </div>
+
+        <div class="salary-box">
+            <h2>১০% সেলারি</h2>
+            <div class="conditions">
+                <span>কমপক্ষে ১০টি রেফার থাকতে হবে</span>
+                <span>টিম মেম্বার হতে হবে অন্তত ১২০ জন</span>
+                <span>৩০০ টাকার প্রিমিয়াম কেনা থাকতে হবে</span>
+            </div>
+        </div>
+
+        <div class="salary-box">
+            <h2>১৫% সেলারি</h2>
+            <div class="conditions">
+                <span>কমপক্ষে ৩০টি রেফার থাকতে হবে</span>
+                <span>টিম মেম্বার সংখ্যা হতে হবে ৩০০</span>
+                <span>৬০০ টাকার প্রিমিয়াম কেনা থাকতে হবে</span>
+            </div>
+        </div>
+
+        <div class="salary-box">
+            <h2>২০% সেলারি</h2>
+            <div class="conditions">
+                <span>কমপক্ষে ৫০টি রেফার থাকতে হবে</span>
+                <span>টিম মেম্বার সংখ্যা হতে হবে ৫০০</span>
+                <span>১০০০ টাকার প্রিমিয়াম কেনা থাকতে হবে</span>
+            </div>
+        </div>
+
+        <div class="salary-box">
+            <h2>২৫% সেলারি</h2>
+            <div class="conditions">
+                <span>কমপক্ষে ১০০টি রেফার থাকতে হবে</span>
+                <span>টিম মেম্বার সংখ্যা হতে হবে ১০০০</span>
+                <span>২০০০ টাকার প্রিমিয়াম কেনা থাকতে হবে</span>
+            </div>
+        </div>
+
+        <div class="note">
+            নোটঃ একজন ইউজার যদি ১০% সেলারিতে থাকে এবং পরে সে ১৫% যোগ্যতা অর্জন করে, তাহলে তার আগের ১০% সেলারি স্বয়ংক্রিয়ভাবে বন্ধ হয়ে যাবে। শুধুমাত্র সর্বশেষ অর্জিত সেলারি লেভেলই কার্যকর থাকবে।
+        </div>
+    </div>
+
+    <script>
+        // Additional animation triggers
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add delay to note animation
+            setTimeout(() => {
+                document.querySelector('.note').style.animation = 'fadeIn 0.5s forwards';
+            }, 1000);
+            
+            // Add hover effect to boxes
+            const boxes = document.querySelectorAll('.salary-box');
+            boxes.forEach(box => {
+                box.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 8px 15px rgba(255, 215, 0, 0.3)';
+                });
+                box.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.5)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

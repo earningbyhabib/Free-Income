@@ -4,6 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ফ্রিল্যান্সার-২৪</title>
+    <!-- Welcome Page Styles -->
+    <style>
+        #welcomeContainer {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .welcome-logo-box {
+            background-color: #000;
+            border-radius: 15px;
+            padding: 12px 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            margin-top: 30px;
+            border: 2px solid #ff5733;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .welcome-logo-text {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .tm-sup {
+            font-size: 0.3em;
+            vertical-align: super;
+            margin-left: 2px;
+            font-weight: 400;
+            color: #fff;
+            position: relative;
+            top: -5px;
+        }
+
+        #welcomeText {
+            font-size: 1.5rem;
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            font-family: 'Hind Siliguri', sans-serif;
+            position: absolute;
+            bottom: 100px;
+            width: 100%;
+        }
+
+        #fireworksCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    </style>
+    <!-- Main Dashboard Styles -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap');
         
@@ -14,7 +85,7 @@
             --light: #F5F5F5;
             --button-bg: #F0F2F5;
             --shadow: 0 4px 12px rgba(0,0,0,0.15);
-            --border: 1px solid rgba(0, 0, 0, 0.3); /* বর্ডার চিকন ও হালকা করা হয়েছে */
+            --border: 1px solid rgba(0, 0, 0, 0.3);
         }
         
         * {
@@ -163,7 +234,7 @@
             50% { transform: scale(1.1); }
         }
         
-        /* ভিডিও থাম্বনেল (সংশোধিত) */
+        /* ভিডিও থাম্বনেল */
         .video-thumbnail {
             width: 92%;
             margin: 25px auto;
@@ -173,7 +244,7 @@
             border: var(--border);
             position: relative;
             cursor: pointer;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio (height / width * 100%) */
+            padding-bottom: 56.25%;
             height: 0;
         }
         
@@ -366,200 +437,379 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="overlay"></div>
-    
-    <div class="sidebar">
-        <div class="profile-section">
-            <img src="https://i.postimg.cc/Qx67zP1h/20250723-124200.jpg" class="profile-img" alt="Profile">
-            <div class="name">Full Name </div>
-            <div class="username" style="font-size: 13px; opacity: 0.8;">@username</div>
-            <div class="balance">৳0.00</div>
-        </div>
-        
-        <div class="quick-actions">
-            <div class="action-btn" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Deposite.html'">
-                <i class="fas fa-wallet"></i>
-                Deposit 
-            </div>
-            <div class="action-btn" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Withdraw.html'">
-                <i class="fas fa-money-bill-wave"></i>
-                Withdraw 
-            </div>
-            <div class="action-btn" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Reffer.html'">
-                <i class="fas fa-user-plus"></i>
-                Reffer
+    <!-- Welcome Page (Shows First) -->
+    <div id="welcomeContainer">
+        <div class="welcome-logo-box">
+            <div class="welcome-logo-text">
+                FREELANCER-24<span class="tm-sup">TM</span>
             </div>
         </div>
         
-        <div class="menu">
-            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Dashboard.htm'">
-                <i class="fas fa-home"></i>
-                Home
+        <div id="welcomeText">Your freelancing journey begins now</div>
+        
+        <audio id="welcomeVoice">
+            <source src="https://common-rose-uktjgpjcom.edgeone.app/km_20250725_1080p_30f_20250725_084813-enhanced-v2.mp3" type="audio/mpeg">
+        </audio>
+        <canvas id="fireworksCanvas"></canvas>
+    </div>
+
+    <!-- Main Dashboard Content (Hidden Initially) -->
+    <div id="dashboardContent" style="display: none;">
+        <div class="overlay"></div>
+        
+        <div class="sidebar">
+            <div class="profile-section">
+                <img src="https://i.postimg.cc/Qx67zP1h/20250723-124200.jpg" class="profile-img" alt="Profile">
+                <div class="name">Full Name </div>
+                <div class="username" style="font-size: 13px; opacity: 0.8;">@username</div>
+                <div class="balance">৳00.00</div>
             </div>
-            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Spin.html'">
+            
+            <div class="quick-actions">
+                <div class="action-btn" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Deposite.html'">
+                    <i class="fas fa-wallet"></i>
+                    Deposit 
+                </div>
+                <div class="action-btn" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Withdraw.html'">
+                    <i class="fas fa-money-bill-wave"></i>
+                    Withdraw 
+                </div>
+                <div class="action-btn" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Reffer.html'">
+                    <i class="fas fa-user-plus"></i>
+                    Refer
+                </div>
+            </div>
+            
+            <div class="menu">
+                <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Dashboard.htm'">
+                    <i class="fas fa-home"></i>
+                    Home
+                </div>
+                <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Spin.html'">
+                    <i class="fas fa-sync-alt"></i>
+                    Daily Spin. 
+                </div>
+                <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Reffer.html'">
+                    <i class="fas fa-users"></i>
+                    Refer Friends 
+                </div>
+                <div class="menu-item" onclick="window.location.href='tg:resolve?domain=earningbyhabib'">
+                    <i class="fas fa-envelope"></i>
+                   Gmail Sell
+                </div>
+                <div class="menu-item" onclick="window.location.href='tg:resolve?domain=earningbyhabib'">
+                    <i class="fab fa-facebook"></i>
+                    Facebook ID Sell 
+                </div>
+                <div class="menu-item" onclick="window.location.href='tg:resolve?domain=earningbyhabib'">
+                    <i class="fab fa-instagram"></i>
+                    Instragram ID Sell 
+                </div>
+                <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/salary.html'">
+                    <i class="fas fa-money-bill-wave"></i>
+                    মাসিক সেলারি
+                </div>
+                <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Top10.html'">
+                    <i class="fas fa-trophy"></i>
+                    রেফারেল লিডার বোর্ড
+                </div>
+                <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Deposithistory.html'">
+                    <i class="fas fa-file-invoice"></i>
+                   Deposit history 
+                </div>
+                <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Withdrawhistory.html'">
+                    <i class="fas fa-file-alt"></i>
+                    withdraw history 
+                </div>
+                <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Profile.html'">
+                    <i class="fas fa-cog"></i>
+                    Account Setings 
+                </div>
+                <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/'">
+                    <i class="fas fa-key"></i>
+                    Passward Change 
+                </div>
+                <div class="menu-item" onclick="window.location.href='tg:resolve?domain=earningbyhabib'">
+                    <i class="fas fa-question-circle"></i>
+                    Help Center 
+                </div>
+                <div class="menu-item logout" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/login.html'">
+                    <i class="fas fa-sign-out-alt"></i>
+                   Log Out 
+                </div>
+            </div>
+        </div>
+        
+        <header>
+            <div class="icon menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <div class="logo">FREELANCER 24™</div>
+            
+            <div class="icons">
+                <div class="icon notification" onclick="window.location.href='tg:resolve?domain=earningbyhabib'">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="icon profile" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Profile.html'">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </header>
+        
+        <div class="slider">
+            WELCOME to FREELANCER 24™
+        </div>
+        
+        <div class="notice">
+            <div class="notice-text">
+                🙋‍♂️ আসসালামু আলাইকুম। সবাই নিয়ম মেনে কাজ করুন ১০০% পেমেন্ট পাবেন ইনশাআল্লাহ। 💸✅
+            </div>
+        </div>
+        
+        <div class="button-grid">
+            <a href="https://earningbyhabib.github.io/Free-Income/Spin.html" class="btn">
                 <i class="fas fa-sync-alt"></i>
-                Daily Spin. 
-            </div>
-            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Reffer.html'">
-                <i class="fas fa-users"></i>
-                Reffer Friends 
-            </div>
-            <div class="menu-item" onclick="window.location.href='tg:resolve?domain=earningbyhabib'">
-                <i class="fas fa-envelope"></i>
-               Gmail Sell
-            </div>
-            <div class="menu-item" onclick="window.location.href='tg:resolve?domain=earningbyhabib'">
-                <i class="fab fa-facebook"></i>
-                Facebook ID Sell 
-            </div>
-            <div class="menu-item" onclick="window.location.href='tg:resolve?domain=earningbyhabib'">
-                <i class="fab fa-instagram"></i>
-                Instragram ID Sell 
-            </div>
-            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/salary.html'">
-    <i class="fas fa-money-bill-wave"></i>
-    মাসিক সেলারি
-</div>
-<div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Top10.html'">
-    <i class="fas fa-trophy"></i>
-    রেফারেল লিডার বোর্ড
-</div>
-            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Deposithistory.html'">
-                <i class="fas fa-file-invoice"></i>
-               Deposit history 
-            </div>
-            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Withdrawhistory.html'">
-                <i class="fas fa-file-alt"></i>
-                withdraw history 
-            </div>
-            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Profile.html'">
-                <i class="fas fa-cog"></i>
-                Account Setings 
-            </div>
-            <div class="menu-item" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/'">
-                <i class="fas fa-key"></i>
-                Passward Change 
-            </div>
-            <div class="menu-item" onclick="window.location.href='tg:resolve?domain=earningbyhabib'">
+                Daily Spin 
+            </a>
+            
+            <a href="https://earningbyhabib.github.io/Free-Income/Reffer.html" class="btn">
+                <i class="fas fa-user-friends"></i>
+                Refer Friends 
+            </a>
+            
+            <a href="http://www.appcreator24.com/app3561799-vx87kn" class="btn">
+                <i class="fas fa-download"></i>
+                Apps Download 
+            </a>
+            
+            <a href="https://youtube.com/@earningbyhabib" class="btn">
+                <i class="fas fa-video"></i>
+                Video Toturial
+            </a>
+            
+            <a href="tg:resolve?domain=earningbyhabib" class="btn">
                 <i class="fas fa-question-circle"></i>
                 Help Center 
-            </div>
-            <div class="menu-item logout" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/login.html">
-                <i class="fas fa-sign-out-alt"></i>
-               Log Out 
-            </div>
-        </div>
-    </div>
-    
-    <header>
-        <div class="icon menu-toggle">
-            <i class="fas fa-bars"></i>
+            </a>
+            
+            <a href="tg:resolve?domain=earningbyhabib" class="btn">
+                <i class="fas fa-info-circle"></i>
+              About us 
+            </a>
         </div>
         
-        <div class="logo">FREELANCER 24™</div>
-        
-        <div class="icons">
-            <div class="icon notification" onclick="window.location.href='tg:resolve?domain=earningbyhabib'">
-                <i class="fas fa-bell"></i>
+        <div class="video-thumbnail" onclick="window.open('https://youtu.be/xXMJoj5X6yU', '_blank')">
+            <img src="https://img.youtube.com/vi/xXMJoj5X6yU/maxresdefault.jpg" alt="ভিডিও থাম্বনেল">
+            <div class="play-icon">
+                <i class="fas fa-play"></i>
             </div>
-            <div class="icon profile" onclick="window.location.href='https://earningbyhabib.github.io/Free-Income/Profile.html'">
+        </div>
+        
+        <nav>
+            <a href="https://earningbyhabib.github.io/Free-Income/Dashboard.html" class="nav-btn">
+                <i class="fas fa-home"></i>
+                Home 
+            </a>
+            
+            <a href="https://earningbyhabib.github.io/Free-Income/Task.html" class="nav-btn">
+                <i class="fas fa-tasks"></i>
+                Task
+            </a>
+            
+            <a href="https://earningbyhabib.github.io/Free-Income/Vip.html" class="premium-btn">
+                <i class="fas fa-crown"></i>
+            </a>
+            
+            <a href="https://earningbyhabib.github.io/Free-Income/Join.html" class="nav-btn">
+                <i class="fas fa-user-plus"></i>
+                Join Now 
+            </a>
+            
+            <a href="https://earningbyhabib.github.io/Free-Income/Profile.html" class="nav-btn">
                 <i class="fas fa-user"></i>
-            </div>
-        </div>
-    </header>
-    
-    <div class="slider">
-        WELCOME to FREELANCER 24™
+                Profile 
+            </a>
+        </nav>
     </div>
-    
-    <div class="notice">
-        <div class="notice-text">
-            🙋‍♂️ আসসালামু আলাইকুম। সবাই নিয়ম মেনে কাজ করুন ১০০% পেমেন্ট পাবেন ইনশাআল্লাহ। 💸✅
-        </div>
-    </div>
-    
-    <div class="button-grid">
-        <a href="https://earningbyhabib.github.io/Free-Income/Spin.html" class="btn">
-            <i class="fas fa-sync-alt"></i>
-            Daily Spin 
-        </a>
-        
-        <a href="https://earningbyhabib.github.io/Free-Income/Reffer.html" class="btn">
-            <i class="fas fa-user-friends"></i>
-            Reffer Friends 
-        </a>
-        
-        <a href="http://www.appcreator24.com/app3561799-vx87kn" class="btn">
-            <i class="fas fa-download"></i>
-            Apps Download 
-        </a>
-        
-        <a href="https://youtube.com/@earningbyhabib" class="btn">
-            <i class="fas fa-video"></i>
-            Video Toturial
-        </a>
-        
-        <a href="tg:resolve?domain=earningbyhabib" class="btn">
-            <i class="fas fa-question-circle"></i>
-            Help Center 
-        </a>
-        
-        <a href="tg:resolve?domain=earningbyhabib" class="btn">
-            <i class="fas fa-info-circle"></i>
-          About us 
-        </a>
-    </div>
-    
-    <div class="video-thumbnail" onclick="window.open('https://youtu.be/xXMJoj5X6yU', '_blank')">
-        <img src="https://img.youtube.com/vi/xXMJoj5X6yU/maxresdefault.jpg" alt="ভিডিও থাম্বনেল">
-        <div class="play-icon">
-            <i class="fas fa-play"></i>
-        </div>
-    </div>
-    
-    <nav>
-        <a href="https://earningbyhabib.github.io/Free-Income/Dashboard.html" class="nav-btn">
-            <i class="fas fa-home"></i>
-            Home 
-        </a>
-        
-        <a href="https://earningbyhabib.github.io/Free-Income/Task.html" class="nav-btn">
-            <i class="fas fa-tasks"></i>
-            Task
-        </a>
-        
-        <a href="https://earningbyhabib.github.io/Free-Income/Vip.html" class="premium-btn">
-            <i class="fas fa-crown"></i>
-        </a>
-        
-        <a href="https://earningbyhabib.github.io/Free-Income/Join.html" class="nav-btn">
-            <i class="fas fa-user-plus"></i>
-            Join Now 
-        </a>
-        
-        <a href="https://earningbyhabib.github.io/Free-Income/Profile.html" class="nav-btn">
-            <i class="fas fa-user"></i>
-            Profile 
-        </a>
-    </nav>
 
     <script>
-        // সাইডবার টগল
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            document.querySelector('.sidebar').classList.toggle('open');
-            document.querySelector('.overlay').classList.toggle('active');
+        // Welcome Page Script
+        function initWelcomePage() {
+            // Play welcome audio
+            const audio = document.getElementById("welcomeVoice");
+            audio.volume = 0.7;
+            
+            // Try to play audio automatically
+            const playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    // If autoplay is blocked, play on first user interaction
+                    document.addEventListener('click', () => {
+                        audio.play();
+                        setTimeout(() => audio.pause(), 6000);
+                    }, { once: true });
+                }).then(() => {
+                    setTimeout(() => audio.pause(), 6000);
+                });
+            }
+            
+            // Fireworks animation
+            const canvas = document.getElementById("fireworksCanvas");
+            const ctx = canvas.getContext("2d");
+            let W = window.innerWidth;
+            let H = window.innerHeight;
+            canvas.width = W;
+            canvas.height = H;
+
+            function random(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            const fireworks = [];
+            const colors = ['#ff0000', '#ffff00', '#00ff00', '#00ffff', '#0000ff', '#ff00ff', '#ff9900', '#9900ff'];
+
+            function createFirework() {
+                let firework = {
+                    x: random(100, W - 100),
+                    y: H,
+                    targetY: random(100, H / 2),
+                    speed: random(8, 12),
+                    size: 4,
+                    exploded: false,
+                    particles: [],
+                    color: colors[Math.floor(Math.random() * colors.length)]
+                };
+                fireworks.push(firework);
+            }
+
+            function createParticles(firework) {
+                const particleCount = Math.floor(random(30, 50));
+                for (let i = 0; i < particleCount; i++) {
+                    firework.particles.push({
+                        x: firework.x,
+                        y: firework.targetY,
+                        angle: Math.random() * 2 * Math.PI,
+                        speed: Math.random() * 5 + 3,
+                        radius: Math.random() * 2 + 1,
+                        alpha: 1,
+                        color: firework.color
+                    });
+                }
+            }
+
+            function drawFireworks() {
+                ctx.fillStyle = "rgba(0,0,0,0.1)";
+                ctx.fillRect(0, 0, W, H);
+
+                fireworks.forEach((fw, i) => {
+                    if (!fw.exploded) {
+                        ctx.beginPath();
+                        ctx.arc(fw.x, fw.y, fw.size, 0, Math.PI * 2);
+                        ctx.fillStyle = fw.color;
+                        ctx.fill();
+
+                        // Rocket tail
+                        ctx.beginPath();
+                        ctx.moveTo(fw.x, fw.y + 10);
+                        ctx.lineTo(fw.x, fw.y + 20);
+                        ctx.strokeStyle = `rgba(255, 255, 255, 0.7)`;
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                        fw.y -= fw.speed;
+
+                        if (fw.y <= fw.targetY) {
+                            fw.exploded = true;
+                            createParticles(fw);
+                        }
+                    } else {
+                        fw.particles.forEach((p) => {
+                            p.x += Math.cos(p.angle) * p.speed;
+                            p.y += Math.sin(p.angle) * p.speed;
+                            p.alpha -= 0.02;
+                            p.speed *= 0.98;
+
+                            ctx.beginPath();
+                            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                            ctx.fillStyle = `${p.color.replace(')', `, ${p.alpha})`)}`;
+                            ctx.fill();
+                        });
+                    }
+                });
+
+                for (let i = fireworks.length - 1; i >= 0; i--) {
+                    if (fireworks[i].exploded && fireworks[i].particles.every(p => p.alpha <= 0)) {
+                        fireworks.splice(i, 1);
+                    }
+                }
+
+                if (Math.random() < 0.08) {
+                    createFirework();
+                }
+
+                if (!welcomePageClosed) {
+                    requestAnimationFrame(drawFireworks);
+                }
+            }
+
+            // Initial fireworks
+            for (let i = 0; i < 3; i++) {
+                setTimeout(createFirework, i * 300);
+            }
+
+            drawFireworks();
+
+            // Close welcome page after 4 seconds
+            setTimeout(() => {
+                document.getElementById("welcomeContainer").style.opacity = "0";
+                setTimeout(() => {
+                    document.getElementById("dashboardContent").style.display = "block";
+                    document.getElementById("welcomeContainer").style.display = "none";
+                    welcomePageClosed = true;
+                }, 500);
+            }, 4000);
+        }
+
+        // Dashboard Script
+        function initDashboard() {
+            // সাইডবার টগল
+            document.querySelector('.menu-toggle').addEventListener('click', function() {
+                document.querySelector('.sidebar').classList.toggle('open');
+                document.querySelector('.overlay').classList.toggle('active');
+            });
+            
+            document.querySelector('.overlay').addEventListener('click', function() {
+                document.querySelector('.sidebar').classList.remove('open');
+                document.querySelector('.overlay').classList.remove('active');
+            });
+            
+            // নোটিশ বার টেক্সট ডুপ্লিকেট
+            const noticeText = document.querySelector('.notice-text');
+            noticeText.innerHTML += ' ' + noticeText.innerHTML;
+        }
+
+        // Global variable to track welcome page state
+        let welcomePageClosed = false;
+
+        // Initialize everything when page loads
+        window.addEventListener('load', () => {
+            initWelcomePage();
+            initDashboard();
         });
-        
-        document.querySelector('.overlay').addEventListener('click', function() {
-            document.querySelector('.sidebar').classList.remove('open');
-            document.querySelector('.overlay').classList.remove('active');
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (!welcomePageClosed) {
+                const canvas = document.getElementById("fireworksCanvas");
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
         });
-        
-        // নোটিশ বার টেক্সট ডুপ্লিকেট
-        const noticeText = document.querySelector('.notice-text');
-        noticeText.innerHTML += ' ' + noticeText.innerHTML;
     </script>
 </body>
 </html>
